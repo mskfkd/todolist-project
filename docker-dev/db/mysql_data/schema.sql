@@ -1,6 +1,6 @@
 CREATE DATABASE todolist;
-
-DROP TABLE users;
+USE todolist;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
 	id INT(5) AUTO_INCREMENT NOT NULL,
