@@ -29,9 +29,9 @@ services:
         #- ./db/mysql_init:/docker-entrypoint-initdb.d
 
 volumes:
-        - mysql-data:
-                external:
-                        name: project-mysql
+    mysql-data:
+       external:
+           name: project-mysql
 
 
                    #      phpmyadmin:
