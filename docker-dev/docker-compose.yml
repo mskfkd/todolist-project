@@ -25,14 +25,14 @@ services:
     ports:
             - "127.0.0.1:3306:3306"
     volumes:
-      - mysql_data: /var/lib/mysql
-        #- ./db/mysql_init:/docker-entrypoint-initdb.d
+      - mysql-data:/var/lib/mysql
+      - ./db/mysql_init:/docker-entrypoint-initdb.d
 
 volumes:
     mysql-data:
-       external:
-           name: project-mysql
-
+            #       external:
+            #           name: project-mysql
+            #
 
                    #      phpmyadmin:
                    #        image: phpmyadmin/phpmyadmin
