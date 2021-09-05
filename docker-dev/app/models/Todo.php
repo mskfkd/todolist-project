@@ -7,7 +7,7 @@
 
 			// データベースに接続
 			try {
-			     $db = new PDO ( 'mysql:dbname=todolist;host=127.0.0.1:8000;charset=utf8', 'misaki', 'misaki' );
+			     $db = new PDO ( 'mysql:host=127.0.0.1:3306;dbname=todolist;charset=utf8', 'misaki', 'misaki' );
 			}catch ( PDOException $e ) {
 			     echo "DB接続できません。" . $e->getMessage ();
 			     exit;
@@ -17,7 +17,7 @@
 			
 			$result = $db->prepare( $sql );
 			$result->execute();
-			$dbData = $result->fetch_array (PDO::FETCH_ASSOC);
+			$dbData = $result->fetch (PDO::FETCH_ASSOC);
 			
 			
 			
