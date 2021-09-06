@@ -3,7 +3,8 @@
 	require( "../models/Todo.php" );
 	
 	$Todo = new Todo();
-	$Todo->findAll();
+	$tableDatas = $Todo->findAll();
+	var_dump( $tableDatas);
 
 ?>
 <!DOCTYPE html>
@@ -19,11 +20,19 @@
 			<th>期限</th>
 		</tr>
 		<?php
-			foreach( $tableDatas as $data){
+			foreach( $tableDatas as $key => $data ){
 		?>
 			<tr>
-			<th><?php echo $data[ 'title' ]; ?></th>
-			<th><?php echo $data[ 'end_at'];?></th>
+			<th><?php 
+				if( $key == "detail" ) {
+					echo $data[ $key ];
+				}
+			 ?></th>
+			<th><?php 
+				if( $key == "end_at" ) {
+					echo $data[ $key ];
+				}
+			 ?></th>
 			</tr>
 
 		<?php

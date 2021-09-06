@@ -1,33 +1,40 @@
 <?php
 
+	require( "../config/db.php" );
+
 	class Todo {
+		
+		public $db;
+		public $sql;
+		public $result;
+		public $dbData;
+		public $tableDatas = [];
+		public $key;
+		public $data;
 
 		public function findAll() {
 
 
-			// データベースに接続
 			try {
-			     $db = new PDO ( 'mysql:host=127.0.0.1:3306;dbname=todolist;charset=utf8', 'misaki', 'misaki' );
+			     $this->db = new PDO ( DSN, DB_USERNAME, DB_PASSWORD );
 			}catch ( PDOException $e ) {
 			     echo "DB接続できません。" . $e->getMessage ();
 			     exit;
 			}
 			
-			$sql = "SELECT * FROM todos";
+			$this->sql = "SELECT * FROM todos";
 			
-			$result = $db->prepare( $sql );
-			$result->execute();
-			$dbData = $result->fetch (PDO::FETCH_ASSOC);
+			$this->result = $this->db->prepare( $this->sql );
+			$this->result->execute();
+			$this->dbData = $this->result->fetch (PDO::FETCH_ASSOC);
 			
 			
 			
-			$tableDatas = [];
-			
-			foreach( $dbData as $data) {
-				$tableDatas[] = $data;
+			foreach( $this->dbData as $this->key => $this->data) {
+				$this->tableDatas[ $this->key ] = $this->data;
 			}
 			
-			return $tableDatas;
+			return $this->tableDatas;
 
 		}
 
