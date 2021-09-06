@@ -26,7 +26,7 @@
 			
 			$this->result = $this->db->prepare( $this->sql );
 			$this->result->execute();
-			$this->dbData = $this->result->fetch (PDO::FETCH_ASSOC);
+			$this->dbData = $this->result->fetchAll(PDO::FETCH_ASSOC);
 			
 			
 			

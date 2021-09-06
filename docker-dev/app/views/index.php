@@ -4,7 +4,7 @@
 	
 	$Todo = new Todo();
 	$tableDatas = $Todo->findAll();
-	var_dump( $tableDatas);
+//	var_dump( $tableDatas);
 
 ?>
 <!DOCTYPE html>
@@ -24,14 +24,10 @@
 		?>
 			<tr>
 			<th><?php 
-				if( $key == "detail" ) {
-					echo $data[ $key ];
-				}
+				echo $data[ "title" ];
 			 ?></th>
 			<th><?php 
-				if( $key == "end_at" ) {
-					echo $data[ $key ];
-				}
+				echo $data[ "end_at" ];
 			 ?></th>
 			</tr>
 
