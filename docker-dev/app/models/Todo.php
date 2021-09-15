@@ -4,34 +4,28 @@
 
 	class Todo {
 		
-		public $db;
-		public $sql;
-		public $result;
-		public $dbData;
 		public $tableDatas = [];
-		public $key;
-		public $data;
 
 		public function findAll() {
 
 
 			try {
-			     $this->db = new PDO ( DSN, DB_USERNAME, DB_PASSWORD );
+			     $db = new PDO ( DSN, DB_USERNAME, DB_PASSWORD );
 			}catch ( PDOException $e ) {
 			     echo "DB接続できません。" . $e->getMessage ();
 			     exit;
 			}
 			
-			$this->sql = "SELECT * FROM todos";
+			$sql = "SELECT * FROM todos WHERE id = 1";
 			
-			$this->result = $this->db->prepare( $this->sql );
-			$this->result->execute();
-			$this->dbData = $this->result->fetchAll(PDO::FETCH_ASSOC);
+			$sth = $db->prepare( $sql );
+			$sth->execute();
+			$todos = $sth->fetchAll(PDO::FETCH_ASSOC);
 			
 			
 			
-			foreach( $this->dbData as $this->key => $this->data) {
-				$this->tableDatas[ $this->key ] = $this->data;
+			foreach( $todos as $key => $data) {
+				$this->tableDatas[ $key ] = $data;
 			}
 			
 			return $this->tableDatas;
