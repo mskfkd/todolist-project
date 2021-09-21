@@ -1,10 +1,10 @@
 <?php
-	require( "../config/db.php" );
-	require( "../models/Todo.php" );
-	
-	$Todo = new Todo();
-	$tableDatas = $Todo->findAll();
-//	var_dump( $tableDatas);
+//require( "../config/db.php" );
+//require( "../models/Todo.php" );
+require( "../controllers/TodoController.php" );
+
+$TodoController = new TodoController();
+$todos = $TodoController->index();
 
 ?>
 <!DOCTYPE html>
@@ -20,14 +20,14 @@
 			<th>期限</th>
 		</tr>
 		<?php
-			foreach( $tableDatas as $key => $data ){
+			foreach( $todos as $key => $todo ){
 		?>
 			<tr>
 			<th><?php 
-				echo $data[ "title" ];
+				echo $todo[ "title" ];
 			 ?></th>
 			<th><?php 
-				echo $data[ "end_at" ];
+				echo $todo[ "end_at" ];
 			 ?></th>
 			</tr>
 
