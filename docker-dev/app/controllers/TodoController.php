@@ -10,6 +10,14 @@ class TodoController {
 		return $todos;
 	}
 
+	public function detail( $todo_id ) {
+
+		$details = Todo::findById( $todo_id );
+
+		return $details;
+
+	}
+
 
 
 }

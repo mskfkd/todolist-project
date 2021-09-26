@@ -14,7 +14,7 @@ class Todo {
 		     exit;
 		}
 		
-		$sql = "SELECT * FROM todos WHERE id = 1";
+		$sql = "SELECT * FROM todos WHERE user_id = 1";
 		
 		$sth = $db->prepare( $sql );
 		$sth->execute();
@@ -24,6 +24,20 @@ class Todo {
 		
 		
 		return $todos;
+
+	}
+
+	public function findById( $todo_id ) {
+
+
+		$sql = "SELECT * FROM todos WHERE id = " . $todo_id;
+		
+		$sth = $db->prepare( $sql );
+		$sth->execute();
+		$details = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+
+		return $details;
 
 	}
 
