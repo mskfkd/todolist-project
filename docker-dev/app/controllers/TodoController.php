@@ -1,6 +1,6 @@
 <?php
 
-require( "../models/Todo.php" );
+require_once( "./../../models/Todo.php" );
 
 class TodoController {
 	public function index() {
@@ -13,7 +13,7 @@ class TodoController {
 	public function detail( $todo_id ) {
 
 		$details = Todo::findById( $todo_id );
-		var_dump( $todo_id );
+//		var_dump( $todo_id );
 
 		return $details;
 

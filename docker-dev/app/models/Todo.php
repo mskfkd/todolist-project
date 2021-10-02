@@ -1,6 +1,6 @@
 <?php
 
-require( "../config/db.php" );
+require_once( "./../../config/db.php" );
 
 class Todo {
 	
@@ -29,13 +29,21 @@ class Todo {
 
 	public function findById( $todo_id ) {
 
+		try {
+		     $db = new PDO ( DSN, DB_USERNAME, DB_PASSWORD );
+		}catch ( PDOException $e ) {
+		     echo "DB接続できません。" . $e->getMessage ();
+		     exit;
+		}
 
-		$sql = "SELECT * FROM todos WHERE id = " . $todo_id;
+		$sql = "SELECT * FROM todos WHERE id = :id";
 		
 		$sth = $db->prepare( $sql );
+		$sth->bindValue( ':id', $todo_id, PDO::PARAM_INT );
 		$sth->execute();
 		$details = $sth->fetchAll(PDO::FETCH_ASSOC);
 
+//var_dump($details);
 
 		return $details;
 
