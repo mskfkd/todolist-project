@@ -22,9 +22,8 @@ $todos = $TodoController->index();
 			foreach( $todos as $key => $todo ){
 		?>
 			<tr>
-			<th><a href="detail.php?todos.id=<?php 
-				$todo_id = $todo[ "id" ];
-				echo $todo_id;
+			<th><a href="detail.php?todo_id=<?php 
+				echo $todo[ "id" ];
 			?>"><?php 
 				echo $todo[ "title" ];
 			 ?></a></th>

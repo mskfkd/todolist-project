@@ -10,7 +10,10 @@ class TodoController {
 		return $todos;
 	}
 
-	public function detail( $todo_id ) {
+	public function detail() {
+
+		//GETパラメータ取得
+		$todo_id = $_GET[ "todo_id" ];
 
 		$details = Todo::findById( $todo_id );
 //		var_dump( $todo_id );

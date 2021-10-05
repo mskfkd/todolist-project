@@ -4,7 +4,7 @@ require_once( "./../../controllers/TodoController.php" );
 
 
 $TodoController = new TodoController();
-$details = $TodoController->detail( $todo_id );
+$details = $TodoController->detail();
 ?>
 
 <!DOCTYPE html>
@@ -25,19 +25,21 @@ $details = $TodoController->detail( $todo_id );
 		foreach( $details as $key => $detail ) {
 	?>
 		<tr>
+			<td>
 		<?php echo $detail[ "title" ]; ?>
-		</tr>
-		<tr>
+			</td>
+			<td>
 		<?php echo $detail[ "detail" ]; ?>
-		</tr>
-		<tr>
+			</td>
+			<td>
 		<?php echo $detail[ "end_at" ]; ?>
-		</tr>
-		<tr>
+			</td>
+			<td>
 		<?php echo $detail[ "deleted_at" ]; ?>
-		</tr>
-		<tr>
+			</td>
+			<td>
 		<?php echo $detail[ "created_at" ]; ?>
+			</td>
 		</tr>
 	<?php
 		}
