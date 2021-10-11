@@ -15,10 +15,16 @@ class TodoController {
 		//GETパラメータ取得
 		$todo_id = $_GET[ "todo_id" ];
 
-		$details = Todo::findById( $todo_id );
+		$todo = Todo::findById( $todo_id );
 //		var_dump( $todo_id );
 
-		return $details;
+		if( is_null( $todo ) === true
+	       	|| $todo == ""	) {
+			$todo = "";
+		}
+
+
+		return $todo;
 
 	}
 

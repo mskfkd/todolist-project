@@ -31,17 +31,18 @@ class Todo {
 
 		try {
 		     $db = new PDO ( DSN, DB_USERNAME, DB_PASSWORD );
+		     $sql = "SELECT * FROM todos WHERE id = :id";
+		
+		     $sth = $db->prepare( $sql );
+		     $sth->bindValue( ':id', $todo_id, PDO::PARAM_INT );
+		     $sth->execute();
+		     $details = $sth->fetchAll(PDO::FETCH_ASSOC);
 		}catch ( PDOException $e ) {
-		     echo "DB接続できません。" . $e->getMessage ();
-		     exit;
+		     echo "登録されたtodoの詳細が表示できませんでした。" . $e->getMessage ();
+		     $result = 0;
+		     return $result; 
 		}
 
-		$sql = "SELECT * FROM todos WHERE id = :id";
-		
-		$sth = $db->prepare( $sql );
-		$sth->bindValue( ':id', $todo_id, PDO::PARAM_INT );
-		$sth->execute();
-		$details = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 //var_dump($details);
 
