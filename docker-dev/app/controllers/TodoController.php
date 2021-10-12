@@ -20,7 +20,7 @@ class TodoController {
 
 		if( is_null( $todo ) === true
 	       	|| $todo == ""	) {
-			$todo = "";
+			$todo = header("Location:./../../views/todo/index.php");
 		}
 
 
