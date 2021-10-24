@@ -6,11 +6,6 @@ require_once( "./../../controllers/TodoController.php" );
 $TodoController = new TodoController();
 $details = $TodoController->detail();
 
-if(  is_null( $details ) === true
-  || $details == "" ) {
-	header( "HTTP/1.1 404 Not Found" );
-	$error = file_get_contents( "./../../views/error/404.php" );
-}
 
 ?>
 
@@ -30,9 +25,10 @@ if(  is_null( $details ) === true
 			<th>作成日時</th>
 		</tr>
 		<?php
-			if( is_null( $details ) === true
-			  || $detail == "" ) { 
-				echo $error;
+			if( !$details ) { 
+//				echo $details;
+//				var_dump( $details );
+//				exit();
 			}else {
 			foreach( $details as $key => $detail ) {
 		?>

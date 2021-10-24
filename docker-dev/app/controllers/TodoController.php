@@ -16,11 +16,14 @@ class TodoController {
 		$todo_id = $_GET[ "todo_id" ];
 
 		$todo = Todo::findById( $todo_id );
-//		var_dump( $todo_id );
+		//var_dump( $todo );
 
-		if( is_null( $todo ) === true
-	       	|| $todo == ""	) {
-			$todo = header("Location:./../../views/todo/index.php");
+		if( !$todo ) {
+		   $todo = 'error'; 
+		//   return $todo;
+		   header("HTTP/1.1 404 Not Found");
+		   include("Location:./../../views/todo/index.php");
+		   exit();
 		}
 
 
