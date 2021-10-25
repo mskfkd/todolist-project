@@ -20,9 +20,7 @@ class TodoController {
 
 		if( !$todo ) {
 		   $todo = 'error'; 
-		//   return $todo;
-		   header("HTTP/1.1 404 Not Found");
-		   include("Location:./../../views/todo/index.php");
+		   header("Location:./../../views/error/404.php");
 		   exit();
 		}
 
@@ -30,6 +28,7 @@ class TodoController {
 		return $todo;
 
 	}
+
 
 
 

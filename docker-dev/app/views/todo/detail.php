@@ -26,9 +26,6 @@ $details = $TodoController->detail();
 		</tr>
 		<?php
 			if( !$details ) { 
-//				echo $details;
-//				var_dump( $details );
-//				exit();
 			}else {
 			foreach( $details as $key => $detail ) {
 		?>
