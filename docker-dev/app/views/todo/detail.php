@@ -4,9 +4,9 @@ require_once( "./../../controllers/TodoController.php" );
 
 
 $TodoController = new TodoController();
-$details = $TodoController->detail();
-
-
+$data = $TodoController->detail();
+$todo = $data[ 'todo' ];
+var_dump( $todo );
 ?>
 
 <!DOCTYPE html>
@@ -25,9 +25,7 @@ $details = $TodoController->detail();
 			<th>作成日時</th>
 		</tr>
 		<?php
-			if( !$details ) { 
-			}else {
-			foreach( $details as $key => $detail ) {
+			foreach( $data as $key => $detail ) :
 		?>
 			<tr>
 				<td>
@@ -47,8 +45,7 @@ $details = $TodoController->detail();
 				</td>
 			</tr>
 		<?php
-				}
-			}
+			endforeach;
 		?>
 	</table>	
 	

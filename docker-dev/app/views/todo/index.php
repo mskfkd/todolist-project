@@ -19,12 +19,12 @@ $todos = $TodoController->index();
 			<th>期限</th>
 		</tr>
 		<?php
-			foreach( $todos as $key => $todo ){
+			foreach( $todos as $key => $todo ):
 		?>
 			<tr>
 			<th><a href="detail.php?todo_id=<?php 
-				//echo $todo[ "id" ];
-				echo $todo[ 5 ];
+				echo $todo[ "id" ];
+				//echo $todo[ 5 ];
 			?>"><?php 
 				echo $todo[ "title" ];
 			 ?></a></th>
@@ -34,7 +34,7 @@ $todos = $TodoController->index();
 			</tr>
 
 		<?php
-			}
+			endforeach;
 		?>
 	</table>
 </body>

@@ -29,7 +29,18 @@ class TodoController {
 
 	}
 
+	public function new() {
 
+		echo "newメソッドを呼んだ。";
+
+	}
+
+
+	public function store() {
+
+		echo "storeメソッドを呼んだ。";
+
+	}
 
 
 }
