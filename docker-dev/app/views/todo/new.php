@@ -5,11 +5,11 @@ $TodoController = new TodoController();
 //$test = $_POST[ "test" ];
 //echo $test;
 
-if( $_SERVER[ "REQUEST_METHOD" ] == "GET" ) {
+if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 //if( $test == "GET" ) {
-	$requests = $TodoController->new();
-} else {
 	$requests = $TodoController->store();
+} else {
+	$requests = $TodoController->new();
 }
 
 

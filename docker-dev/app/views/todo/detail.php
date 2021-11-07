@@ -6,7 +6,6 @@ require_once( "./../../controllers/TodoController.php" );
 $TodoController = new TodoController();
 $data = $TodoController->detail();
 $todo = $data[ 'todo' ];
-var_dump( $todo );
 ?>
 
 <!DOCTYPE html>
@@ -24,29 +23,23 @@ var_dump( $todo );
 			<th>完了日時</th>
 			<th>作成日時</th>
 		</tr>
-		<?php
-			foreach( $data as $key => $detail ) :
-		?>
 			<tr>
 				<td>
-			<?php echo $detail[ "title" ]; ?>
+			<?php echo $todo[ "title" ]; ?>
 				</td>
 				<td>
-			<?php echo $detail[ "detail" ]; ?>
+			<?php echo $todo[ "detail" ]; ?>
 				</td>
 				<td>
-			<?php echo $detail[ "end_at" ]; ?>
+			<?php echo $todo[ "end_at" ]; ?>
 				</td>
 				<td>
-			<?php echo $detail[ "deleted_at" ]; ?>
+			<?php echo $todo[ "deleted_at" ]; ?>
 				</td>
 				<td>
-			<?php echo $detail[ "created_at" ]; ?>
+			<?php echo $todo[ "created_at" ]; ?>
 				</td>
 			</tr>
-		<?php
-			endforeach;
-		?>
 	</table>	
 	
 	</body>
