@@ -24,7 +24,7 @@ $todos = $TodoController->index();
 			<tr>
 			<th><a href="detail.php?todo_id=<?php 
 				echo $todo[ "id" ];
-				//echo $todo[ 5 ];
+			//	echo $todo[ 1 ];
 			?>"><?php 
 				echo $todo[ "title" ];
 			 ?></a></th>

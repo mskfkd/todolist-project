@@ -1,19 +1,23 @@
 <?php
 require_once( "./../../controllers/TodoController.php" );
+require_once( "./../../models/Todo.php" );
 
 $TodoController = new TodoController();
-//$test = $_POST[ "test" ];
-//echo $test;
 
-if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
-//if( $test == "GET" ) {
-	$requests = $TodoController->store();
+//if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
+if( isset( $_POST[ "submit" ] ) ) {
+	
+	$requests = $TodoController->store( $_POST[ "title" ],$_POST[ "detail" ], $_POST[ "end_at" ] );
+	return $requests;
+
 } else {
-	$requests = $TodoController->new();
+
+	$requests = $TodoController->insertDb();
+	return $requests;
+
 }
 
-
-?>
+?> 
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -21,7 +25,25 @@ if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
   <title>新規作成</title>
 </head>
 <body>
-	<?php echo $requests?>
+    <h1>新規作成</h1>
+	<form action="./../../controllers/TodoController/store" method="POST">
+		<div>
+			<p>タイトル</p>
+			<input type="text" name="title">
+		</div>
+		<div>
+			<p>タスク詳細</p>
+			<textarea name="detail" rows="5" placeholder="詳細を入力"></textarea>
+		</div>
+		<div>
+			<p>期限</p>
+			<input type="date" name="end_at">
+		</div>
+		<div>
+			<input type="submit" name="submit" value="追加">
+		</div>
+
+	</form>
 </body>
 </html>
 
