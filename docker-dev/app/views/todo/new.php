@@ -2,18 +2,17 @@
 require_once( "./../../controllers/TodoController.php" );
 require_once( "./../../models/Todo.php" );
 
-$TodoController = new TodoController();
+$controller = new TodoController();
 
-//if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
-if( isset( $_POST[ "submit" ] ) ) {
+if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 	
-	$requests = $TodoController->store( $_POST[ "title" ],$_POST[ "detail" ], $_POST[ "end_at" ] );
-	return $requests;
+	$requests = $controller->store();
+//	return $requests;
 
 } else {
 
-	$requests = $TodoController->insertDb();
-	return $requests;
+	$requests = $controller->new();
+//	return $requests;
 
 }
 
@@ -26,7 +25,12 @@ if( isset( $_POST[ "submit" ] ) ) {
 </head>
 <body>
     <h1>新規作成</h1>
-	<form action="./../../controllers/TodoController/store" method="POST">
+	<form action="<?php echo $requests;?>" method="POST">
+		<div>
+			<p>ユーザーID</p>
+			<input type="text" name="user_id">
+		</div>
+		<div>
 		<div>
 			<p>タイトル</p>
 			<input type="text" name="title">

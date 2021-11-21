@@ -27,13 +27,18 @@ class TodoController {
 
 	}
 
-	public function insertDb() {
+	public function new() {
 
-		$title = $_POST[ "title" ];
-		$detail = $_POST[ "detail" ];
-		$endAt = $_POST[ "end_at" ];
-		$insert = Todo::insert( $title, $detail, $endAt );
-		var_dump( $insert );
+	}
+
+
+	public function store() {
+
+		$userId = $_REQUEST[ "user_id" ];
+		$title = $_REQUEST[ "title" ];
+		$detail = $_REQUEST[ "detail" ];
+		$endAt = $_REQUEST[ "end_at" ];
+		$insert = Todo::insert( $userId, $title, $detail, $endAt );
 
 		if( $insert === true ) {
 			echo "登録が完了しました。";
@@ -44,10 +49,6 @@ class TodoController {
 
 		return;
 
-	}
-
-
-	public function store() {
 
 	}
 

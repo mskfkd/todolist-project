@@ -50,24 +50,21 @@ class Todo {
 	}
 
 
-	public function insert( $title, $detail, $endAt ) {
+	public function insert( $user_id, $title, $detail, $endAt ) {
 
 		try {
 		     $db = new PDO ( DSN, DB_USERNAME, DB_PASSWORD );
-		     $sql = "INSERT INTO todos ( title, detail, end_at ) VALUES ( :title, :detail, :end_at )";
-		     var_dump( $title );
-		     var_dump( $detail );
-		     var_dump( $endAt );
+		     $sql = "INSERT INTO todos ( user_id, title, detail, end_at, created_at ) VALUES ( :user_id, :title, :detail, :end_at, NOW() )";
+		     
 		
 		     $sth = $db->prepare( $sql );
-		     $stmt = [
-			     	':title' => $title, 
-			     	':detail' => $detail, 
-				':end_at' => $endAt 
-		     	];
-		     $res = $sth->execute( $stmt );
+		     $sth->bindParam(':user_id', $title, PDO::PARAM_INT);
+		     $sth->bindParam(':title', $title, PDO::PARAM_STR);
+		     $sth->bindParam(':detail', $detail, PDO::PARAM_STR);
+		     $sth->bindParam(':end_at', date("Y-m-d H:i:s", strtotime($date)), PDO::PARAM_STR);
+		     $res = $sth->execute();
 
-		     $db = null;
+
 		     
 		}catch ( PDOException $e ) {
 		     $result = 0;

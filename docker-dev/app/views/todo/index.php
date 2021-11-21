@@ -2,8 +2,8 @@
 require_once( "./../../controllers/TodoController.php" );
 require_once( "./detail.php" );
 
-$TodoController = new TodoController();
-$todos = $TodoController->index();
+$controller = new TodoController();
+$todos = $controller->index();
 
 ?>
 <!DOCTYPE html>

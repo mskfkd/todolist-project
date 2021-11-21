@@ -3,8 +3,8 @@
 require_once( "./../../controllers/TodoController.php" );
 
 
-$TodoController = new TodoController();
-$data = $TodoController->detail();
+$controller = new TodoController();
+$data = $controller->detail();
 $todo = $data[ 'todo' ];
 ?>
 
