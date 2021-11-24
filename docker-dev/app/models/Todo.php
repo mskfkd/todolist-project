@@ -50,7 +50,7 @@ class Todo {
 	}
 
 
-	public function insert( $user_id, $title, $detail, $endAt ) {
+	public function insert( $passToTodo ) {
 
 		try {
 		     $db = new PDO ( DSN, DB_USERNAME, DB_PASSWORD );
@@ -58,16 +58,16 @@ class Todo {
 		     
 		
 		     $sth = $db->prepare( $sql );
-		     $sth->bindParam(':user_id', $title, PDO::PARAM_INT);
-		     $sth->bindParam(':title', $title, PDO::PARAM_STR);
-		     $sth->bindParam(':detail', $detail, PDO::PARAM_STR);
-		     $sth->bindParam(':end_at', date("Y-m-d H:i:s", strtotime($date)), PDO::PARAM_STR);
+		     $sth->bindParam(':user_id', $passToTodo[ "userId" ], PDO::PARAM_INT);
+		     $sth->bindParam(':title', $passToTodo[ "title" ], PDO::PARAM_STR);
+		     $sth->bindParam(':detail', $passToTodo[ "detail" ],  PDO::PARAM_STR);
+		     $sth->bindParam(':end_at', date("Y-m-d H:i:s", strtotime( $passToTodo[ "endAt" ] )), PDO::PARAM_STR);
 		     $res = $sth->execute();
 
 
 		     
 		}catch ( PDOException $e ) {
-		     $result = 0;
+		     $result = false;
 		     return $result; 
 		}
 

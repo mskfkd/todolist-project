@@ -34,16 +34,21 @@ class TodoController {
 
 	public function store() {
 
-		$userId = $_REQUEST[ "user_id" ];
-		$title = $_REQUEST[ "title" ];
-		$detail = $_REQUEST[ "detail" ];
-		$endAt = $_REQUEST[ "end_at" ];
-		$insert = Todo::insert( $userId, $title, $detail, $endAt );
+		$passToTodo = [
+			"userId" => $_POST[ "user_id" ],
+			"title"	 => $_POST[ "title" ],
+			"detail" => $_POST[ "detail" ],
+			"endAt"  => $_POST[ "end_at" ],
+		];
 
-		if( $insert === true ) {
-			echo "登録が完了しました。";
+		$result = Todo::insert( $passToTodo );
+
+		if( $result === true ) {
+			header("Location:./../../views/todo/index.php");
+			exit();
 		}else {
-			echo "登録に失敗しました。";
+			header("Location:./../../views/todo/new.php");
+			exit();
 		}
 
 
