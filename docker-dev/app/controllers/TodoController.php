@@ -1,6 +1,7 @@
 <?php
 
 require_once( "./../../models/Todo.php" );
+require_once( "./../../validations/TodoValidation.php" );
 
 class TodoController {
 	public function index() {
@@ -40,6 +41,15 @@ class TodoController {
 			"detail" => $_POST[ "detail" ],
 			"endAt"  => $_POST[ "end_at" ],
 		];
+
+		$validate = TodoValidation::postCheck( $passToTodo );
+
+		if( $validate === false ) {
+			header("Location:./../../views/todo/new.php");
+			exit();
+		}
+
+
 
 		$result = Todo::insert( $passToTodo );
 
