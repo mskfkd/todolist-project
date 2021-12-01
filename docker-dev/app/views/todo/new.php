@@ -1,6 +1,7 @@
 <?php
 require_once( "./../../controllers/TodoController.php" );
 require_once( "./../../models/Todo.php" );
+require_once( "./../../validations/TodoValidation.php" );
 
 $controller = new TodoController();
 
@@ -16,6 +17,8 @@ if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 
 }
 
+session_start();
+
 ?> 
 <!DOCTYPE html>
 <html lang="ja">
@@ -28,12 +31,12 @@ if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 	<form action="<?php echo $requests;?>" method="POST">
 		<div>
 			<p>ユーザーID</p>
-			<input type="text" name="user_id">
+			<input type="text" name="user_id" value="<?php if( !$_POST[ "user_id" ]){ echo $_SESSION[ "user_id" ];} ?>">
 		</div>
 		<div>
 		<div>
 			<p>タイトル</p>
-			<input type="text" name="title">
+			<input type="text" name="title" value="<?php if( !$_POST[ "title" ]){ echo $_SESSION[ "title" ];} ?>">
 		</div>
 		<div>
 			<p>タスク詳細</p>
@@ -41,7 +44,7 @@ if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 		</div>
 		<div>
 			<p>期限</p>
-			<input type="date" name="end_at">
+			<input type="date" name="end_at" value="<?php if( !$_POST[ "end_at" ]){ echo $_SESSION[ "end_at" ];} ?>">
 		</div>
 		<div>
 			<input type="submit" name="submit" value="追加">

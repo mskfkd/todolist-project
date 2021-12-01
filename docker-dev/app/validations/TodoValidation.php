@@ -6,11 +6,19 @@ class TodoValidation {
 
 	public function postCheck( $passToTodo ) {
 		$todos = [];
+//		$passToTodo = [
+//                        "userId" => $_GET[ "user_id" ],
+//	                "title"  => $_GET[ "title" ],
+//		        "detail" => $_GET[ "detail" ],
+//			"endAt"  => $_GET[ "end_at" ],
+//			      ];
 
-//userIdはDBに登録されているものか
-		$todos = TodoController::index();
+		session_start();
+
+		$todos = Todo::findId();
+		
 		if( array_key_exists( $passTodo[ "userId" ], $todos ) === false ) {
-
+			$_SESSION[ "user_id" ] = $passTodo[ "userId" ];
 			return false;
 
 		}
@@ -18,6 +26,7 @@ class TodoValidation {
 //titleは空欄でないか
 		if( !$passTodo[ "title" ] ) {
 
+			$_SESSION[ "title" ] = $passTodo[ "title" ];
 			return false;
 
 		}
@@ -25,6 +34,7 @@ class TodoValidation {
 //endatは空欄でないか
 		if( !$passTodo[ "endAt" ] ) {
 
+			$_SESSION[ "end_at" ] = $passTodo[ "endAt" ];
 			return false;
 
 		}
