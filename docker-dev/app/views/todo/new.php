@@ -17,7 +17,6 @@ if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 
 }
 
-session_start();
 
 ?> 
 <!DOCTYPE html>
@@ -31,20 +30,20 @@ session_start();
 	<form action="<?php echo $requests;?>" method="POST">
 		<div>
 			<p>ユーザーID</p>
-			<input type="text" name="user_id" value="<?php if( !$_POST[ "user_id" ]){ echo $_SESSION[ "user_id" ];} ?>">
+			<input type="text" name="user_id" value="<?php echo $userId; ?>">
 		</div>
 		<div>
 		<div>
 			<p>タイトル</p>
-			<input type="text" name="title" value="<?php if( !$_POST[ "title" ]){ echo $_SESSION[ "title" ];} ?>">
+			<input type="text" name="title" value="<?php echo $title; ?>">
 		</div>
 		<div>
 			<p>タスク詳細</p>
-			<textarea name="detail" rows="5" placeholder="詳細を入力"></textarea>
+			<textarea name="detail" rows="5" placeholder="詳細を入力" value=""></textarea>
 		</div>
 		<div>
 			<p>期限</p>
-			<input type="date" name="end_at" value="<?php if( !$_POST[ "end_at" ]){ echo $_SESSION[ "end_at" ];} ?>">
+			<input type="date" name="end_at" value="<?php echo $endAt ?>">
 		</div>
 		<div>
 			<input type="submit" name="submit" value="追加">

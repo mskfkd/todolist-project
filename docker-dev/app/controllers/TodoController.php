@@ -35,14 +35,15 @@ class TodoController {
 
 	public function store() {
 
-		$passToTodo = [
+		$params = [
 			"userId" => $_POST[ "user_id" ],
 			"title"	 => $_POST[ "title" ],
 			"detail" => $_POST[ "detail" ],
 			"endAt"  => $_POST[ "end_at" ],
 		];
 
-		$validate = TodoValidation::postCheck( $passToTodo );
+		$validator = new Todovalidation;
+		$validate = $validator->postCheck( $params );
 
 		if( $validate === false ) {
 			header("Location:./../../views/todo/new.php");
@@ -50,8 +51,9 @@ class TodoController {
 		}
 
 
-
-		$result = Todo::insert( $passToTodo );
+		$validated_data = $validator->getData( $params );
+		var_dump( $validated_data );
+		$result = Todo::insert( $validated_data );
 
 		if( $result === true ) {
 			header("Location:./../../views/todo/index.php");

@@ -4,21 +4,15 @@ require_once( "./../../controllers/TodoController.php" );
 
 class TodoValidation {
 
-	public function postCheck( $passToTodo ) {
-		$todos = [];
-//		$passToTodo = [
-//                        "userId" => $_GET[ "user_id" ],
-//	                "title"  => $_GET[ "title" ],
-//		        "detail" => $_GET[ "detail" ],
-//			"endAt"  => $_GET[ "end_at" ],
-//			      ];
-
+	public function postCheck( $params ) {
 		session_start();
+		$todos = [];
 
 		$todos = Todo::findId();
 		
 		if( array_key_exists( $passTodo[ "userId" ], $todos ) === false ) {
 			$_SESSION[ "user_id" ] = $passTodo[ "userId" ];
+			$userId = $_SESSION[ "user_id" ];
 			return false;
 
 		}
@@ -27,6 +21,7 @@ class TodoValidation {
 		if( !$passTodo[ "title" ] ) {
 
 			$_SESSION[ "title" ] = $passTodo[ "title" ];
+			$title = $_SESSION[ "title" ];
 			return false;
 
 		}
@@ -35,13 +30,22 @@ class TodoValidation {
 		if( !$passTodo[ "endAt" ] ) {
 
 			$_SESSION[ "end_at" ] = $passTodo[ "endAt" ];
+			$endAt = $_SESSION[ "end_at" ];
 			return false;
 
 		}
 
-
+		return;
 
 	}
+
+
+	public function getData( $params ){
+	
+		return $params;	
+	
+	}
+
 
 
 
