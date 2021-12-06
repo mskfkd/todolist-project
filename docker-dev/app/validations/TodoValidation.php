@@ -13,6 +13,7 @@ class TodoValidation {
 		if( array_key_exists( $passTodo[ "userId" ], $todos ) === false ) {
 			$_SESSION[ "user_id" ] = $passTodo[ "userId" ];
 			$userId = $_SESSION[ "user_id" ];
+			return $userId;
 			return false;
 
 		}
@@ -22,6 +23,7 @@ class TodoValidation {
 
 			$_SESSION[ "title" ] = $passTodo[ "title" ];
 			$title = $_SESSION[ "title" ];
+			return $title;
 			return false;
 
 		}
@@ -31,6 +33,7 @@ class TodoValidation {
 
 			$_SESSION[ "end_at" ] = $passTodo[ "endAt" ];
 			$endAt = $_SESSION[ "end_at" ];
+			return $endAt;
 			return false;
 
 		}

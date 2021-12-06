@@ -52,8 +52,8 @@ class TodoController {
 
 
 		$validated_data = $validator->getData( $params );
-		var_dump( $validated_data );
 		$result = Todo::insert( $validated_data );
+		var_dump( $result );
 
 		if( $result === true ) {
 			header("Location:./../../views/todo/index.php");
