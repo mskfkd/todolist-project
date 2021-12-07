@@ -11,29 +11,29 @@ class TodoValidation {
 		$todos = Todo::findId();
 		
 		if( array_key_exists( $passTodo[ "userId" ], $todos ) === false ) {
-			$_SESSION[ "user_id" ] = $passTodo[ "userId" ];
-			$userId = $_SESSION[ "user_id" ];
-			return $userId;
+	//		$_SESSION[ "user_id" ] = $passTodo[ "userId" ];
+	//		$userId = $_SESSION[ "user_id" ];
+	//		echo $userId;
 			return false;
 
 		}
 
 //titleは空欄でないか
-		if( !$passTodo[ "title" ] ) {
+		if( !isset($passTodo[ "title" ]) ) {
 
-			$_SESSION[ "title" ] = $passTodo[ "title" ];
-			$title = $_SESSION[ "title" ];
-			return $title;
+	//		$_SESSION[ "title" ] = $passTodo[ "title" ];
+	//		$title = $_SESSION[ "title" ];
+	//		echo $title;
 			return false;
 
 		}
 
 //endatは空欄でないか
-		if( !$passTodo[ "endAt" ] ) {
+		if( !isset($passTodo[ "endAt" ]) ) {
 
-			$_SESSION[ "end_at" ] = $passTodo[ "endAt" ];
-			$endAt = $_SESSION[ "end_at" ];
-			return $endAt;
+	//		$_SESSION[ "end_at" ] = $passTodo[ "endAt" ];
+	//		$endAt = $_SESSION[ "end_at" ];
+	//		echo $endAt;
 			return false;
 
 		}

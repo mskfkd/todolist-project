@@ -34,6 +34,7 @@ class TodoController {
 
 
 	public function store() {
+		session_start();
 
 		$params = [
 			"userId" => $_POST[ "user_id" ],
@@ -44,8 +45,21 @@ class TodoController {
 
 		$validator = new Todovalidation;
 		$validate = $validator->postCheck( $params );
+		var_dump( $validate);
 
 		if( $validate === false ) {
+		       $_SESSION[ "user_id" ] = $passTodo[ "userId" ];
+		       $_SESSION[ "title" ] = $passTodo[ "title" ];
+		       $_SESSION[ "detail" ] = $passTodo[ "detail" ];
+		       $_SESSION[ "end_at" ] = $passTodo[ "endAt" ];
+		       $params = [
+		      		"userId"  => $_SESSION[ "user_id" ],
+		      		"title"   => $_SESSION[ "title" ],
+		      		"deitail" => $_SESSION[ "detail" ],
+		      		"endAt"   => $_SESSION[ "end_at" ],
+		       ];
+		       return $params;
+									
 			header("Location:./../../views/todo/new.php");
 			exit();
 		}
@@ -53,7 +67,6 @@ class TodoController {
 
 		$validated_data = $validator->getData( $params );
 		$result = Todo::insert( $validated_data );
-		var_dump( $result );
 
 		if( $result === true ) {
 			header("Location:./../../views/todo/index.php");
