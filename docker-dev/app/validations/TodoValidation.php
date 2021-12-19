@@ -43,11 +43,6 @@ class TodoValidation {
 	}
 
 
-	public function getData( $params ){
-	
-		return $params;	
-	
-	}
 
 
 

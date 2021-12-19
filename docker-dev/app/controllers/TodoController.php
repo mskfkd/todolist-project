@@ -28,7 +28,23 @@ class TodoController {
 
 	}
 
+	public function getData( $params ){
+	
+		return $params;	
+	
+	}	
+
 	public function new() {
+		session_start();
+
+		$params = [
+			"userId" => $_GET[ "user_id" ],
+			"title"	 => $_GET[ "title" ],
+			"detail" => $_GET[ "detail" ],
+			"endAt"  => $_GET[ "end_at" ],
+		];
+
+		return $params;
 
 	}
 
@@ -45,27 +61,28 @@ class TodoController {
 
 		$validator = new Todovalidation;
 		$validate = $validator->postCheck( $params );
-		var_dump( $validate);
 
 		if( $validate === false ) {
-		       $_SESSION[ "user_id" ] = $passTodo[ "userId" ];
-		       $_SESSION[ "title" ] = $passTodo[ "title" ];
-		       $_SESSION[ "detail" ] = $passTodo[ "detail" ];
-		       $_SESSION[ "end_at" ] = $passTodo[ "endAt" ];
+
+		       $_GET[ "user_id" ] = $params[ "userId" ];
+		       $_GET[ "title" ] = $params[ "title" ];
+		       $_GET[ "detail" ] = $params[ "detail" ];
+		       $_GET[ "end_at" ] = $params[ "endAt" ];
+
 		       $params = [
-		      		"userId"  => $_SESSION[ "user_id" ],
-		      		"title"   => $_SESSION[ "title" ],
-		      		"deitail" => $_SESSION[ "detail" ],
-		      		"endAt"   => $_SESSION[ "end_at" ],
+		      		"userId"  => $_GET[ "user_id" ],
+		      		"title"   => $_GET[ "title" ],
+		      		"deitail" => $_GET[ "detail" ],
+		      		"endAt"   => $_GET[ "end_at" ],
 		       ];
-		       return $params;
-									
-			header("Location:./../../views/todo/new.php");
+					 $convert = http_build_query( $params );
+
+			header("Location:./../../views/todo/new.php" . "?" . $convert );
 			exit();
 		}
 
 
-		$validated_data = $validator->getData( $params );
+		$validated_data = $this->getData( $params );
 		$result = Todo::insert( $validated_data );
 
 		if( $result === true ) {
