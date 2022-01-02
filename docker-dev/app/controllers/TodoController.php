@@ -37,12 +37,19 @@ class TodoController {
 	public function new() {
 		session_start();
 
+		if( isset( $_GET[ "user_id" ]) === true ) {
+			$params[ "userId" ] = $_GET[ "user_id" ];
+		}
+		else {
+			echo "ユーザーIDを入力してください。";
+		}
+		
 		$params = [
-			"userId" => $_GET[ "user_id" ],
 			"title"	 => $_GET[ "title" ],
 			"detail" => $_GET[ "detail" ],
 			"endAt"  => $_GET[ "end_at" ],
 		];
+		var_dump( $params );
 
 		return $params;
 
@@ -64,20 +71,10 @@ class TodoController {
 
 		if( $validate === false ) {
 
-		       $_GET[ "user_id" ] = $params[ "userId" ];
-		       $_GET[ "title" ] = $params[ "title" ];
-		       $_GET[ "detail" ] = $params[ "detail" ];
-		       $_GET[ "end_at" ] = $params[ "endAt" ];
+					 $query = http_build_query( $params );
 
-		       $params = [
-		      		"userId"  => $_GET[ "user_id" ],
-		      		"title"   => $_GET[ "title" ],
-		      		"deitail" => $_GET[ "detail" ],
-		      		"endAt"   => $_GET[ "end_at" ],
-		       ];
-					 $convert = http_build_query( $params );
-
-			header("Location:./../../views/todo/new.php" . "?" . $convert );
+			//header("Location:./../../views/todo/new.php" . "?" . $query );
+			header("Location:./../../views/todo/new.php" . "?user_id=" . $query["userId"] . "&title=" . $query[ "title"] . "&detail=" . $query[ "detail"] . "&end_at=" . $query[ "endAt" ] );
 			exit();
 		}
 
