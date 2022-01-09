@@ -14,7 +14,6 @@ if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 
 	$requests = $controller->new();
 	$user_id = $requests[ "userId" ];
-var_dump( $requests);
 
 }
 
@@ -28,10 +27,10 @@ session_start();
 </head>
 <body>
     <h1>新規作成</h1>
-	<form action="<?php echo $requests;?>" method="POST">
+	<form action="./../../views/todo/new.php" method="POST">
 		<div>
 			<p>ユーザーID</p>
-			<input type="text" name="user_id" value="<?php if( !isset( $_GET[ "user_id" ]) ) { echo $user_id;} ?>">
+			<p>1</p>
 		</div>
 		<div>
 		<div>

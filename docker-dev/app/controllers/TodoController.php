@@ -1,5 +1,5 @@
 <?php
-
+ini_set("display_errors", 1);
 require_once( "./../../models/Todo.php" );
 require_once( "./../../validations/TodoValidation.php" );
 
@@ -37,19 +37,18 @@ class TodoController {
 	public function new() {
 		session_start();
 
-		if( isset( $_GET[ "user_id" ]) === true ) {
-			$params[ "userId" ] = $_GET[ "user_id" ];
-		}
-		else {
-			echo "ユーザーIDを入力してください。";
-		}
+//		if( isset( $_GET[ "user_id" ]) === true ) {
+//			$params[ "userId" ] = $_GET[ "user_id" ];
+//		}
+//		else {
+//			echo "ユーザーIDを入力してください。";
+//		}
 		
 		$params = [
 			"title"	 => $_GET[ "title" ],
 			"detail" => $_GET[ "detail" ],
 			"endAt"  => $_GET[ "end_at" ],
 		];
-		var_dump( $params );
 
 		return $params;
 
@@ -73,8 +72,7 @@ class TodoController {
 
 					 $query = http_build_query( $params );
 
-			//header("Location:./../../views/todo/new.php" . "?" . $query );
-			header("Location:./../../views/todo/new.php" . "?user_id=" . $query["userId"] . "&title=" . $query[ "title"] . "&detail=" . $query[ "detail"] . "&end_at=" . $query[ "endAt" ] );
+			header("Location:./../../views/todo/new.php" . "?" . $query );
 			exit();
 		}
 
