@@ -30,7 +30,7 @@ session_start();
 	<form action="./../../views/todo/new.php" method="POST">
 		<div>
 			<p>ユーザーID</p>
-			<p>1</p>
+			<input type="text" name="user_id" value="1">
 		</div>
 		<div>
 		<div>

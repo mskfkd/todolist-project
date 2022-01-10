@@ -8,17 +8,29 @@ class TodoValidation {
 		session_start();
 		$todos = [];
 
-		$todos = Todo::findId();
+		$todo = new Todo;
+		$todos = $todo->findId();
+
+		$tmpData = [];
+		$i = 1;
 		
-		if( array_key_exists( $params[ "userId" ], $todos ) === false ) {
+		foreach( $todos as $datas ) {
+			$tmpData[ $i ] = $datas[ "id" ];
+			$i++;
+		}
+
+//		foreach( $params as $param ) {
+
+		if( array_key_exists( $params[ "userId" ], $tmpData ) === false ) {
 	//		$_SESSION[ "user_id" ] = $passTodo[ "userId" ];
 	//		$userId = $_SESSION[ "user_id" ];
 	//		echo $userId;
+
 			return false;
 
 		}
 
-//titleは空欄でないか
+//	titleは空欄でないか
 		if( !isset($params[ "title" ]) ) {
 
 	//		$_SESSION[ "title" ] = $passTodo[ "title" ];
@@ -28,17 +40,18 @@ class TodoValidation {
 
 		}
 
-//endatは空欄でないか
-		if( !isset($params[ "endAt" ]) ) {
+//	endatは空欄でないか
+			if( !isset($params[ "endAt" ]) ) {
 
 	//		$_SESSION[ "end_at" ] = $passTodo[ "endAt" ];
 	//		$endAt = $_SESSION[ "end_at" ];
 	//		echo $endAt;
-			return false;
+				return false;
 
 		}
 
-		return;
+	//}
+		return true;
 
 	}
 

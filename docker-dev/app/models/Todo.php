@@ -64,7 +64,6 @@ class Todo {
 		$sth->execute();
 		$users = $sth->fetchAll(PDO::FETCH_ASSOC);
 		
-
 		return $users;
 
 	}
