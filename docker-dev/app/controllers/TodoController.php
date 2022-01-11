@@ -68,12 +68,15 @@ class TodoController {
 		$validator = new Todovalidation;
 		$validate = $validator->postCheck( $params );
 
-		if( $validate === false ) {
-//			新規作成処理に失敗した場合は、エラーメッセージを表示させてみたいです
-//			バリデーションがNGの場合は、どの入力項目に不備があるのかリスト形式でエラーメッセージを表示してみたいです
-					 $query = http_build_query( $params );
+		if( $validate !== true ) {
+				foreach( $validate as $data ){
+						echo $data;
+				}
+
+			$query = http_build_query( $params );
 
 			header("Location:./../../views/todo/new.php" . "?" . $query );
+
 			exit();
 		}
 
@@ -82,11 +85,16 @@ class TodoController {
 		$result = Todo::insert( $validated_data );
 
 		if( $result === true ) {
+
 			header("Location:./../../views/todo/index.php");
 			exit();
+
 		}else {
+
 			header("Location:./../../views/todo/new.php");
+			echo "新規作成に失敗しました。";
 			exit();
+
 		}
 
 

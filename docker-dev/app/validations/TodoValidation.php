@@ -20,13 +20,15 @@ class TodoValidation {
 		}
 
 //		foreach( $params as $param ) {
+	$messages = [];
 
 		if( array_key_exists( $params[ "userId" ], $tmpData ) === false ) {
 	//		$_SESSION[ "user_id" ] = $passTodo[ "userId" ];
 	//		$userId = $_SESSION[ "user_id" ];
 	//		echo $userId;
 
-			return false;
+			$messages[ "userId" ] = "登録のないユーザーidです。";
+//			return false;
 
 		}
 
@@ -36,18 +38,23 @@ class TodoValidation {
 	//		$_SESSION[ "title" ] = $passTodo[ "title" ];
 	//		$title = $_SESSION[ "title" ];
 	//		echo $title;
-			return false;
+
+			$messages[ "title" ] = "タイトルが空欄のようです。";
+//			return false;
 
 		}
 
 //	endatは空欄でないか
 			if( !isset($params[ "endAt" ]) ) {
 
-	//		$_SESSION[ "end_at" ] = $passTodo[ "endAt" ];
-	//		$endAt = $_SESSION[ "end_at" ];
-	//		echo $endAt;
-				return false;
+				$messages[ "endAt" ] = "期限が設定されていないようです。";
+//				return false;
 
+		}
+
+		if ( count( $messages ) > 0 ){
+			var_dump( $messages );
+				return $messages;
 		}
 
 	//}
