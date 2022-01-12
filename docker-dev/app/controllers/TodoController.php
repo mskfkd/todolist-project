@@ -69,6 +69,7 @@ class TodoController {
 		$validate = $validator->postCheck( $params );
 
 		if( $validate !== true ) {
+			//@@@ TODO
 				foreach( $validate as $data ){
 						echo $data;
 				}

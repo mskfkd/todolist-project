@@ -8,6 +8,7 @@ $controller = new TodoController();
 if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 	
 	$requests = $controller->store();
+	var_dump( $requests );
 //	return $requests;
 
 } else {
@@ -26,7 +27,18 @@ session_start();
   <title>新規作成</title>
 </head>
 <body>
-    <h1>新規作成</h1>
+	<ul>
+		<?php
+				if( count($requests) > 0 ) {
+					foreach( $requests as $data ) :
+		?>
+						<li><?php echo $data; ?></li>
+		<?php
+					endforeach;
+				}
+		?>
+	</ul>
+  <h1>新規作成</h1>
 	<form action="./../../views/todo/new.php" method="POST">
 		<div>
 			<p>ユーザーID</p>
