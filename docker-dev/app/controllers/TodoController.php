@@ -69,15 +69,11 @@ class TodoController {
 		$validate = $validator->postCheck( $params );
 
 		if( $validate !== true ) {
-			//@@@ TODO
-				foreach( $validate as $data ){
-						echo $data;
-				}
 
 			$query = http_build_query( $params );
 
 			header("Location:./../../views/todo/new.php" . "?" . $query );
-
+			return $validate;
 			exit();
 		}
 
