@@ -5,7 +5,7 @@ require_once( "./../../controllers/TodoController.php" );
 class TodoValidation {
 
 	public function postCheck( $params ) {
-		session_start();
+		//session_start();
 		$todos = [];
 
 		$todo = new Todo;
@@ -20,11 +20,14 @@ class TodoValidation {
 		}
 
 //		foreach( $params as $param ) {
-		$messages = [];
+		global $status;
+		$status = [];
+
+
 
 		if( array_key_exists( $params[ "userId" ], $tmpData ) === false ) {
 
-			$messages[ "userId" ] = "登録のないユーザーidです。";
+			$status[ "userId" ] = false;
 //			return false;
 
 		}
@@ -33,7 +36,7 @@ class TodoValidation {
 		if( is_null( $params[ "title" ] ) === true
 			|| $params[ "title" ] === "" ) {
 
-			$messages[ "title" ] = "タイトルが空欄のようです。";
+			$status[ "title" ] = false;
 //			return false;
 
 		}
@@ -42,14 +45,13 @@ class TodoValidation {
 			if( !is_null( $params[ "endAt" ] ) === true
 				|| $params[ "endAt" ] === "" ) {
 
-				$messages[ "endAt" ] = "期限が設定されていないようです。";
+				$status[ "endAt" ] = false;
 //				return false;
 
 			}
 
-		if ( count( $messages ) > 0 ){
-
-				return $messages;
+		if ( count( $status ) > 0 ){
+				return false;
 		}
 
 	//}
@@ -57,12 +59,31 @@ class TodoValidation {
 
 	}
 
+	public function getErrorMessage( $status ) {
+		//statusの内容をどうやって渡すか
+var_dump( $status );
+		
+		if( $status[ "userId" ] === false ){
 
+			$messages[ "userId" ] = "登録のないユーザーidです。";
 
+		}
+		
+		if( $status[ "title" ] === false ) {
 
+			$messages[ "title" ] = "タイトルが空欄のようです。";
 
+		}
 
+		if( $status[ "endAt" ] === false  ) {
 
+			$messages[ "endAt" ] = "期限が設定されていないようです。";
+
+		}
+		
+		return $messages;
+
+	}
 
 
 }

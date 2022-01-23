@@ -68,9 +68,12 @@ class TodoController {
 		$validator = new Todovalidation;
 		$validate = $validator->postCheck( $params );
 
-		if( $validate !== true ) {
-
-			$query = http_build_query( $params );
+		if( $validate === false ) {
+//バリデーションクラスからエラーメッセージを取得
+			$message = $validator->getErrorMessage();
+		//var_dump( $message );
+//セッションに保存
+			$_SESSION[ "message" ] = $message;
 
 			header("Location:./../../views/todo/new.php" . "?" . $query );
 			return $validate;
