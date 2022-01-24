@@ -76,10 +76,10 @@ class TodoController {
 			$_SESSION[ "message" ] = $message;
 
 			header("Location:./../../views/todo/new.php" . "?" . $query );
-			return $validate;
+			return $_SESSION[ "message" ];
 			exit();
 		}
-
+die();
 
 		$validated_data = $this->getData( $params );
 		$result = Todo::insert( $validated_data );

@@ -51,6 +51,8 @@ class TodoValidation {
 			}
 
 		if ( count( $status ) > 0 ){
+			var_dump( $status );
+			return $status;
 				return false;
 		}
 
