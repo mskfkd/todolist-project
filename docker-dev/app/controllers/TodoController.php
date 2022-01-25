@@ -67,19 +67,20 @@ class TodoController {
 
 		$validator = new Todovalidation;
 		$validate = $validator->postCheck( $params );
+//		var_dump( $validate );
 
-		if( $validate === false ) {
+		if( $validate !== true ) {
 //バリデーションクラスからエラーメッセージを取得
-			$message = $validator->getErrorMessage();
+			$message = $validator->getErrorMessage( $validate );
 		//var_dump( $message );
 //セッションに保存
 			$_SESSION[ "message" ] = $message;
+			$query = http_build_query( $params );
 
 			header("Location:./../../views/todo/new.php" . "?" . $query );
 			return $_SESSION[ "message" ];
 			exit();
 		}
-die();
 
 		$validated_data = $this->getData( $params );
 		$result = Todo::insert( $validated_data );

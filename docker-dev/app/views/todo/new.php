@@ -19,6 +19,10 @@ if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 }
 
 session_start();
+//セッションからエラーメッセージ取得
+$errMsg = $_SESSION[ "message" ];
+var_dump($errMsg);
+
 ?> 
 <!DOCTYPE html>
 <html lang="ja">
@@ -29,13 +33,19 @@ session_start();
 <body>
 	<ul>
 		<?php
-				if( count($requests) > 0 ) {
-					foreach( $requests as $data ) :
+				if( count( $errMsg ) > 0 ) {
+					foreach( $errMsg as $data ) :
 		?>
 						<li><?php echo $data; ?></li>
 		<?php
 					endforeach;
 				}
+//エラーメッセージがあれば、セッションクリア
+					if( isset( $_SESSION[ "message" ] ) ){
+					
+						session_destroy();
+					
+					}
 		?>
 	</ul>
   <h1>新規作成</h1>

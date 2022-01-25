@@ -20,7 +20,6 @@ class TodoValidation {
 		}
 
 //		foreach( $params as $param ) {
-		global $status;
 		$status = [];
 
 
@@ -42,7 +41,7 @@ class TodoValidation {
 		}
 
 //	endatは空欄でないか
-			if( !is_null( $params[ "endAt" ] ) === true
+			if( is_null( $params[ "endAt" ] ) === true
 				|| $params[ "endAt" ] === "" ) {
 
 				$status[ "endAt" ] = false;
@@ -51,9 +50,7 @@ class TodoValidation {
 			}
 
 		if ( count( $status ) > 0 ){
-			var_dump( $status );
-			return $status;
-				return false;
+				return $status;
 		}
 
 	//}
@@ -63,7 +60,7 @@ class TodoValidation {
 
 	public function getErrorMessage( $status ) {
 		//statusの内容をどうやって渡すか
-var_dump( $status );
+//var_dump( $status );
 		
 		if( $status[ "userId" ] === false ){
 
