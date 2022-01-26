@@ -56,7 +56,6 @@ class TodoController {
 
 
 	public function store() {
-		session_start();
 
 		$params = [
 			"userId" => $_POST[ "user_id" ],
@@ -70,6 +69,7 @@ class TodoController {
 //		var_dump( $validate );
 
 		if( $validate !== true ) {
+			session_start();
 //バリデーションクラスからエラーメッセージを取得
 			$message = $validator->getErrorMessage( $validate );
 		//var_dump( $message );
@@ -78,7 +78,7 @@ class TodoController {
 			$query = http_build_query( $params );
 
 			header("Location:./../../views/todo/new.php" . "?" . $query );
-			return $_SESSION[ "message" ];
+		//	return $_SESSION[ "message" ];
 			exit();
 		}
 

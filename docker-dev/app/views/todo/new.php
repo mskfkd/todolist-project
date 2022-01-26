@@ -20,8 +20,8 @@ if( $_SERVER[ "REQUEST_METHOD" ] == "POST" ) {
 
 session_start();
 //セッションからエラーメッセージ取得
-$errMsg = $_SESSION[ "message" ];
-var_dump($errMsg);
+$message = $_SESSION[ "message" ];
+//var_dump($_SESSION[ "message" ]);
 
 ?> 
 <!DOCTYPE html>
@@ -33,8 +33,9 @@ var_dump($errMsg);
 <body>
 	<ul>
 		<?php
-				if( count( $errMsg ) > 0 ) {
-					foreach( $errMsg as $data ) :
+//var_dump($errMsg);
+				if( count( $message ) > 0 ) {
+					foreach( $message as $data ) :
 		?>
 						<li><?php echo $data; ?></li>
 		<?php
