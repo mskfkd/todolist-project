@@ -1,93 +1,84 @@
 <?php
-require_once( "./../../models/Todo.php" );
-require_once( "./../../controllers/TodoController.php" );
+require_once("./../../models/Todo.php");
+require_once("./../../controllers/TodoController.php");
 
-class TodoValidation {
+class TodoValidation
+{
+	public $errors = [];
 
-	public function postCheck( $params ) {
+	public function postCheck($params)
+	{
 		//session_start();
+		$this->errors = $errors;
 		$todos = [];
 
-		$todo = new Todo;
-		$todos = $todo->findId();
+		$user = new User;
+		$todos = $user->getAllId();
 
 		$tmpData = [];
 		$i = 1;
-		
-		foreach( $todos as $datas ) {
+
+		foreach ( $todos as $datas ) {
 			$tmpData[ $i ] = $datas[ "id" ];
 			$i++;
 		}
 
-//		foreach( $params as $param ) {
 		$status = [];
 
 
 
-		if( array_key_exists( $params[ "userId" ], $tmpData ) === false ) {
+		if ( array_key_exists( $params[ "userId" ], $tmpData ) === false) {
 
-			$status[ "userId" ] = false;
-//			return false;
-
-		}
-
-//	titleは空欄でないか
-		if( is_null( $params[ "title" ] ) === true
-			|| $params[ "title" ] === "" ) {
-
-			$status[ "title" ] = false;
-//			return false;
+			$this->errors[ "userId" ] = false;
 
 		}
 
-//	endatは空欄でないか
-			if( is_null( $params[ "endAt" ] ) === true
-				|| $params[ "endAt" ] === "" ) {
+		//	titleは空欄でないか
+		if (
+			is_null( $params[ "title" ] ) === true
+			|| $params[ "title" ] === ""
+		) {
 
-				$status[ "endAt" ] = false;
-//				return false;
+			$this->errors[ "title" ] = false;
 
-			}
-
-		if ( count( $status ) > 0 ){
-				return $status;
 		}
 
-	//}
+		//	endatは空欄でないか
+		if (
+			is_null( $params[ "endAt" ] ) === true
+			|| $params[ "endAt" ] === ""
+		) {
+
+			$this->errors[ "endAt" ] = false;
+
+		}
+
+		if ( count( $this->errors ) > 0) {
+			return false;
+		}
+
 		return true;
-
 	}
 
-	public function getErrorMessage( $status ) {
-		//statusの内容をどうやって渡すか
-//var_dump( $status );
-		
-		if( $status[ "userId" ] === false ){
+	public function getErrorMessage( )
+	{
+//		$this->errors = $errors;
 
-			$messages[ "userId" ] = "登録のないユーザーidです。";
+		if ( $this->errors[ "userId" ] === false ) {
 
-		}
-		
-		if( $status[ "title" ] === false ) {
-
-			$messages[ "title" ] = "タイトルが空欄のようです。";
-
+			$this->errors[ "userId" ] = "登録のないユーザーidです。";
 		}
 
-		if( $status[ "endAt" ] === false  ) {
+		if ( $this->errors[ "title" ] === false ) {
 
-			$messages[ "endAt" ] = "期限が設定されていないようです。";
-
+			$this->errors[ "title" ] = "タイトルが空欄のようです。";
 		}
-		
-		return $messages;
 
+		if ($this->errors[ "endAt" ] === false) {
+
+			$this->errors[ "endAt" ] = "期限が設定されていないようです。";
+		}
+
+		return $this->errors;
 	}
-
-
 }
-
-
-
-
-?>
