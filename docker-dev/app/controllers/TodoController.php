@@ -61,7 +61,8 @@ class TodoController
 	{
 
 		$params = [
-			"userId" => $_POST["user_id"],
+//			"userId" => $_POST["user_id"],
+			"userId" => 1,
 			"title"	 => $_POST["title"],
 			"detail" => $_POST["detail"],
 			"endAt"  => $_POST["end_at"],

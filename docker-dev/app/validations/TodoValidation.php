@@ -1,5 +1,6 @@
 <?php
 require_once("./../../models/Todo.php");
+require_once("./../../models/User.php");
 require_once("./../../controllers/TodoController.php");
 
 class TodoValidation
@@ -10,24 +11,16 @@ class TodoValidation
 	{
 		//session_start();
 		$this->errors = $errors;
-		$todos = [];
+		$users = [];
 
 		$user = new User;
-		$todos = $user->getAllId();
-
-		$tmpData = [];
-		$i = 1;
-
-		foreach ( $todos as $datas ) {
-			$tmpData[ $i ] = $datas[ "id" ];
-			$i++;
-		}
+		$users = $user->getAllId();
 
 		$status = [];
 
 
 
-		if ( array_key_exists( $params[ "userId" ], $tmpData ) === false) {
+		if ( array_key_exists( $params[ "userId" ], $users ) === false) {
 
 			$this->errors[ "userId" ] = false;
 

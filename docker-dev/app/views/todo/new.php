@@ -8,12 +8,10 @@ $controller = new TodoController();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	$requests = $controller->store();
-
 } else {
 
 	$requests = $controller->new();
 	$user_id = $requests["userId"];
-
 }
 
 session_start();
@@ -57,21 +55,15 @@ $message = $_SESSION["message"];
 		<div>
 			<div>
 				<p>タイトル</p>
-				<input type="text" name="title" value="<?php if (!isset($_GET["title"])) {
-																									echo $title = $requests["title"];
-																								} ?>">
+				<input type="text" name="title" value="<?php if (!isset($_GET["title"])) { echo $title = $requests["title"]; } ?>">
 			</div>
 			<div>
 				<p>タスク詳細</p>
-				<textarea name="detail" rows="5" placeholder="詳細を入力" value="<?php if (!isset($_GET["detail"])) {
-																																			echo $detail = $requests["detail"];
-																																		} ?>"></textarea>
+				<textarea name="detail" rows="5" placeholder="詳細を入力" value="<?php if (!isset($_GET["detail"])) { echo $detail = $requests["detail"]; } ?>"></textarea>
 			</div>
 			<div>
 				<p>期限</p>
-				<input type="date" name="end_at" value="<?php if (!isset($_GET["end_at"])) {
-																									echo $endAt = $requests["endAt"];
-																								} ?>">
+				<input type="date" name="end_at" value="<?php if (!isset($_GET["end_at"])) { echo $endAt = $requests["endAt"]; } ?>">
 			</div>
 			<div>
 				<input type="submit" name="submit" value="追加">
