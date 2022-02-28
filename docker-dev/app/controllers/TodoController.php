@@ -101,4 +101,17 @@ class TodoController
 
 		return;
 	}
+
+
+	public function edit() {
+
+	}
+
+	public function update() {
+
+	}
+
+
+
+
 }

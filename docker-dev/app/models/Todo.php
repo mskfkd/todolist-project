@@ -68,8 +68,7 @@ class Todo {
 
 		     
 		}catch ( PDOException $e ) {
-		     $result = false;
-		     return $result; 
+		     return false; 
 		}
 
 		return $res;

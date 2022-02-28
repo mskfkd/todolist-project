@@ -17,6 +17,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 session_start();
 //セッションからエラーメッセージ取得
 $message = $_SESSION["message"];
+//エラーメッセージがあれば、セッションクリア
+if (isset($_SESSION["message"])) {
+	session_destroy();
+}
 //var_dump($_SESSION[ "message" ]);
 
 ?>
@@ -35,14 +39,9 @@ $message = $_SESSION["message"];
 		if (count($message) > 0) {
 			foreach ($message as $data) :
 		?>
-				<li><?php echo $data; ?></li>
+				<li><?php echo $data; var_dump($data);?></li>
 		<?php
 			endforeach;
-		}
-		//エラーメッセージがあれば、セッションクリア
-		if (isset($_SESSION["message"])) {
-
-			session_destroy();
 		}
 		?>
 	</ul>
