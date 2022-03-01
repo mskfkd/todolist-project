@@ -16,7 +16,5 @@ $controller = new TodoController();
 	<title>編集機能</title>
 </head>
 
-<!--もしも編集ボタンを押されたらedit,
-編集が完了したらupdate-->
 <body>
 </body>
