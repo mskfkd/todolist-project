@@ -17,4 +17,40 @@ $controller = new TodoController();
 </head>
 
 <body>
+<ul>
+		<?php
+		//var_dump($errMsg);
+		if (count($message) > 0) {
+			foreach ($message as $data) :
+		?>
+				<li><?php echo $data;?></li>
+		<?php
+			endforeach;
+		}
+		?>
+	</ul>
+	<h1>編集</h1>
+	<form action="./../../views/todo/edit.php" method="POST">
+		<div>
+			<p>ユーザーID</p>
+			<input type="text" name="user_id" value="1">
+		</div>
+		<div>
+			<div>
+				<p>タイトル</p>
+				<input type="text" name="title" value="編集テスト">
+			</div>
+			<div>
+				<p>タスク詳細</p>
+				<textarea name="detail" rows="5" value="">編集テスト、編集テスト、編集テスト、編集テスト</textarea>
+			</div>
+			<div>
+				<p>期限</p>
+				<input type="text" name="end_at" value="2022/04/30">
+			</div>
+			<div>
+				<input type="submit" name="submit" value="編集">
+			</div>
+
+	</form>
 </body>

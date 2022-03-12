@@ -39,7 +39,7 @@ if (isset($_SESSION["message"])) {
 		if (count($message) > 0) {
 			foreach ($message as $data) :
 		?>
-				<li><?php echo $data; var_dump($data);?></li>
+				<li><?php echo $data;?></li>
 		<?php
 			endforeach;
 		}

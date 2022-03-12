@@ -104,11 +104,59 @@ class TodoController
 
 
 	public function edit() {
+		session_start();
+
+		$params = [
+			"title"	 => $_GET["title"],
+			"detail" => $_GET["detail"],
+			"endAt"  => $_GET["end_at"],
+		];
+
+		return $params;
 
 	}
 
 	public function update() {
-
+		$params = [
+			//			"userId" => $_POST["user_id"],
+						"userId" => 1,
+						"title"	 => $_POST["title"],
+						"detail" => $_POST["detail"],
+						"endAt"  => $_POST["end_at"],
+					];
+			
+					$validator = new Todovalidation;
+					$validate = $validator->postCheck($params);
+			
+					if ($validate === false) {
+						session_start();
+						//バリデーションクラスからエラーメッセージを取得
+						$message = $validator->getErrorMessage();
+						//セッションに保存
+						$_SESSION["message"] = $message;
+						$query = http_build_query($params);
+			
+						header("Location:./../../views/todo/new.php" . "?" . $query);
+						//	return $_SESSION[ "message" ];
+						exit();
+					}
+			
+					$validated_data = $this->getData($params);
+					$result = Todo::update($validated_data);
+			
+					if ($result === true) {
+			
+						header("Location:./../../views/todo/index.php");
+						exit();
+					} else {
+			
+						header("Location:./../../views/todo/new.php");
+						echo "編集に失敗しました。";
+						exit();
+					}
+			
+			
+					return;
 	}
 
 
