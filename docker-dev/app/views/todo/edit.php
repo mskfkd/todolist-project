@@ -5,6 +5,20 @@ require_once("./../../validations/TodoValidation.php");
 
 $controller = new TodoController();
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+	$requests = $controller->update();
+} else {
+
+	$requests = $controller->edit();
+	$user_id = $requests["userId"];
+}
+
+session_start();
+$message = $_SESSION["message"];
+if (isset($_SESSION["message"])) {
+	session_destroy();
+}
 
 
 ?>

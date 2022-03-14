@@ -136,7 +136,7 @@ class TodoController
 						$_SESSION["message"] = $message;
 						$query = http_build_query($params);
 			
-						header("Location:./../../views/todo/new.php" . "?" . $query);
+						header("Location:./../../views/todo/edit.php" . "?" . $query);
 						//	return $_SESSION[ "message" ];
 						exit();
 					}
@@ -150,7 +150,7 @@ class TodoController
 						exit();
 					} else {
 			
-						header("Location:./../../views/todo/new.php");
+						header("Location:./../../views/todo/edit.php");
 						echo "編集に失敗しました。";
 						exit();
 					}
