@@ -75,25 +75,26 @@ class Todo {
 
 	}
 
-	public function update( $updateTotodo) {
+	public function update( $params ) {
 
 		try {
 		     $db = new PDO ( DSN, DB_USERNAME, DB_PASSWORD );
 		     $sql = "UPDATE todos SET :title, :detail, :end_at, WHERE id = :id";
 		
 		     $sth = $db->prepare( $sql );
-		     $sth->bindValue( ':id', $todo_id, PDO::PARAM_INT );
-				 $sth->bindParam(':title', $updateToTodo[ "title" ], PDO::PARAM_STR);
-		     $sth->bindParam(':detail', $updateToTodo[ "detail" ],  PDO::PARAM_STR);
-		     $sth->bindParam(':end_at', date("Y-m-d H:i:s", strtotime( $updateToTodo[ "endAt" ] )), PDO::PARAM_STR);
-		     $sth->execute();
-		     $details = $sth->fetch(PDO::FETCH_ASSOC);
+		     $sth->bindParam( ':id', $params[ "todoId" ], PDO::PARAM_INT );
+				 $sth->bindParam(':title', $params[ "title" ], PDO::PARAM_STR);
+		     $sth->bindParam(':detail', $params[ "detail" ],  PDO::PARAM_STR);
+		     $sth->bindParam(':end_at', date("Y-m-d H:i:s", strtotime( $params[ "endAt" ] )), PDO::PARAM_STR);
+		     $res = $sth->execute();
+				 
 		}catch ( PDOException $e ) {
 		     $result = 0;
 		     return $result; 
 		}
 
 
+		return $res;
 
 
 	}

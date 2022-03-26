@@ -46,8 +46,8 @@ if (isset($_SESSION["message"])) {
 	<h1>編集</h1>
 	<form action="./../../views/todo/edit.php" method="POST">
 		<div>
-			<p>ユーザーID</p>
-			<input type="text" name="user_id" value="1">
+			<p>todoID</p>
+			<input type="text" name="id" value="1">
 		</div>
 		<div>
 			<div>

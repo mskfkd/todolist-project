@@ -119,44 +119,44 @@ class TodoController
 	public function update() {
 		$params = [
 			//			"userId" => $_POST["user_id"],
-						"userId" => 1,
-						"title"	 => $_POST["title"],
-						"detail" => $_POST["detail"],
-						"endAt"  => $_POST["end_at"],
-					];
-			
-					$validator = new Todovalidation;
-					$validate = $validator->postCheck($params);
-			
-					if ($validate === false) {
-						session_start();
-						//バリデーションクラスからエラーメッセージを取得
-						$message = $validator->getErrorMessage();
-						//セッションに保存
-						$_SESSION["message"] = $message;
-						$query = http_build_query($params);
-			
-						header("Location:./../../views/todo/edit.php" . "?" . $query);
-						//	return $_SESSION[ "message" ];
-						exit();
-					}
-			
-					$validated_data = $this->getData($params);
-					$result = Todo::update($validated_data);
-			
-					if ($result === true) {
-			
-						header("Location:./../../views/todo/index.php");
-						exit();
-					} else {
-			
-						header("Location:./../../views/todo/edit.php");
-						echo "編集に失敗しました。";
-						exit();
-					}
-			
-			
-					return;
+			"todoId" => 1,
+			"title"	 => $_POST["title"],
+			"detail" => $_POST["detail"],
+			"endAt"  => $_POST["end_at"],
+		];
+
+		$findTodo = new Todo;
+		$validate = $findTodo->findById($params[ "todoId" ]);
+
+		if ($validate === false) {
+			session_start();
+			//バリデーションクラスからエラーメッセージを取得
+			$message = "選択されたtodoは見つかりませんでした。";
+			//セッションに保存
+			$_SESSION["message"] = $message;
+			$query = http_build_query($params);
+
+			header("Location:./../../views/todo/edit.php" . "?" . $query);
+			//	return $_SESSION[ "message" ];
+			exit();
+		}
+
+//		$validated_data = $this->getData($params);
+		$result = $findTodo->update($params);
+
+		if ($result === true) {
+
+			header("Location:./../../views/todo/index.php");
+			exit();
+		} else {
+
+			header("Location:./../../views/todo/edit.php");
+			echo "編集に失敗しました。";
+			exit();
+		}
+
+
+		return;
 	}
 
 
