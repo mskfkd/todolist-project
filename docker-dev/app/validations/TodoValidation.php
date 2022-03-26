@@ -5,7 +5,7 @@ require_once("./../../controllers/TodoController.php");
 
 class TodoValidation
 {
-//	public $errors = [];
+	//	public $errors = [];
 	const ERROR_USER_NOT_EXIST = "登録のないユーザーidです。";
 	const ERROR_NO_TITLE = "タイトルが空欄のようです。";
 	const ERROR_NO_LIMIT =  "期限が設定されていないようです。";
@@ -13,52 +13,49 @@ class TodoValidation
 	public function postCheck($params)
 	{
 		//session_start();
-//		$this->errors = $errors;
+		//		$this->errors = $errors;
 		$users = [];
 
 		$user = new User;
-		$users = $user->isExistById( $params[ "userId" ] );
+		$users = $user->isExistById($params["userId"]);
 
 		$status = [];
 
 
 
-		if ( array_key_exists( $params[ "userId" ] , $users ) === false ) {
+		if (array_key_exists($params["userId"], $users) === false) {
 
-			$this->errors[ "userId" ] = self::ERROR_USER_NOT_EXIST;
-
+			$this->errors["userId"] = self::ERROR_USER_NOT_EXIST;
 		}
 
 		//	titleは空欄でないか
 		if (
-			is_null( $params[ "title" ] ) === true
-			|| $params[ "title" ] === ""
+			is_null($params["title"]) === true
+			|| $params["title"] === ""
 		) {
 
-			$this->errors[ "title" ] = self::ERROR_NO_TITLE;
-
+			$this->errors["title"] = self::ERROR_NO_TITLE;
 		}
 
 		//	endatは空欄でないか
 		if (
-			is_null( $params[ "endAt" ] ) === true
-			|| $params[ "endAt" ] === ""
+			is_null($params["endAt"]) === true
+			|| $params["endAt"] === ""
 		) {
 
-			$this->errors[ "endAt" ] = self::ERROR_NO_LIMIT;
-
+			$this->errors["endAt"] = self::ERROR_NO_LIMIT;
 		}
 
-		if ( count( $this->errors ) > 0) {
+		if (count($this->errors) > 0) {
 			return false;
 		}
 
 		return true;
 	}
 
-	public function getErrorMessage( )
+	public function getErrorMessage()
 	{
-//		$this->errors = $errors;
+		//		$this->errors = $errors;
 		return $this->errors;
 	}
 }
