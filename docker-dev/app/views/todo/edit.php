@@ -52,15 +52,15 @@ if (isset($_SESSION["message"])) {
 		<div>
 			<div>
 				<p>タイトル</p>
-				<input type="text" name="title" value="編集テスト">
+				<input type="text" name="title" value="edit_test">
 			</div>
 			<div>
 				<p>タスク詳細</p>
-				<textarea name="detail" rows="5" value="">編集テスト、編集テスト、編集テスト、編集テスト</textarea>
+				<textarea name="detail" rows="5" value="">this is update test.</textarea>
 			</div>
 			<div>
 				<p>期限</p>
-				<input type="text" name="end_at" value="2022/04/30">
+				<input type="text" name="end_at" value="2022-04-30 23:59:59">
 			</div>
 			<div>
 				<input type="submit" name="submit" value="編集">

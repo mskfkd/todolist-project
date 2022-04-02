@@ -78,8 +78,8 @@ class Todo
 
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
-//			$sql = "UPDATE todos SET title = :title, detail = :detail, end_at = :end_at WHERE id = :id";
-			$sql = "UPDATE todos SET title = '" . $params[ "title" ] . "'  detail ='" .  $params[ "detail" ] ."', end_at ='" . $params[ "endAt" ]  ."' WHERE id = " . $params[ "todoId" ] . "";
+			$sql = "UPDATE todos SET title = :title, detail = :detail, end_at = :end_at, updated_at = NOW() WHERE id = :id";
+			//$sql = "UPDATE todos SET title = '" . $params[ "title" ] . "',  detail ='" .  $params[ "detail" ] ."', end_at ='" . $params[ "endAt" ]  ."' WHERE id = " . $params[ "todoId" ] . ";";
 
 			$sth = $db->prepare($sql);
 			$sth->bindParam(':id', $params["todoId"], PDO::PARAM_INT);
