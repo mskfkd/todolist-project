@@ -8,6 +8,7 @@ $controller = new TodoController();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	$response = $controller->update($params);
+
 } else {
 
 	$response = $controller->edit();
@@ -39,7 +40,7 @@ if (isset($_SESSION["message"])) {
 		<?php endif; ?>
 	</ul>
 	<h1>編集</h1>
-	<form action="./../../views/todo/edit.php" method="GET">
+	<form action="./../../views/todo/edit.php" method="POST">
 		<div>
 			<p>todoID</p>
 			<input type="text" name="todoId" value="<?php echo $todo_id; ?>">

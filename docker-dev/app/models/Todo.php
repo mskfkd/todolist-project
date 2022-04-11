@@ -87,7 +87,7 @@ class Todo
 			$sth->bindParam(':detail', $params["detail"],  PDO::PARAM_STR);
 			$sth->bindParam(':end_at', date("Y-m-d H:i:s", strtotime($params["endAt"])), PDO::PARAM_STR);
 			$res = $sth->execute();
-			var_dump($sql);
+
 		} catch (PDOException $e) {
 			$result = 0;
 			return $result;
