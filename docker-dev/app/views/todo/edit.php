@@ -7,11 +7,11 @@ $controller = new TodoController();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-	$requests = $controller->update();
+	$response = $controller->update($params);
 } else {
 
-	$requests = $controller->edit();
-	$user_id = $requests["userId"];
+	$response = $controller->edit();
+	$todo_id = $response["todoId"];
 }
 
 session_start();
@@ -32,22 +32,17 @@ if (isset($_SESSION["message"])) {
 
 <body>
 <ul>
-		<?php
-		//var_dump($errMsg);
-		if (count($message) > 0) {
-			foreach ($message as $data) :
-		?>
-				<li><?php echo $data;?></li>
-		<?php
-			endforeach;
-		}
-		?>
+		<?php	if (count($message) > 0): ?> 
+			<?php foreach ($message as $data) :	?>
+					<li><?php echo $data;?></li>
+			<?php endforeach; ?>
+		<?php endif; ?>
 	</ul>
 	<h1>編集</h1>
-	<form action="./../../views/todo/edit.php" method="POST">
+	<form action="./../../views/todo/edit.php" method="GET">
 		<div>
 			<p>todoID</p>
-			<input type="text" name="id" value="1">
+			<input type="text" name="todoId" value="<?php echo $todo_id; ?>">
 		</div>
 		<div>
 			<div>
@@ -56,11 +51,11 @@ if (isset($_SESSION["message"])) {
 			</div>
 			<div>
 				<p>タスク詳細</p>
-				<textarea name="detail" rows="5" value="">this is update test.</textarea>
+				<textarea name="detail" rows="5" value="">this is 2nd update test.</textarea>
 			</div>
 			<div>
 				<p>期限</p>
-				<input type="text" name="end_at" value="2022-04-30 23:59:59">
+				<input type="text" name="end_at" value="2022-05-31 23:59:59">
 			</div>
 			<div>
 				<input type="submit" name="submit" value="編集">

@@ -107,23 +107,19 @@ class TodoController
 		session_start();
 
 		$params = [
-			"title"	 => $_GET["title"],
-			"detail" => $_GET["detail"],
-			"endAt"  => $_GET["end_at"],
+			"todoId"	=> $_GET["todoId"],
+			"title"			 => $_GET["title"],
+			"detail"		=> $_GET["detail"],
+			"endAt"		=> $_GET["end_at"],
 		];
 
 		return $params;
 
 	}
 
-	public function update() {
-		$params = [
-			//			"userId" => $_POST["user_id"],
-			"todoId" => 1,
-			"title"	 => $_POST["title"],
-			"detail" => $_POST["detail"],
-			"endAt"  => $_POST["end_at"],
-		];
+	public function update($params) {
+
+		var_dump($params);
 
 		$findTodo = new Todo;
 		$validate = $findTodo->findById($params[ "todoId" ]);
