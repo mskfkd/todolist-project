@@ -1,5 +1,5 @@
 DROP DATABASE IF EXISTS todolist;
-CREATE DATABASE todolist;
+CREATE DATABASE todolist default character set utf8mb4 collate utf8mb4_bin;
 USE todolist;
 DROP TABLE IF EXISTS users;
 
@@ -34,7 +34,8 @@ CREATE TABLE todos (
 
 INSERT INTO todos ( user_id, title, detail, end_at, created_at)
 VALUES
-( 1, "テスト", "これはテストです。", 2021-10-31, NOW());
+( 1, "test", "this is test.", "2022-06-30", NOW()),
+( 1, "2nd test", "this is 2nd test.", "2022-07-31", NOW());
 
 
 
