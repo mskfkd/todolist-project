@@ -119,6 +119,13 @@ class TodoController
 
 	public function update($params) {
 
+		//$params = [
+		//	"userId" => $_POST["todoId"],
+		//	"title"	 => $_POST["title"],
+		//	"detail" => $_POST["detail"],
+		//	"endAt"  => $_POST["end_at"],
+		//];
+
 		var_dump($params);
 
 		$findTodo = new Todo;
