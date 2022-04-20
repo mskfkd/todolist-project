@@ -126,8 +126,8 @@ class TodoController
 			"endAt"  => $_POST["end_at"],
 		];
 
-		$findTodo = new Todo;
-		$validate = $findTodo->findById($params[ "todoId" ]);
+		$findTodo = new TodoValidation;
+		$validate = $findTodo->checkTodoId($params[ "todoId" ]);
 
 		if ($validate === false) {
 			session_start();

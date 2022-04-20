@@ -58,4 +58,21 @@ class TodoValidation
 		//		$this->errors = $errors;
 		return $this->errors;
 	}
+
+	public function checkTodoId( $passTodoId ) {
+
+		$checkTodoId = new Todo;
+		$resultTodoId = $checkTodoId->findById( $passTodoId );
+
+		if( $resultTodoId === 0 ) {
+				return false;
+		}
+
+
+	}
+
+
+
+
+
 }
