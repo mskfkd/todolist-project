@@ -119,15 +119,15 @@ class TodoController
 
 	public function update($params) {
 
-		$params = [
-			"todoId" => $_POST["todoId"],
-			"title"	 => $_POST["title"],
-			"detail" => $_POST["detail"],
-			"endAt"  => $_POST["end_at"],
-		];
+//		$params = [
+//			"todoId" => $_POST["todoId"],
+//			"title"	 => $_POST["title"],
+//			"detail" => $_POST["detail"],
+//			"endAt"  => $_POST["end_at"],
+//		];
 
-		$findTodo = new TodoValidation;
-		$validate = $findTodo->checkTodoId($params[ "todoId" ]);
+		$TodoValidate = new TodoValidation;
+		$validate = $TodoValidate->checkTodoId($params[ "todoId" ]);
 
 		if ($validate === false) {
 			session_start();
@@ -142,8 +142,11 @@ class TodoController
 			exit();
 		}
 
+		$validated_data = $TodoValidate->getData( $params[ "todoId" ] );
+
 //		$validated_data = $this->getData($params);
-		$result = $findTodo->update($params);
+		$Update = new Todo;
+		$result = $Update->update($validated_data);
 
 		if ($result === true) {
 

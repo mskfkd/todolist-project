@@ -51,9 +51,7 @@ class Todo
 	}
 
 
-
-	public function insert($passToTodo)
-	{
+	public function insert($passToTodo) {
 
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);

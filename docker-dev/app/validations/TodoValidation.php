@@ -71,7 +71,20 @@ class TodoValidation
 
 	}
 
+	public function getData( $params )
+	{
 
+		$getTodoId = new Todo;
+		$resultTodoId = $getTodoId->findById( $passTodoId );
+
+		if( $resultTodoId === 0 ) {
+				return false;
+		}
+
+
+
+
+	}
 
 
 
