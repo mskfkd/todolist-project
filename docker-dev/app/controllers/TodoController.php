@@ -15,16 +15,9 @@ class TodoController
 	public function detail()
 	{
 
-		//GETパラメータ取得
 		$todo_id = $_GET["todo_id"];
 
 		$todo = Todo::findById($todo_id);
-
-		//		if( !$todo ) {
-		//		   $todo = 'error'; 
-		//		   header("Location:./../../views/error/404.php");
-		//		   exit();
-		//		}
 
 
 		return $todo;
@@ -40,12 +33,6 @@ class TodoController
 	{
 		session_start();
 
-		//		if( isset( $_GET[ "user_id" ]) === true ) {
-		//			$params[ "userId" ] = $_GET[ "user_id" ];
-		//		}
-		//		else {
-		//			echo "ユーザーIDを入力してください。";
-		//		}
 
 		$params = [
 			"title"	 => $_GET["title"],
@@ -61,7 +48,6 @@ class TodoController
 	{
 
 		$params = [
-//			"userId" => $_POST["user_id"],
 			"userId" => 1,
 			"title"	 => $_POST["title"],
 			"detail" => $_POST["detail"],
@@ -80,7 +66,6 @@ class TodoController
 			$query = http_build_query($params);
 
 			header("Location:./../../views/todo/new.php" . "?" . $query);
-			//	return $_SESSION[ "message" ];
 			exit();
 		}
 
@@ -117,34 +102,32 @@ class TodoController
 
 	}
 
-	public function update($params) {
+	public function update() {
 
-//		$params = [
-//			"todoId" => $_POST["todoId"],
-//			"title"	 => $_POST["title"],
-//			"detail" => $_POST["detail"],
-//			"endAt"  => $_POST["end_at"],
-//		];
+		$message = "";
 
-		$TodoValidate = new TodoValidation;
-		$validate = $TodoValidate->checkTodoId($params[ "todoId" ]);
+		$params = [
+			"todoId" => $_POST["todoId"],
+			"title"	 => $_POST["title"],
+			"detail" => $_POST["detail"],
+			"endAt"  => $_POST["end_at"],
+		];
+
+		$validator = new TodoValidation;
+		$validate = $validator->checkTodo($params);
 
 		if ($validate === false) {
 			session_start();
-			//バリデーションクラスからエラーメッセージを取得
-			$message = "選択されたtodoは見つかりませんでした。";
-			//セッションに保存
-			$_SESSION["message"] = $message;
+			$message = $validator->getErrorMessage();
+			$_SESSION["errors"] = $message;
 			$query = http_build_query($params);
 
 			header("Location:./../../views/todo/edit.php" . "?" . $query);
-			//	return $_SESSION[ "message" ];
 			exit();
 		}
 
-		$validated_data = $TodoValidate->getData( $params[ "todoId" ] );
+		$validated_data = $validator->getData( $params[ "todoId" ] );
 
-//		$validated_data = $this->getData($params);
 		$Update = new Todo;
 		$result = $Update->update($validated_data);
 

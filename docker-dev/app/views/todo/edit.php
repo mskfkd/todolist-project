@@ -3,6 +3,7 @@ require_once("./../../controllers/TodoController.php");
 require_once("./../../models/Todo.php");
 require_once("./../../validations/TodoValidation.php");
 
+$message = [];
 $controller = new TodoController();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -16,8 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 session_start();
-$message = $_SESSION["message"];
-if (isset($_SESSION["message"])) {
+$message = $_SESSION["errors"];
+if (isset($_SESSION["errors"])) {
 	session_destroy();
 }
 
@@ -56,7 +57,7 @@ if (isset($_SESSION["message"])) {
 			</div>
 			<div>
 				<p>期限</p>
-				<input type="text" name="end_at" value="2022-05-31 23:59:59">
+				<input type="text" name="end_at" value="2022-01-31 23:59:59">
 			</div>
 			<div>
 				<input type="submit" name="submit" value="編集">

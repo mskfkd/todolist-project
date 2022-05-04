@@ -5,21 +5,19 @@ require_once("./../../controllers/TodoController.php");
 
 class TodoValidation
 {
-	//	public $errors = [];
 	const ERROR_USER_NOT_EXIST = "登録のないユーザーidです。";
+	const ERROR_TODO_NOT_EXIST = "登録のないtodoです。";
 	const ERROR_NO_TITLE = "タイトルが空欄のようです。";
-	const ERROR_NO_LIMIT =  "期限が設定されていないようです。";
+	const ERROR_NO_LIMIT =  "期限が設定を見直してください。";
 
 	public function postCheck($params)
 	{
-		//session_start();
-		//		$this->errors = $errors;
 		$users = [];
 
 		$user = new User;
 		$users = $user->isExistById($params["userId"]);
 
-		$status = [];
+		$this->errors = [];
 
 
 
@@ -28,7 +26,6 @@ class TodoValidation
 			$this->errors["userId"] = self::ERROR_USER_NOT_EXIST;
 		}
 
-		//	titleは空欄でないか
 		if (
 			is_null($params["title"]) === true
 			|| $params["title"] === ""
@@ -37,9 +34,9 @@ class TodoValidation
 			$this->errors["title"] = self::ERROR_NO_TITLE;
 		}
 
-		//	endatは空欄でないか
 		if (
-			is_null($params["endAt"]) === true
+			$params["endAt"] <= date( "Y-m-d" )
+			|| is_null($params["endAt"]) === true
 			|| $params["endAt"] === ""
 		) {
 
@@ -55,19 +52,44 @@ class TodoValidation
 
 	public function getErrorMessage()
 	{
-		//		$this->errors = $errors;
 		return $this->errors;
 	}
 
-	public function checkTodoId( $passTodoId ) {
+	public function checkTodo( $params ) {
 
+		$this->errors = [];
 		$checkTodoId = new Todo;
-		$resultTodoId = $checkTodoId->findById( $passTodoId );
+		$resultTodoId = $checkTodoId->findById( $params[ "todoId" ] );
 
-		if( $resultTodoId === 0 ) {
-				return false;
+		if( 
+			$resultTodoId === 0
+			|| $params["todoId"] === ""
+			|| is_null( $params["todoId"] ) === true ) {
+				$this->errors["todoId"] = self::ERROR_TODO_NOT_EXIST;
 		}
 
+		if (
+			is_null($params["title"]) === true
+			|| $params["title"] === ""
+		) {
+
+			$this->errors["title"] = self::ERROR_NO_TITLE;
+		}
+
+		if (
+			$params["endAt"] <= date( "Y-m-d" )
+			|| is_null($params["endAt"]) === true
+			|| $params["endAt"] === ""
+		) {
+
+			$this->errors["endAt"] = self::ERROR_NO_LIMIT;
+		}
+
+		if (count($this->errors) > 0) {
+			return false;
+		}
+
+		return true;
 
 	}
 
@@ -75,7 +97,7 @@ class TodoValidation
 	{
 
 		$getTodoId = new Todo;
-		$resultTodoId = $getTodoId->findById( $passTodoId );
+		$resultTodoId = $getTodoId->findById( $params );
 
 		if( $resultTodoId === 0 ) {
 				return false;
