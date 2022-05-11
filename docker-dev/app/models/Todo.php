@@ -77,18 +77,29 @@ class Todo
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
 			$sql = "UPDATE todos SET title = :title, detail = :detail, end_at = :end_at, updated_at = NOW() WHERE id = :id";
-			//$sql = "UPDATE todos SET title = '" . $params[ "title" ] . "',  detail ='" .  $params[ "detail" ] ."', end_at ='" . $params[ "endAt" ]  ."' WHERE id = " . $params[ "todoId" ] . ";";
+
+			$db->beginTransaction();
 
 			$sth = $db->prepare($sql);
 			$sth->bindParam(':id', $params["todoId"], PDO::PARAM_INT);
 			$sth->bindParam(':title', $params["title"], PDO::PARAM_STR);
 			$sth->bindParam(':detail', $params["detail"],  PDO::PARAM_STR);
 			$sth->bindParam(':end_at', date("Y-m-d H:i:s", strtotime($params["endAt"])), PDO::PARAM_STR);
+
 			$res = $sth->execute();
 
+			if( $res ) {
+
+				$db->commit();
+
+			}
+
 		} catch (PDOException $e) {
+
+			$db->rollBack();
 			$result = 0;
 			return $result;
+
 		}
 
 

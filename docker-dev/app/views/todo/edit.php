@@ -53,11 +53,11 @@ if (isset($_SESSION["errors"])) {
 			</div>
 			<div>
 				<p>タスク詳細</p>
-				<textarea name="detail" rows="5" value="">this is 2nd update test.</textarea>
+				<textarea name="detail" rows="5" value="">this is 3rd update test.</textarea>
 			</div>
 			<div>
 				<p>期限</p>
-				<input type="text" name="end_at" value="2022-01-31 23:59:59">
+				<input type="text" name="end_at" value="2022-06-30 23:59:59">
 			</div>
 			<div>
 				<input type="submit" name="submit" value="編集">

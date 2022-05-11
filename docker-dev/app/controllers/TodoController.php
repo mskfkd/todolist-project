@@ -104,7 +104,7 @@ class TodoController
 
 	public function update() {
 
-		$message = "";
+		// $message = "";
 
 		$params = [
 			"todoId" => $_POST["todoId"],
@@ -128,8 +128,8 @@ class TodoController
 
 		$validated_data = $validator->getData( $params[ "todoId" ] );
 
-		$Update = new Todo;
-		$result = $Update->update($validated_data);
+		$todo = new Todo;
+		$result = $todo->update($validated_data);
 
 		if ($result === true) {
 
