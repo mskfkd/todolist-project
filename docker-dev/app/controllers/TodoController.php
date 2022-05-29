@@ -129,17 +129,19 @@ class TodoController
 		$validated_data = $validator->getData( $params[ "todoId" ] );
 
 		$todo = new Todo;
-		$result = $todo->update($validated_data);
+		$result = $todo->update($validated_data,$params);
 
 		if ($result === true) {
 
 			header("Location:./../../views/todo/index.php");
 			exit();
+
 		} else {
 
 			header("Location:./../../views/todo/edit.php");
 			echo "編集に失敗しました。";
 			exit();
+
 		}
 
 

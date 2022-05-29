@@ -71,7 +71,7 @@ class Todo
 		return $res;
 	}
 
-	public function update($params)
+	public function update($validates_data,$params)
 	{
 
 		try {
@@ -81,7 +81,7 @@ class Todo
 			$db->beginTransaction();
 
 			$sth = $db->prepare($sql);
-			$sth->bindParam(':id', $params["todoId"], PDO::PARAM_INT);
+			$sth->bindParam(':id', $validates_data["todoId"], PDO::PARAM_INT);
 			$sth->bindParam(':title', $params["title"], PDO::PARAM_STR);
 			$sth->bindParam(':detail', $params["detail"],  PDO::PARAM_STR);
 			$sth->bindParam(':end_at', date("Y-m-d H:i:s", strtotime($params["endAt"])), PDO::PARAM_STR);
@@ -95,7 +95,6 @@ class Todo
 			}
 
 		} catch (PDOException $e) {
-
 			$db->rollBack();
 			$result = 0;
 			return $result;
