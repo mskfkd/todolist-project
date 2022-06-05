@@ -96,12 +96,45 @@ class Todo
 
 		} catch (PDOException $e) {
 			$db->rollBack();
-			$result = 0;
-			return $result;
+			return false;
 
 		}
 
 
 		return $res;
 	}
+
+	public function delete($validates_data) {
+
+		try {
+			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
+			$sql = "DELETE FROM todos WHERE id = :id";
+
+			$db->beginTransaction();
+
+			$sth = $db->prepare($sql);
+			$sth->bindValue(':id', $validates_data["todoId"], PDO::PARAM_INT);
+
+			$res = $sth->execute();
+
+			if( $res ) {
+
+				$db->commit();
+
+			}
+
+		} catch (PDOException $e) {
+			$db->rollBack();
+			return false;
+
+		}
+
+
+		return $res;
+
+
+
+	}
+
+
 }

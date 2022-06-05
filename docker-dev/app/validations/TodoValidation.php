@@ -107,6 +107,25 @@ class TodoValidation
 
 	}
 
+	public function checkDeleteTodo( $params ) {
 
+		$this->errors = [];
+		$checkTodoId = new Todo;
+		$resultTodoId = $checkTodoId->findById( $params[ "todoId" ] );
+
+		if( 
+			$resultTodoId === 0
+			|| $params["todoId"] === ""
+			|| is_null( $params["todoId"] ) === true ) {
+				$this->errors["todoId"] = self::ERROR_TODO_NOT_EXIST;
+		}
+
+		if (count($this->errors) > 0) {
+			return false;
+		}
+
+		return true;
+
+	}
 
 }
