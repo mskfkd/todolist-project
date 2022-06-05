@@ -149,10 +149,9 @@ class TodoController
 	}
 
 	public function delete($todo) {
-		var_dump($todo);
 
 		$params = [
-			"todoId" => $_POST["todoId"],
+			"todoId" => $_POST[$todo["id"]],
 //			"title"	 => $_POST["title"],
 //			"detail" => $_POST["detail"],
 //			"endAt"  => $_POST["end_at"],
@@ -162,12 +161,12 @@ class TodoController
 		$validate = $validator->checkDeleteTodo($params);
 
 		if ($validate === false) {
-			session_start();
+//			session_start();
 			$message = $validator->getErrorMessage();
 			$_SESSION["errors"] = $message;
-			$query = http_build_query($params);
+//			$query = http_build_query($params);
 
-			header("Location:./../../views/todo/index.php" . "?" . $query);
+//			header("Location:./../../views/todo/index.php" . "?" . $query);
 			exit();
 		}
 

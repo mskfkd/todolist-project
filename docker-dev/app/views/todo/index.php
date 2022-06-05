@@ -5,9 +5,13 @@ require_once("./detail.php");
 $controller = new TodoController();
 $todos = $controller->index();
 
+if($_SERVER["REQUEST_METHOD"] === "POST") {
+
+	$controller->delete($todo);
+
+}
 
 ini_set('display_errors', 1);
-var_dump($todo);
 
 ?>
 <!DOCTYPE html>
