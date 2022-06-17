@@ -7,7 +7,6 @@ $controller = new TodoController();
 $data = $controller->detail();
 $todo = $data[ 'todo' ];
 ?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>

@@ -148,10 +148,10 @@ class TodoController
 		return;
 	}
 
-	public function delete($todo) {
+	public function delete( $todo ) {
 
 		$params = [
-			"todoId" => $_POST[$todo["id"]],
+			"todoId" => $_REQUEST[ "todo_id" ],
 //			"title"	 => $_POST["title"],
 //			"detail" => $_POST["detail"],
 //			"endAt"  => $_POST["end_at"],
@@ -176,13 +176,12 @@ class TodoController
 		$result = $todo->delete($validated_data,$params);
 
 		if ($result === true) {
-
 			header("Location:./../../views/todo/index.php");
 			exit();
 
 		} else {
 
-			header("Location:./../../views/todo/edit.php");
+			header("Location:./../../views/todo/index.php");
 			echo "削除に失敗しました。";
 			exit();
 

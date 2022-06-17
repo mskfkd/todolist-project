@@ -41,8 +41,7 @@ class Todo
 			$details = $sth->fetch(PDO::FETCH_ASSOC);
 		} catch (PDOException $e) {
 			//		     echo "登録されたtodoの詳細が表示できませんでした。" . $e->getMessage ();
-			$result = 0;
-			return $result;
+			return false;
 		}
 
 
@@ -113,7 +112,7 @@ class Todo
 			$db->beginTransaction();
 
 			$sth = $db->prepare($sql);
-			$sth->bindValue(':id', $validates_data["todoId"], PDO::PARAM_INT);
+			$sth->bindValue(':id', $validates_data["id"], PDO::PARAM_INT);
 
 			$res = $sth->execute();
 

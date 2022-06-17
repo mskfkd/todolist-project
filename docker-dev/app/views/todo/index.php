@@ -5,9 +5,10 @@ require_once("./detail.php");
 $controller = new TodoController();
 $todos = $controller->index();
 
-if($_SERVER["REQUEST_METHOD"] === "POST") {
+if( isset( $_REQUEST[ "action" ] ) === true 
+	&& $_REQUEST[ "action" ] === "delete" ) {
 
-	$controller->delete($todo);
+	$controller->delete( $_REQUEST[ "todo_id" ] );
 
 }
 
@@ -42,7 +43,7 @@ ini_set('display_errors', 1);
 						<th><?php
 								echo $todo["end_at"];
 								?></th>
-						<th><input type="submit" name="delete" value="削除" ></th>
+						<th><a href="./../../views/todo/index.php?todo_id=<?php echo $todo["id"];?>&action=delete">削除</a></th>
 					</tr>
 
 				<?php
