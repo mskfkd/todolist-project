@@ -1,5 +1,5 @@
 <?php
-ini_set("display_errors", 1);
+
 require_once("./../../models/Todo.php");
 require_once("./../../validations/TodoValidation.php");
 
@@ -178,13 +178,10 @@ class TodoController
 		if ($result === true) {
 			header("Location:./../../views/todo/index.php");
 			exit();
-
 		} else {
-
 			header("Location:./../../views/todo/index.php");
 			echo "削除に失敗しました。";
 			exit();
-
 		}
 
 

@@ -2,7 +2,6 @@
 
 require_once( "./../../controllers/TodoController.php" );
 
-
 $controller = new TodoController();
 $data = $controller->detail();
 $todo = $data[ 'todo' ];
@@ -39,6 +38,6 @@ $todo = $data[ 'todo' ];
 			<?php echo $todo[ "created_at" ]; ?>
 				</td>
 			</tr>
-	</table>	
+	</table>
 	
 	</body>

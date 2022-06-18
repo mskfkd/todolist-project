@@ -49,7 +49,7 @@ if (isset($_SESSION["message"])) {
 	<form action="./../../views/todo/new.php" method="POST">
 		<div>
 			<p>ユーザーID</p>
-			<input type="text" name="user_id" value="1">
+			<input type="text" name="user_id" value="">
 		</div>
 		<div>
 			<div>

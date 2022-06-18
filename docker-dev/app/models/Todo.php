@@ -28,7 +28,7 @@ class Todo
 		return $todos;
 	}
 
-	public function findById($todo_id)
+	public static function findById($todo_id)
 	{
 
 		try {
@@ -40,7 +40,6 @@ class Todo
 			$sth->execute();
 			$details = $sth->fetch(PDO::FETCH_ASSOC);
 		} catch (PDOException $e) {
-			//		     echo "登録されたtodoの詳細が表示できませんでした。" . $e->getMessage ();
 			return false;
 		}
 
