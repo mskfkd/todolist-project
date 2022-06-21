@@ -104,7 +104,6 @@ class TodoController
 
 	public function update() {
 
-		// $message = "";
 
 		$params = [
 			"todoId" => $_POST["todoId"],
@@ -176,10 +175,10 @@ class TodoController
 		$result = $todo->delete($validated_data,$params);
 
 		if ($result === true) {
-			header("Location:./../../views/todo/index.php");
+			header("Location:./index.php");
 			exit();
 		} else {
-			header("Location:./../../views/todo/index.php");
+			header("Location:./index.php");
 			echo "削除に失敗しました。";
 			exit();
 		}

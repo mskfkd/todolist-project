@@ -16,12 +16,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 session_start();
 //セッションからエラーメッセージ取得
-$message = $_SESSION["message"];
+$message = [];
+$message[] = $_SESSION["message"];
 //エラーメッセージがあれば、セッションクリア
 if (isset($_SESSION["message"])) {
 	session_destroy();
 }
-//var_dump($_SESSION[ "message" ]);
 
 ?>
 <!DOCTYPE html>
@@ -35,7 +35,6 @@ if (isset($_SESSION["message"])) {
 <body>
 	<ul>
 		<?php
-		//var_dump($errMsg);
 		if (count($message) > 0) {
 			foreach ($message as $data) :
 		?>
@@ -46,7 +45,7 @@ if (isset($_SESSION["message"])) {
 		?>
 	</ul>
 	<h1>新規作成</h1>
-	<form action="./../../views/todo/new.php" method="POST">
+	<form action="./../../views/todo/new.php" method="GET">
 		<div>
 			<p>ユーザーID</p>
 			<input type="text" name="user_id" value="">

@@ -1,6 +1,6 @@
 <?php
 require_once("./../../controllers/TodoController.php");
-require_once("./detail.php");
+// require_once("./detail.php");
 
 $controller = new TodoController();
 $todos = $controller->index();
@@ -49,6 +49,7 @@ ini_set("display_errors", 1);
 				?>
 			</form>
 	</table>
+	<a href="./../../views/todo/new.php">新規作成</a>
 </body>
 
 </html>
