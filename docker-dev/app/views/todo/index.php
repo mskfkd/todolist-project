@@ -1,6 +1,5 @@
 <?php
 require_once("./../../controllers/TodoController.php");
-// require_once("./detail.php");
 
 $controller = new TodoController();
 $todos = $controller->index();
