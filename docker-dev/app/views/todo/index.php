@@ -18,6 +18,7 @@ ini_set("display_errors", 1);
 <head>
 	<meta charset="UTF-8">
 	<title>to do リスト一覧</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -40,7 +41,7 @@ ini_set("display_errors", 1);
 						<th><?php
 								echo $todo["end_at"];
 								?></th>
-						<th><a href="./../../views/todo/index.php?todo_id=<?php echo $todo["id"];?>&action=delete">削除</a></th>
+						<th><a href="./../../views/todo/index.php?todo_id=<?php echo $todo["id"];?>&action=delete" class="btn" id="<?php echo $todo["id"];?>">削除</a></th>
 					</tr>
 
 				<?php
@@ -49,6 +50,18 @@ ini_set("display_errors", 1);
 			</form>
 	</table>
 	<a href="./../../views/todo/new.php">新規作成</a>
+	<script>
+				$(function () {
+						$('.btn').on( 'click', function() {
+								var todo_id = $(this).attr('id');
+								console.log(todo_id);
+						});
+
+
+
+				});
+
+	</script>
 </body>
 
 </html>

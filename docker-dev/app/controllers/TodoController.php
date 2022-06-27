@@ -151,21 +151,15 @@ class TodoController
 
 		$params = [
 			"todoId" => $_REQUEST[ "todo_id" ],
-//			"title"	 => $_POST["title"],
-//			"detail" => $_POST["detail"],
-//			"endAt"  => $_POST["end_at"],
 		];
 
 		$validator = new TodoValidation;
 		$validate = $validator->checkDeleteTodo($params);
 
 		if ($validate === false) {
-//			session_start();
 			$message = $validator->getErrorMessage();
 			$_SESSION["errors"] = $message;
-//			$query = http_build_query($params);
 
-//			header("Location:./../../views/todo/index.php" . "?" . $query);
 			exit();
 		}
 

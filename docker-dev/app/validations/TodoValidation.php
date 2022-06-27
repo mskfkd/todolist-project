@@ -116,8 +116,8 @@ class TodoValidation
 			return false;
 		}
 
-		$checkTodoId = new Todo;
-		$resultTodoId = $checkTodoId->findById( $params[ "todoId" ] );
+		$Todo = new Todo;
+		$resultTodoId = $Todo->findById( $params[ "todoId" ] );
 
 		if( !$resultTodoId )	{
 			$this->errors[ "todoId" ] = self::ERROR_TODO_NOT_EXIST;
