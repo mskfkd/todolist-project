@@ -41,7 +41,7 @@ ini_set("display_errors", 1);
 						<th><?php
 								echo $todo["end_at"];
 								?></th>
-						<th><a href="./../../views/todo/index.php?todo_id=<?php echo $todo["id"];?>&action=delete" class="btn" id="<?php echo $todo["id"];?>">削除</a></th>
+						<th><button class="delete_btn" id="<?php echo $todo["id"];?>">削除</button></th>
 					</tr>
 
 				<?php
@@ -52,7 +52,7 @@ ini_set("display_errors", 1);
 	<a href="./../../views/todo/new.php">新規作成</a>
 	<script>
 				$(function () {
-						$('.btn').on( 'click', function() {
+						$('.delete_btn').on( 'click', function() {
 								var todo_id = $(this).attr('id');
 								console.log(todo_id);
 						});
