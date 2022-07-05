@@ -51,10 +51,25 @@ ini_set("display_errors", 1);
 	</table>
 	<a href="./../../views/todo/new.php">新規作成</a>
 	<script>
+
 				$(function () {
 						$('.delete_btn').on( 'click', function() {
+
 								var todo_id = $(this).attr('id');
-								console.log(todo_id);
+
+								$.ajax( {
+										type: "POST",
+										dataType: "json",
+										url: "./../../controllers/TodoController.php",
+										data: todo_id
+								})
+								.done( ( data ) => {
+										console.log( "success" , data );
+								})
+								.fail( (error) => {
+										console.log( "fail", error );
+								});
+
 						});
 
 
