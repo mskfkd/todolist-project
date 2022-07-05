@@ -60,8 +60,8 @@ ini_set("display_errors", 1);
 								$.ajax( {
 										type: "POST",
 										dataType: "json",
-										url: "./../../controllers/TodoController.php",
-										data: todo_id
+										url: "./../../views/api/todo/delete.php",
+										data: { "todo_id" : todo_id}
 								})
 								.done( ( data ) => {
 										console.log( "success" , data );
