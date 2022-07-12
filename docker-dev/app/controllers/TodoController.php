@@ -178,7 +178,7 @@ class TodoController
 		}
 
 
-		return;
+		return $result;
 
 
 	}

@@ -69,6 +69,7 @@ ini_set("display_errors", 1);
 								.fail( (error) => {
 										console.log( "fail", error );
 								});
+								
 
 						});
 
