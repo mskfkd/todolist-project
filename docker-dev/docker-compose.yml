@@ -13,6 +13,7 @@ services:
     build: ./docker/php
     volumes:
      - .:/var/www/html
+     - /usr/local/etc/php/php.ini-development:/usr/local/etc/php/php.ini:cached
     depends_on:
       - mysql
   mysql:
