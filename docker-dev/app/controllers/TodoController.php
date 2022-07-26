@@ -1,7 +1,8 @@
 <?php
 
-require_once("./../../models/Todo.php");
-require_once("./../../validations/TodoValidation.php");
+require_once(dirname(__FILE__). "./../models/Todo.php");
+require_once(dirname(__FILE__). "./../validations/TodoValidation.php");
+
 
 class TodoController
 {

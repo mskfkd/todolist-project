@@ -1,5 +1,5 @@
 <?php
-require_once("./../../../controllers/TodoController.php");
+require_once(dirname(__FILE__). "/../../../controllers/TodoController.php");
 
 $todo_id = $_POST[ "todo_id" ];
 error_log("todo_id" . $todo_id);
