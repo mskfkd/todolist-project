@@ -64,10 +64,14 @@ ini_set("display_errors", 1);
 										data: { "todo_id" : todo_id}
 								})
 								.done( ( data ) => {
-										console.log( "success" , data );
+
+									console.log( "成功" );
+
 								})
 								.fail( (error) => {
-										console.log( "fail", error );
+
+									alert( "削除に失敗しました。" );
+
 								});
 								
 

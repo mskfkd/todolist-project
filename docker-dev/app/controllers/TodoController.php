@@ -148,41 +148,7 @@ class TodoController
 		return;
 	}
 
-	public function delete( $todo ) {
-
-		$params = [
-			"todoId" => $_REQUEST[ "todo_id" ],
-		];
-
-		$validator = new TodoValidation;
-		$validate = $validator->checkDeleteTodo($params);
-
-		if ($validate === false) {
-			$message = $validator->getErrorMessage();
-			$_SESSION["errors"] = $message;
-
-			exit();
-		}
-
-		$validated_data = $validator->getData( $params[ "todoId" ] );
-
-		$todo = new Todo;
-		$result = $todo->delete($validated_data,$params);
-
-		if ($result === true) {
-			header("Location:./index.php");
-			exit();
-		} else {
-			header("Location:./index.php");
-			echo "削除に失敗しました。";
-			exit();
-		}
-
-
-		return $result;
-
-
-	}
+	
 
 
 }
