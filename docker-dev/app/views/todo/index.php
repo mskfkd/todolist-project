@@ -65,12 +65,14 @@ ini_set("display_errors", 1);
 								})
 								.done( ( data ) => {
 
-									console.log( "成功" );
+									window.addEventListener('load', function () {
+									 setTimeout(window.location.reload(), 5000);
+									});
 
 								})
 								.fail( (error) => {
 
-									alert( "削除に失敗しました。" );
+									alert( "削除に失敗しました。");
 
 								});
 								

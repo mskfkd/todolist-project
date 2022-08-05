@@ -15,7 +15,6 @@ $response = [
 //    "result" => "success",
 //    "todo_id" => $todo_id,
 //];
-//error_log("response" . $response);
 echo json_encode( $response );
 
 ?>
