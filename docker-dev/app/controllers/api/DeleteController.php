@@ -26,7 +26,7 @@ class DeleteController {
 		$result = $todo->delete($validated_data,$params);
 
 		if ($result === false) {
-			return "error";
+			return false;
 		}
 
 

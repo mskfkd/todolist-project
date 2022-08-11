@@ -11,6 +11,10 @@ $response = [
     "todo_id" => $todo_id,
 ];
 
+if ( $response[ "result" ] === false ) {
+    echo json_encode( "error" );
+}
+
 //$response = [ 
 //    "result" => "success",
 //    "todo_id" => $todo_id,

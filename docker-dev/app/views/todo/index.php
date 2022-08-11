@@ -64,15 +64,17 @@ ini_set("display_errors", 1);
 										data: { "todo_id" : todo_id}
 								})
 								.done( ( data ) => {
-
-									window.addEventListener('load', function () {
-									 setTimeout(window.location.reload(), 5000);
-									});
+									console.log("data" . data);
+									if ( data.result !== false ) {
+										window.location.href = "./index.php";
+									} else {
+										alert( "削除に失敗しました。" );	
+									}
 
 								})
 								.fail( (error) => {
 
-									alert( "削除に失敗しました。");
+									console.log( "削除に失敗しました。");
 
 								});
 								
