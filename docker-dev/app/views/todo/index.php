@@ -57,27 +57,39 @@ ini_set("display_errors", 1);
 
 								var todo_id = $(this).attr('id');
 
-								$.ajax( {
-										type: "POST",
-										dataType: "json",
-										url: "./../../views/api/todo/delete.php",
-										data: { "todo_id" : todo_id}
-								})
-								.done( ( data ) => {
-									console.log("data" . data);
-									if ( data.result !== false ) {
-										window.location.href = "./index.php";
-									} else {
-										alert( "削除に失敗しました。" );	
-									}
+								if ( confirm( "削除してもよろしいですか?todo_id: " + todo_id ) ) {
 
-								})
-								.fail( (error) => {
+									$('.delete_btn').prop( "disabled", true );
 
-									console.log( "削除に失敗しました。");
+									$.ajax( {
+											type: "POST",
+											dataType: "json",
+											url: "./../api/todo/delete.php",
+											data: { "todo_id" : todo_id}
+									})
+									.done( ( data ) => {
 
-								});
+										var data_stringfy = JSON.stringify( data );
+										var data_result = JSON.parse( data_stringfy );
+
+										if ( data_result[ "result" ] === true ) {
+
+											window.location.href = "./index.php";
+
+										} else {
+
+											alert( "削除に失敗しました。" );	
+
+										}
+
+									})
+									.fail( (error) => {
+
+										console.log( "削除に失敗しました。");
+
+									});
 								
+								}
 
 						});
 
