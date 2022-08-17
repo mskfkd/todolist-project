@@ -1,9 +1,9 @@
 <?php
-require_once(dirname(__FILE__) . "/../../../controllers/api/DeleteController.php");
+require_once(dirname(__FILE__) . "/../../../controllers/api/TodoController.php");
 
 $todo_id = $_POST[ "todo_id" ];
 
-$controller = new DeleteController();
+$controller = new TodoController();
 $delete = $controller->delete( $todo_id );
 
 $response = [ 
@@ -12,13 +12,13 @@ $response = [
 ];
 
 if ( $response[ "result" ] === false ) {
-    echo json_encode( "error" );
+    echo $delete;
 }
 
 //$response = [ 
 //    "result" => "success",
 //    "todo_id" => $todo_id,
 //];
-echo json_encode( $response );
+echo $delete;
 
 ?>

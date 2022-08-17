@@ -69,8 +69,8 @@ ini_set("display_errors", 1);
 									})
 									.done( ( data ) => {
 
-										var data_stringfy = JSON.stringify( data );
-										var data_result = JSON.parse( data_stringfy );
+										let data_stringfy = JSON.stringify( data );
+										let result_json = JSON.parse( data_stringfy );
 
 										if ( data_result[ "result" ] === true ) {
 
@@ -79,6 +79,7 @@ ini_set("display_errors", 1);
 										} else {
 
 											alert( "削除に失敗しました。" );	
+											$('.delete_btn').prop( "enabled", true );
 
 										}
 
@@ -86,6 +87,7 @@ ini_set("display_errors", 1);
 									.fail( (error) => {
 
 										console.log( "削除に失敗しました。");
+										$('.delete_btn').prop( "enabled", true );
 
 									});
 								
