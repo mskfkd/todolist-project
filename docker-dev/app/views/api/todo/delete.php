@@ -1,9 +1,9 @@
 <?php
-require_once(dirname(__FILE__) . "/../../../controllers/api/TodoController.php");
+require_once(dirname(__FILE__) . "/../../../controllers/api/DeleteController.php");
 
 $todo_id = $_POST[ "todo_id" ];
 
-$controller = new TodoController();
+$controller = new DeleteController();
 $delete = $controller->delete( $todo_id );
 
 $response = [ 
@@ -14,7 +14,6 @@ $response = [
 if ( $response[ "result" ] === false ) {
     echo $delete;
 }
-
 //$response = [ 
 //    "result" => "success",
 //    "todo_id" => $todo_id,

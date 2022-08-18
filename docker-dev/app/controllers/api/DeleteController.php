@@ -2,7 +2,7 @@
 require_once(dirname(__FILE__). "./../../models/Todo.php");
 require_once(dirname(__FILE__). "./../../validations/TodoValidation.php");
 
-class TodoController {
+class DeleteController {
 
   public function delete( $todo ) {
 
@@ -26,11 +26,11 @@ class TodoController {
 		$result = $todo->delete($validated_data,$params);
 
 		if ($result === false) {
-			return false;
+			return json_encode( $result );
 		}
 
 
-		return $result;
+		return json_encode($result);
 
 
 	}

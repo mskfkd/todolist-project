@@ -55,7 +55,7 @@ ini_set("display_errors", 1);
 				$(function () {
 						$('.delete_btn').on( 'click', function() {
 
-								var todo_id = $(this).attr('id');
+								let todo_id = $(this).attr('id');
 
 								if ( confirm( "削除してもよろしいですか?todo_id: " + todo_id ) ) {
 
@@ -70,24 +70,28 @@ ini_set("display_errors", 1);
 									.done( ( data ) => {
 
 										let data_stringfy = JSON.stringify( data );
-										let result_json = JSON.parse( data_stringfy );
+										const result_json = JSON.parse( data_stringfy );
 
-										if ( data_result[ "result" ] === true ) {
+										if ( result_json === true ) {
 
+											alert( "削除が完了しました。");	
+											$('.delete_btn').prop( "enabled", true );
 											window.location.href = "./index.php";
 
 										} else {
 
 											alert( "削除に失敗しました。" );	
 											$('.delete_btn').prop( "enabled", true );
+											window.location.href = "./index.php";
 
 										}
 
 									})
 									.fail( (error) => {
 
-										console.log( "削除に失敗しました。");
+										alert( "削除に失敗しました。");
 										$('.delete_btn').prop( "enabled", true );
+											window.location.href = "./index.php";
 
 									});
 								
