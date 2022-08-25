@@ -37,11 +37,17 @@ ini_set("display_errors", 1);
 							<?php echo $todo["title"];?>
 							</a>
 							<input type="hidden" name="<?php echo $todo["id"]; ?>">
-					</th>
+						</th>
 						<th><?php
 								echo $todo["end_at"];
-								?></th>
-						<th><button class="delete_btn" id="<?php echo $todo["id"];?>">削除</button></th>
+								?>
+						</th>
+						<th>
+							<input type="checkbox" name="check[]" value="<?php echo $todo["id"]; ?>">完了
+						</th>
+						<th>
+							<button class="delete_btn" id="<?php echo $todo["id"];?>">削除</button>
+						</th>
 					</tr>
 
 				<?php
@@ -99,9 +105,16 @@ ini_set("display_errors", 1);
 
 						});
 
-
-
 				});
+
+
+
+
+
+
+
+
+
 
 	</script>
 </body>
