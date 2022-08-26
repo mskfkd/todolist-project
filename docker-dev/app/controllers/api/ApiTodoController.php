@@ -35,7 +35,9 @@ class ApiTodoController {
 
 	}
 
-
+	public function updateStatus() {
+		
+	}
 
 
 

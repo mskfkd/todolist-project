@@ -134,5 +134,32 @@ class Todo
 
 	}
 
+	public fuction updateStatus() {
+
+		try {
+			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
+			$sql = "UPDATE todos SET deleted_at = NOW(),  updated_at = NOW() WHERE id = :id";
+
+			$db->beginTransaction();
+
+			$sth = $db->prepare($sql);
+			$sth->bindParam(':id', $validates_data["todoId"], PDO::PARAM_INT);
+
+			$res = $sth->execute();
+
+			if( $res ) {
+
+				$db->commit();
+
+			}
+
+		} catch (PDOException $e) {
+			$db->rollBack();
+			return false;
+
+		}
+
+	}
+
 
 }

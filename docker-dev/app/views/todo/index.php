@@ -43,7 +43,7 @@ ini_set("display_errors", 1);
 								?>
 						</th>
 						<th>
-							<input type="checkbox" name="check[]" value="<?php echo $todo["id"]; ?>">完了
+							<input type="checkbox" name="check[]" value="<?php echo $todo["id"]; ?>"/>完了
 						</th>
 						<th>
 							<button class="delete_btn" id="<?php echo $todo["id"];?>">削除</button>
@@ -105,9 +105,16 @@ ini_set("display_errors", 1);
 
 						});
 
+						$( 'input[type="checkbox"]' ).change( function() {
+
+							if( $(this).prop( 'checked' )) {
+								$(this).closest("tr").css("text-decoration", "line-through");
+							}else {
+								$(this).closest("tr").css("text-decoration", "none");
+							}
+						});
+
 				});
-
-
 
 
 
