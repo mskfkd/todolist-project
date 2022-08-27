@@ -131,4 +131,28 @@ class TodoValidation
 
 	}
 
+	public function checkStatusTodo( $params ) {
+
+		$this->errors = [];
+
+		if( !$params[ "todoId" ] ) {
+			$this->errors[ "todoId" ] = "選択されたtodoはありません。";
+			return false;
+		}
+
+		$Todo = new Todo;
+		$resultTodoId = $Todo->findById( $params[ "todoId" ] );
+
+		if( !$resultTodoId )	{
+			$this->errors[ "todoId" ] = self::ERROR_TODO_NOT_EXIST;
+		}
+
+		if (count($this->errors) > 0) {
+			return false;
+		}
+
+		return true;
+
+	}
+
 }

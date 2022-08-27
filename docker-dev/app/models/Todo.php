@@ -134,7 +134,7 @@ class Todo
 
 	}
 
-	public fuction updateStatus() {
+	public function updateStatus($validates_data) {
 
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);

@@ -4,12 +4,15 @@ require_once("./../../controllers/TodoController.php");
 $controller = new TodoController();
 $todos = $controller->index();
 
-if( isset( $_REQUEST[ "action" ] ) === true 
-	&& $_REQUEST[ "action" ] === "delete" ) {
+//if( isset( $_REQUEST[ "action" ] ) === true 
+//	&& $_REQUEST[ "action" ] === "delete" ) {
+//
+//	$controller->delete( $_REQUEST[ "todo_id" ] );
+//
+//}
 
-	$controller->delete( $_REQUEST[ "todo_id" ] );
 
-}
+
 ini_set("display_errors", 1);
 ?>
 <!DOCTYPE html>
@@ -43,7 +46,7 @@ ini_set("display_errors", 1);
 								?>
 						</th>
 						<th>
-							<input type="checkbox" name="check[]" value="<?php echo $todo["id"]; ?>"/>完了
+							<input type="checkbox" name="check[]" value="<?php echo $todo["id"];?>"/>完了
 						</th>
 						<th>
 							<button class="delete_btn" id="<?php echo $todo["id"];?>">削除</button>
@@ -108,13 +111,37 @@ ini_set("display_errors", 1);
 						$( 'input[type="checkbox"]' ).change( function() {
 
 							if( $(this).prop( 'checked' )) {
-								$(this).closest("tr").css("text-decoration", "line-through");
-							}else {
+								let todo_id = $(this).val();
+
+								$.ajax(
+									{
+									type: "POST",
+											dataType: "json",
+											url: "./../api/todo/update_status.php",
+											data: { "todo_id" : todo_id}
+									}
+								)
+								.done ( (data) => {
+
+									console.log("complete");
+									alert( "タスクが完了しました。" );
+									$(this).closest("tr").css("text-decoration", "line-through");
+
+								})
+								.fail ( (fail) => {
+
+									console.log("fail");
+									alert( "タスクのステータス変更に失敗しました。" );
+
+								});
+								
+							}
+							else {
 								$(this).closest("tr").css("text-decoration", "none");
 							}
 						});
 
-				});
+			});
 
 
 
