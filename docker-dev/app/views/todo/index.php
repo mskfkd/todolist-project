@@ -1,7 +1,7 @@
 <?php
 require_once("./../../controllers/TodoController.php");
 
-$controller = new TodoController();
+$controller = new TodoController\index();
 $todos = $controller->index();
 
 //if( isset( $_REQUEST[ "action" ] ) === true 
@@ -109,7 +109,7 @@ ini_set("display_errors", 1);
 						});
 
 						$( 'input[type="checkbox"]' ).change( function() {
-
+//画面更新時にチェックを引き継ぐ
 							if( $(this).prop( 'checked' )) {
 								let todo_id = $(this).val();
 
