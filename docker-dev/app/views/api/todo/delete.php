@@ -1,9 +1,9 @@
 <?php
-require_once(dirname(__FILE__) . "/../../../controllers/api/TodoController.php");
+require_once(dirname(__FILE__) . "/../../../controllers/api/apiTodoController.php");
 
 $todo_id = $_POST[ "todo_id" ];
 
-$controller = new TodoController\TodoController;
+$controller = new apiTodoController;
 $delete = $controller->delete( $todo_id );
 
 $response = [ 

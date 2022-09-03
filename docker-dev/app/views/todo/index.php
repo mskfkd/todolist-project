@@ -1,7 +1,7 @@
 <?php
 require_once("./../../controllers/TodoController.php");
 
-$controller = new TodoController\index();
+$controller = new TodoController();
 $todos = $controller->index();
 
 //if( isset( $_REQUEST[ "action" ] ) === true 
@@ -46,7 +46,7 @@ ini_set("display_errors", 1);
 								?>
 						</th>
 						<th>
-							<input type="checkbox" name="check[]" value="<?php echo $todo["id"];?>"/>完了
+							<input type="checkbox" name="<?php echo $todo["id"];?>"/>完了
 						</th>
 						<th>
 							<button class="delete_btn" id="<?php echo $todo["id"];?>">削除</button>
@@ -112,6 +112,7 @@ ini_set("display_errors", 1);
 //画面更新時にチェックを引き継ぐ
 							if( $(this).prop( 'checked' )) {
 								let todo_id = $(this).val();
+								// localStorage.setItem(name, todo_id);
 
 								$.ajax(
 									{
@@ -126,18 +127,23 @@ ini_set("display_errors", 1);
 									console.log("complete");
 									alert( "タスクが完了しました。" );
 									$(this).closest("tr").css("text-decoration", "line-through");
+									window.location.href = "./index.php";
+									// localStorage.clear();
 
 								})
 								.fail ( (fail) => {
 
-									console.log("fail");
+									console.log("fail" );
 									alert( "タスクのステータス変更に失敗しました。" );
+									window.location.href = "./index.php";
+									// localStorage.getItem( todo_id );
 
 								});
 								
 							}
 							else {
 								$(this).closest("tr").css("text-decoration", "none");
+								// localStorage.getItem( todo_id );
 							}
 						});
 

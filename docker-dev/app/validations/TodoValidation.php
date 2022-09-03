@@ -1,5 +1,4 @@
 <?php
-namespace TodoValidation;
 require_once(dirname(__FILE__). "./../models/Todo.php");
 require_once(dirname(__FILE__). "./../models/User.php");
 require_once(dirname(__FILE__). "./../controllers/TodoController.php");
