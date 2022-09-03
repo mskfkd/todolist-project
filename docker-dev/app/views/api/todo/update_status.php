@@ -4,6 +4,7 @@ require_once(dirname(__FILE__) . "/../../../controllers/api/ApiTodoController.ph
 
 
 $todo_id = $_POST[ "todo_id" ];
+var_dump($todo_id);
 
 $controller = new ApiTodoController();
 $updateStatus = $controller->UpdateStatus( $todo_id );
@@ -17,6 +18,6 @@ if ( $response[ "result" ] === false ) {
   echo $updateStatus;
 }
 
-echo $delete;
+echo $updateStatus;
 
 ?>

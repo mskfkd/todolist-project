@@ -46,7 +46,7 @@ ini_set("display_errors", 1);
 								?>
 						</th>
 						<th>
-							<input type="checkbox" name="<?php echo $todo["id"];?>"/>完了
+							<input type="checkbox" id="<?php echo $todo[ "id" ]?>" value="<?php echo $todo["id"];?>"/>完了
 						</th>
 						<th>
 							<button class="delete_btn" id="<?php echo $todo["id"];?>">削除</button>
@@ -112,6 +112,7 @@ ini_set("display_errors", 1);
 //画面更新時にチェックを引き継ぐ
 							if( $(this).prop( 'checked' )) {
 								let todo_id = $(this).val();
+								// let todo_id = $(this).attr('id');
 								// localStorage.setItem(name, todo_id);
 
 								$.ajax(
