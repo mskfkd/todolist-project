@@ -3,7 +3,7 @@ require_once(dirname(__FILE__) . "/../../../controllers/api/apiTodoController.ph
 
 $todo_id = $_POST[ "todo_id" ];
 
-$controller = new apiTodoController;
+$controller = new TodoController();
 $delete = $controller->delete( $todo_id );
 
 $response = [ 
