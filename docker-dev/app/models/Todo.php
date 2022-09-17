@@ -31,9 +31,11 @@ class Todo
 	public static function findById($todo_id)
 	{
 
+		//@@@@ここでなぜかidがvalidationで受け取ったidと異なる値で渡される
+		error_log( "findById" . $todo_id);
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
-			$sql = "SELECT * FROM todos WHERE id = :id";
+			$sql = "SELECT * FROM todos WHERE id = :id && status = 1";
 
 			$sth = $db->prepare($sql);
 			$sth->bindValue(':id', $todo_id, PDO::PARAM_INT);
@@ -138,12 +140,13 @@ class Todo
 
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
-			$sql = "UPDATE todos SET deleted_at = NOW(),  updated_at = NOW() WHERE id = :id";
+			$sql = "UPDATE todos SET status = :status,  updated_at = NOW() WHERE id = :id";
 
 			$db->beginTransaction();
 
 			$sth = $db->prepare($sql);
 			$sth->bindParam(':id', $validates_data["todoId"], PDO::PARAM_INT);
+			$sth->bindParam(':status', 2, PDO::PARAM_INT);
 
 			$res = $sth->execute();
 

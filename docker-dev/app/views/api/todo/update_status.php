@@ -3,11 +3,10 @@ require_once(dirname(__FILE__) . "/../../../controllers/api/ApiTodoController.ph
 
 
 $todo_id = $_POST[ "todo_id" ];
-error_log($todo_id);
 
-$controller = new TodoController();
+$controller = new ApiTodoController();
 $updateStatus = $controller->UpdateStatus( $todo_id );
-var_dump($updateStatus);
+// var_dump( "updatestatus" . $updateStatus );
 
 $response = [ 
   "result" => $updateStatus,

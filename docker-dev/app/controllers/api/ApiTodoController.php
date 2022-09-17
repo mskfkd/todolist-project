@@ -35,12 +35,11 @@ class ApiTodoController {
 	}
 
 	public function UpdateStatus( $params ) {
-		$params = [
-			"todoId" => $_REQUEST[ "todo_id" ],
-		];
 
 		$validator = new TodoValidation;
+		//@@@ $validateとれてない
 		$validate = $validator->checkStatusTodo($params);
+		// error_log( "validate" . $validate);
 
 		if ($validate === false) {
 			$message = $validator->getErrorMessage();

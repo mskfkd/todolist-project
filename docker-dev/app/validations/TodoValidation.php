@@ -9,6 +9,7 @@ class TodoValidation
 	const ERROR_TODO_NOT_EXIST = "登録のないtodoです。";
 	const ERROR_NO_TITLE = "タイトルが空欄のようです。";
 	const ERROR_NO_LIMIT =  "期限が設定を見直してください。";
+	const ERROR_NO_STATUS =  "すでに完了済みのtodoのようです。";
 
 	public function postCheck($params)
 	{
@@ -135,17 +136,21 @@ class TodoValidation
 
 		$this->errors = [];
 
-		if( !$params[ "todoId" ] ) {
+		if( !$params ) {
 			$this->errors[ "todoId" ] = "選択されたtodoはありません。";
 			return false;
 		}
 
+		//@@@このあたり
 		$Todo = new Todo;
-		$resultTodoId = $Todo->findById( $params[ "todoId" ] );
+		$resultTodoId = $Todo->findById( $params );
+		error_log( "resultTodoId" . $resultTodoId);
 
 		if( !$resultTodoId )	{
-			$this->errors[ "todoId" ] = self::ERROR_TODO_NOT_EXIST;
+			$this->errors[ "todoId" ] = self::ERROR_NO_STATUS;
 		}
+
+		
 
 		if (count($this->errors) > 0) {
 			return false;
