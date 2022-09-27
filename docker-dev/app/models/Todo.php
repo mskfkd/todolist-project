@@ -32,7 +32,7 @@ class Todo
 	{
 
 		//@@@@ここでなぜかidがvalidationで受け取ったidと異なる値で渡される
-		error_log( "findById" . $todo_id);
+		// error_log( "findById" . $todo_id);
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
 			$sql = "SELECT * FROM todos WHERE id = :id && status = 1";

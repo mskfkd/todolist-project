@@ -96,6 +96,8 @@ class TodoValidation
 
 	public function getData( $params )
 	{
+		//@@@@@ここから
+		error_log("getData" . $params["id"]);
 		$getTodoId = new Todo;
 		$resultTodoId = $getTodoId->findById( $params );
 
@@ -141,12 +143,10 @@ class TodoValidation
 			return false;
 		}
 
-		//@@@このあたり
 		$Todo = new Todo;
 		$resultTodoId = $Todo->findById( $params );
-		error_log( "resultTodoId" . $resultTodoId);
 
-		if( !$resultTodoId )	{
+		if( !$resultTodoId[ "id" ] )	{
 			$this->errors[ "todoId" ] = self::ERROR_NO_STATUS;
 		}
 
@@ -156,7 +156,7 @@ class TodoValidation
 			return false;
 		}
 
-		return true;
+		return $resultTodoId["id"];
 
 	}
 

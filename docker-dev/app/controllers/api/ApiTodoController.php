@@ -37,9 +37,7 @@ class ApiTodoController {
 	public function UpdateStatus( $params ) {
 
 		$validator = new TodoValidation;
-		//@@@ $validateとれてない
 		$validate = $validator->checkStatusTodo($params);
-		// error_log( "validate" . $validate);
 
 		if ($validate === false) {
 			$message = $validator->getErrorMessage();
@@ -49,6 +47,7 @@ class ApiTodoController {
 		}
 
 		$validated_data = $validator->getData( $params[ "todoId" ] );
+		// error_log( "validate_data" . $validated_data);
 
 		$todo = new Todo;
 		$result = $todo->updateStatus($validated_data);
