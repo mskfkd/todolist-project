@@ -50,7 +50,6 @@ class ApiTodoController {
 
 		$todo = new Todo;
 		$result = $todo->updateStatus($validated_data);
-		error_log( "result" . $result);
 
 		if ($result === false) {
 			return json_encode( $result );

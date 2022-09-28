@@ -6,7 +6,6 @@ $todo_id = $_POST[ "todo_id" ];
 
 $controller = new ApiTodoController();
 $updateStatus = $controller->UpdateStatus( $todo_id );
-// error_log( "updatestatus" . $updateStatus );
 
 $response = [ 
   "result" => $updateStatus,

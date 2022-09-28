@@ -149,7 +149,6 @@ class Todo
 			$sth = $db->prepare($sql);
 			$sth->bindParam(':id', $validates_data["id"], PDO::PARAM_INT);
 			$sth->bindParam(':status', $status, PDO::PARAM_INT);
-			error_log( "ここまで通ってる" . $sql);
 
 			$res = $sth->execute();
 
