@@ -46,11 +46,11 @@ class ApiTodoController {
 			exit();
 		}
 
-		$validated_data = $validator->getData( $params[ "todoId" ] );
-		// error_log( "validate_data" . $validated_data);
+		$validated_data = $validator->getData( $params );
 
 		$todo = new Todo;
 		$result = $todo->updateStatus($validated_data);
+		error_log( "result" . $result);
 
 		if ($result === false) {
 			return json_encode( $result );

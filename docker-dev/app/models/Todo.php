@@ -16,7 +16,7 @@ class Todo
 			exit;
 		}
 
-		$sql = "SELECT * FROM todos WHERE user_id = 1";
+		$sql = "SELECT * FROM todos WHERE user_id = 1 && status = 1";
 
 		$sth = $db->prepare($sql);
 		$sth->execute();
@@ -138,6 +138,8 @@ class Todo
 
 	public function updateStatus($validates_data) {
 
+			$status = 2;
+
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
 			$sql = "UPDATE todos SET status = :status,  updated_at = NOW() WHERE id = :id";
@@ -145,8 +147,9 @@ class Todo
 			$db->beginTransaction();
 
 			$sth = $db->prepare($sql);
-			$sth->bindParam(':id', $validates_data["todoId"], PDO::PARAM_INT);
-			$sth->bindParam(':status', 2, PDO::PARAM_INT);
+			$sth->bindParam(':id', $validates_data["id"], PDO::PARAM_INT);
+			$sth->bindParam(':status', $status, PDO::PARAM_INT);
+			error_log( "ここまで通ってる" . $sql);
 
 			$res = $sth->execute();
 

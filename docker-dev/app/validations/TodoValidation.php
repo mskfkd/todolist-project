@@ -96,8 +96,7 @@ class TodoValidation
 
 	public function getData( $params )
 	{
-		//@@@@@ここから
-		error_log("getData" . $params["id"]);
+
 		$getTodoId = new Todo;
 		$resultTodoId = $getTodoId->findById( $params );
 
@@ -156,7 +155,7 @@ class TodoValidation
 			return false;
 		}
 
-		return $resultTodoId["id"];
+		return true;
 
 	}
 
