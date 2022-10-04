@@ -4,6 +4,7 @@ require_once(dirname(__FILE__). "./../config/db.php");
 
 class Todo
 {
+	const STATUS_COMPLETE = 2;
 
 	public static function findAll()
 	{
@@ -138,7 +139,6 @@ class Todo
 
 	public function updateStatus($validates_data) {
 
-			$status = 2;
 
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
@@ -148,7 +148,7 @@ class Todo
 
 			$sth = $db->prepare($sql);
 			$sth->bindParam(':id', $validates_data["id"], PDO::PARAM_INT);
-			$sth->bindParam(':status', $status, PDO::PARAM_INT);
+			$sth->bindValue(':status', self::STATUS_COMPLETE);
 
 			$res = $sth->execute();
 
