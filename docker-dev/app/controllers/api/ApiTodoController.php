@@ -34,7 +34,9 @@ class ApiTodoController {
 
 	}
 
-	public function UpdateStatus( $params ) {
+	public function updateStatus( $params ) {
+
+		$response = [];
 
 		$validator = new TodoValidation;
 		$validate = $validator->checkStatusTodo($params);
@@ -47,16 +49,17 @@ class ApiTodoController {
 		}
 
 		$validated_data = $validator->getData( $params );
+		$response[ "todo_id" ] = $validated_data[ "id" ];
 
 		$todo = new Todo;
-		$result = $todo->updateStatus($validated_data);
+		$response[ "result" ] = $todo->updateStatus($validated_data);
 
-		if ($result === false) {
-			return json_encode( $result );
+
+		if ( $response[ "result" ] === false ) {
+			return json_encode( $response );
 		}
 
-
-		return json_encode($result);
+		return json_encode( $response );
 
 
 

@@ -30,7 +30,6 @@ ini_set("display_errors", 1);
 			<th>項目</th>
 			<th>期限</th>
 		</tr>
-			<form action="./../../views/todo/index.php" method="POST">
 				<?php
 				foreach ($todos as $key => $todo) :
 				?>
@@ -56,7 +55,6 @@ ini_set("display_errors", 1);
 				<?php
 				endforeach;
 				?>
-			</form>
 	</table>
 	<a href="./../../views/todo/new.php">新規作成</a>
 	<script>
@@ -134,7 +132,7 @@ ini_set("display_errors", 1);
 								})
 								.fail ( (fail) => {
 
-									console.log("fail" );
+									console.log("fail");
 									alert( "タスクのステータス変更に失敗しました。" );
 									window.location.href = "./index.php";
 									// localStorage.getItem( todo_id );

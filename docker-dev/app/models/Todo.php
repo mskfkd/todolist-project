@@ -155,6 +155,7 @@ class Todo
 			if( $res ) {
 
 				$db->commit();
+				// return true;
 
 			}
 
