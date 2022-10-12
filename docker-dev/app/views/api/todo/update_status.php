@@ -9,10 +9,6 @@ $response = $controller->updateStatus( $todo_id );
 
 
 
-if ( $response[ "result" ] === false ) {
-  echo $response[ "id" ];
-}
-
-echo $response[ "id" ];
+echo $response;
 
 ?>
