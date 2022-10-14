@@ -5,7 +5,7 @@ require_once(dirname(__FILE__). "./../validations/TodoValidation.php");
 
 class TodoController
 {
-	public function index()
+	public function listDisplay()
 	{
 		$todos = Todo::findAll();
 
@@ -25,9 +25,6 @@ class TodoController
 
 	public function pagenation() {
 
-		$data = Todo::countAll();
-
-
 		if ( isset( $_GET[ 'page' ] )
 		&&	is_numeric( $_GET[ 'page' ] )) {
 			$page = $_GET[ 'page' ];
@@ -35,8 +32,14 @@ class TodoController
 			$page = 1;
 		}
 
+		return $page;
+
+	}
+	
+	public function pagenum( $page ) {
+		
+		$data = Todo::countAll();
 		$maxPage = ceil( $data['count(*)'] / 5 );
-		error_log($maxPage);
 
 		if ( $page == 1 || $page == $maxPage ) {
 			$range = 4;
@@ -45,9 +48,20 @@ class TodoController
 		} else {
 			$range = 2;
 		}
-		return $page;
+		return $range;
 
 	}
+
+	public function index()
+	{
+		$list = $this->listDisplay();
+		$page = $this->pagenation();
+		$range = $this->pagenum( $page );
+
+		return [ $list, $page, $range ];
+
+	}
+
 
 
 	public function getData($params)
