@@ -3,6 +3,8 @@ require_once("./../../controllers/TodoController.php");
 
 $controller = new TodoController();
 $todos = $controller->index();
+$page = $controller->pagenation();
+// error_log($page);
 
 //if( isset( $_REQUEST[ "action" ] ) === true 
 //	&& $_REQUEST[ "action" ] === "delete" ) {
@@ -56,6 +58,27 @@ ini_set("display_errors", 1);
 				endforeach;
 				?>
 	</table>
+	<div class="pagenation">
+		<?php if( $page >= 2): ?>
+			<a href="index.php?page=<?php echo( $page - 1); ?>" class="page_feed">&laquo;</a>
+		<?php else:;?>
+			<span class="1st_page">&laquo;</span>
+		<?php endif; ?>
+		<?php for( $i = 1; $i <= $maxPage; $i++ ) : ?>
+			<?php if( $i >= $page - $range && $i <= $page + $range ) :?>
+				<?php if( $i == $page ) : ?>
+					<span class="pagenumber"><?php echo $i; ?></span>
+				<?php else: ?>
+					<a href="?page=<?php echo $i; ?>" class="pagenumer"><?php echo $i;?></a>
+				<?php endif; ?>
+			<?php endif; ?>
+		<?php endfor; ?>
+		<?php if( $page < $maxPage ) :?>
+			<a href="index.php?page=<?php echo ( $page + 1 );?>" class="page_feed">&raquo;</a>
+		<?php else :?>
+			<span class="1st_last_page">&raquo;</span>
+		<?php endif; ?>
+	</div>
 	<a href="./../../views/todo/new.php">新規作成</a>
 	<script>
 

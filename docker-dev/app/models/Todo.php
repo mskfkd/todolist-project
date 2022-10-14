@@ -9,7 +9,6 @@ class Todo
 	public static function findAll()
 	{
 
-
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
 		} catch (PDOException $e) {
@@ -23,17 +22,31 @@ class Todo
 		$sth->execute();
 		$todos = $sth->fetchAll(PDO::FETCH_ASSOC);
 
+		return $todos;
+	}
 
+	public static function countAll() {
 
+		try {
+			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
+		} catch (PDOException $e) {
+			echo "DB接続できません。" . $e->getMessage();
+			exit;
+		}
+
+		$sql = "SELECT count(*) FROM todos WHERE user_id = 1 && status = 1";
+
+		$sth = $db->prepare($sql);
+		$sth->execute();
+		$todos = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 		return $todos;
+
 	}
 
 	public static function findById($todo_id)
 	{
 
-		//@@@@ここでなぜかidがvalidationで受け取ったidと異なる値で渡される
-		// error_log( "findById" . $todo_id);
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
 			$sql = "SELECT * FROM todos WHERE id = :id && status = 1";

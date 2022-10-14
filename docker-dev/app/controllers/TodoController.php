@@ -23,6 +23,33 @@ class TodoController
 		return $todo;
 	}
 
+	public function pagenation() {
+
+		$data = Todo::countAll();
+
+
+		if ( isset( $_GET[ 'page' ] )
+		&&	is_numeric( $_GET[ 'page' ] )) {
+			$page = $_GET[ 'page' ];
+		}else {
+			$page = 1;
+		}
+
+		$maxPage = ceil( $data['count(*)'] / 5 );
+		error_log($maxPage);
+
+		if ( $page == 1 || $page == $maxPage ) {
+			$range = 4;
+		} elseif( $page == 2 || $page == $maxPage - 1 ) {
+			$range = 3;
+		} else {
+			$range = 2;
+		}
+		return $page;
+
+	}
+
+
 	public function getData($params)
 	{
 
