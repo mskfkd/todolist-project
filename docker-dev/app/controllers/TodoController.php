@@ -48,7 +48,7 @@ class TodoController
 		} else {
 			$range = 2;
 		}
-		return $range;
+		return [ $maxPage, $range ];
 
 	}
 

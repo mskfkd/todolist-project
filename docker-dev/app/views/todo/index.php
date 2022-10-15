@@ -3,7 +3,6 @@ require_once("./../../controllers/TodoController.php");
 
 $controller = new TodoController();
 $todos = $controller->index();
-error_log(print_r($todos[2],true));
 
 //if( isset( $_REQUEST[ "action" ] ) === true 
 //	&& $_REQUEST[ "action" ] === "delete" ) {
@@ -59,20 +58,20 @@ ini_set("display_errors", 1);
 	</table>
 	<div class="pagenation">
 		<?php if( $todos[1] >= 2): ?>
+			<?php error_log($todos[1]);?>
 			<a href="index.php?page=<?php echo( $todos[1] - 1); ?>" class="page_feed">&laquo;</a>
-		<?php else:;?>
+		<?php else:?>
 			<span class="1st_page">&laquo;</span>
 		<?php endif; ?>
-		<?php for( $i = 1; $i <= $maxPage; $i++ ) : ?>
+		<?php for( $i = 1; $i <= $todos[2][0]; $i++ ) : ?>
 			<?php if( $i >= $todos[1] - $todos[2] && $i <= $todos[1] + $todos[2] ) :?>
 				<?php if( $i == $todos[1] ) : ?>
-					<span class="pagenumber"><?php echo $i; ?></span>
 				<?php else: ?>
 					<a href="?page=<?php echo $i; ?>" class="pagenumer"><?php echo $i;?></a>
 				<?php endif; ?>
 			<?php endif; ?>
 		<?php endfor; ?>
-		<?php if( $todos[1] < $maxPage ) :?>
+		<?php if( $todos[1] < $todos[2][0] ) :?>
 			<a href="index.php?page=<?php echo ( $todos[1] + 1 );?>" class="page_feed">&raquo;</a>
 		<?php else :?>
 			<span class="1st_last_page">&raquo;</span>
