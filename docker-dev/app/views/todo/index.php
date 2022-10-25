@@ -4,15 +4,6 @@ require_once("./../../controllers/TodoController.php");
 $controller = new TodoController();
 $todos = $controller->index();
 
-//if( isset( $_REQUEST[ "action" ] ) === true 
-//	&& $_REQUEST[ "action" ] === "delete" ) {
-//
-//	$controller->delete( $_REQUEST[ "todo_id" ] );
-//
-//}
-
-
-
 ini_set("display_errors", 1);
 ?>
 <!DOCTYPE html>
@@ -58,13 +49,12 @@ ini_set("display_errors", 1);
 	</table>
 	<div class="pagenation">
 		<?php if( $todos[1] >= 2): ?>
-			<?php error_log($todos[1]);?>
 			<a href="index.php?page=<?php echo( $todos[1] - 1); ?>" class="page_feed">&laquo;</a>
 		<?php else:?>
 			<span class="1st_page">&laquo;</span>
 		<?php endif; ?>
 		<?php for( $i = 1; $i <= $todos[2][0]; $i++ ) : ?>
-			<?php if( $i >= $todos[1] - $todos[2] && $i <= $todos[1] + $todos[2] ) :?>
+			<?php if( $i >= $todos[1] - $todos[2][1] && $i <= $todos[1] + $todos[2][1] ) :?>
 				<?php if( $i == $todos[1] ) : ?>
 				<?php else: ?>
 					<a href="?page=<?php echo $i; ?>" class="pagenumer"><?php echo $i;?></a>

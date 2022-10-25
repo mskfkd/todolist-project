@@ -36,9 +36,8 @@ class Todo
 
 		$sql = "SELECT count(*) FROM todos WHERE user_id = 1 && status = 1";
 
-		$sth = $db->prepare($sql);
-		$sth->execute();
-		$todos = $sth->fetchAll(PDO::FETCH_ASSOC);
+		$sth = $db->query($sql);
+		$todos = $sth->fetch(PDO::FETCH_COLUMN);
 
 		return $todos;
 
@@ -58,8 +57,6 @@ class Todo
 		} catch (PDOException $e) {
 			return false;
 		}
-
-
 
 		return $details;
 	}
@@ -152,7 +149,6 @@ class Todo
 
 	public function updateStatus($validates_data) {
 
-
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
 			$sql = "UPDATE todos SET status = :status,  updated_at = NOW() WHERE id = :id";
@@ -180,5 +176,35 @@ class Todo
 
 	}
 
+	public function pagenation() {
+
+		if ( isset( $_GET[ 'page' ] )
+		&&	is_numeric( $_GET[ 'page' ] )) {
+			$page = $_GET[ 'page' ];
+		}else {
+			$page = 1;
+		}
+
+		return $page;
+
+	}
+	
+	public function pagenum( $page ) {
+		
+		$data = Todo::countAll();
+
+		$maxPage = ceil( $data / 5 );
+
+		if ( $page == 1 || $page == $maxPage ) {
+			$range = 4;
+		} elseif( $page == 2 || $page == $maxPage - 1 ) {
+			$range = 3;
+		} else {
+			$range = 2;
+		}
+
+		return [ $maxPage, $range ];
+
+	}
 
 }

@@ -5,11 +5,15 @@ require_once(dirname(__FILE__). "./../validations/TodoValidation.php");
 
 class TodoController
 {
-	public function listDisplay()
+
+	public function index()
 	{
+		$page = Todo::pagenation();
+		$range = Todo::pagenum( $page );
 		$todos = Todo::findAll();
 
-		return $todos;
+		return [ $todos, $page, $range ];
+
 	}
 
 	public function detail()
@@ -19,50 +23,8 @@ class TodoController
 
 		$todo = Todo::findById($todo_id);
 
-
 		return $todo;
 	}
-
-	public function pagenation() {
-
-		if ( isset( $_GET[ 'page' ] )
-		&&	is_numeric( $_GET[ 'page' ] )) {
-			$page = $_GET[ 'page' ];
-		}else {
-			$page = 1;
-		}
-
-		return $page;
-
-	}
-	
-	public function pagenum( $page ) {
-		
-		$data = Todo::countAll();
-		$maxPage = ceil( $data['count(*)'] / 5 );
-
-		if ( $page == 1 || $page == $maxPage ) {
-			$range = 4;
-		} elseif( $page == 2 || $page == $maxPage - 1 ) {
-			$range = 3;
-		} else {
-			$range = 2;
-		}
-		return [ $maxPage, $range ];
-
-	}
-
-	public function index()
-	{
-		$list = $this->listDisplay();
-		$page = $this->pagenation();
-		$range = $this->pagenum( $page );
-
-		return [ $list, $page, $range ];
-
-	}
-
-
 
 	public function getData($params)
 	{
