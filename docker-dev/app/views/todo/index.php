@@ -13,7 +13,9 @@ ini_set("display_errors", 1);
 	<meta charset="UTF-8">
 	<title>to do リスト一覧</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="../css/stylesheet.css">
 </head>
+
 
 <body>
 	<table>
@@ -51,20 +53,21 @@ ini_set("display_errors", 1);
 		<?php if( $todos[1] >= 2): ?>
 			<a href="index.php?page=<?php echo( $todos[1] - 1); ?>" class="page_feed">&laquo;</a>
 		<?php else:?>
-			<span class="1st_page">&laquo;</span>
+			<span class="first_page">&laquo;</span>
 		<?php endif; ?>
 		<?php for( $i = 1; $i <= $todos[2][0]; $i++ ) : ?>
 			<?php if( $i >= $todos[1] - $todos[2][1] && $i <= $todos[1] + $todos[2][1] ) :?>
 				<?php if( $i == $todos[1] ) : ?>
+					<span class="now_page_number"><?php echo $i; ?></span>
 				<?php else: ?>
-					<a href="?page=<?php echo $i; ?>" class="pagenumer"><?php echo $i;?></a>
+					<a href="?page=<?php echo $i; ?>" class="pagenumber"><?php echo $i;?></a>
 				<?php endif; ?>
 			<?php endif; ?>
 		<?php endfor; ?>
 		<?php if( $todos[1] < $todos[2][0] ) :?>
 			<a href="index.php?page=<?php echo ( $todos[1] + 1 );?>" class="page_feed">&raquo;</a>
 		<?php else :?>
-			<span class="1st_last_page">&raquo;</span>
+			<span class="first_last_page">&raquo;</span>
 		<?php endif; ?>
 	</div>
 	<a href="./../../views/todo/new.php">新規作成</a>
