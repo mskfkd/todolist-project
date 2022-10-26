@@ -16,9 +16,10 @@ class Todo
 			exit;
 		}
 
-		$sql = "SELECT * FROM todos WHERE user_id = 1 && status = 1";
+		$sql = "SELECT * FROM todos WHERE user_id = 1 && status = 1 LIMIT ?, 10";
 
 		$sth = $db->prepare($sql);
+		$sth->bindParam(1,$_REQUEST[ 'page' ], PDO::PARAM_INT);
 		$sth->execute();
 		$todos = $sth->fetchAll(PDO::FETCH_ASSOC);
 
