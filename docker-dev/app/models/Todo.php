@@ -5,6 +5,7 @@ require_once(dirname(__FILE__). "./../config/db.php");
 class Todo
 {
 	const STATUS_COMPLETE = 2;
+	const UPPER_LINIT = 10;
 
 	public static function findAll()
 	{
@@ -177,24 +178,13 @@ class Todo
 
 	}
 
-	public function pagenation() {
-
-		if ( isset( $_GET[ 'page' ] )
-		&&	is_numeric( $_GET[ 'page' ] )) {
-			$page = $_GET[ 'page' ];
-		}else {
-			$page = 1;
-		}
-
-		return $page;
-
-	}
+	
 	
 	public function pagenum( $page ) {
 		
 		$data = Todo::countAll();
 
-		$maxPage = ceil( $data / 5 );
+		$maxPage = ceil( $data / self::UPPER_LINIT );
 
 		if ( $page == 1 || $page == $maxPage ) {
 			$range = 4;
@@ -204,8 +194,12 @@ class Todo
 			$range = 2;
 		}
 
-		return [ $maxPage, $range ];
+		$result = [
+			'maxPage' => $maxPage,
+			'range' => $range
+		];
 
+		return $result;
 	}
 
 }

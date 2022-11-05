@@ -1,8 +1,11 @@
 <?php
-require_once("./../../controllers/TodoController.php");
+require_once("./../../controllers/BaseController.php");
 
-$controller = new TodoController();
-$todos = $controller->index();
+$controller = new BaseController();
+$params = $controller->index();
+$todos = $params[ 'todos' ];
+$page = $params[ 'page' ];
+$range = $params[ 'range' ];
 
 ini_set("display_errors", 1);
 ?>
@@ -24,7 +27,7 @@ ini_set("display_errors", 1);
 			<th>期限</th>
 		</tr>
 				<?php
-				foreach ($todos[0] as $key => $todo) :
+				foreach ($todos as $key => $todo) :
 				?>
 					<tr>
 						<th>
@@ -50,22 +53,22 @@ ini_set("display_errors", 1);
 				?>
 	</table>
 	<div class="pagenation">
-		<?php if( $todos[1] >= 2): ?>
-			<a href="index.php?page=<?php echo( $todos[1] - 1); ?>" class="page_feed">&laquo;</a>
+		<?php if( $page >= 2): ?>
+			<a href="index.php?page=<?php echo( $page - 1); ?>" class="page_feed">&laquo;</a>
 		<?php else:?>
 			<span class="first_page">&laquo;</span>
 		<?php endif; ?>
-		<?php for( $i = 1; $i <= $todos[2][0]; $i++ ) : ?>
-			<?php if( $i >= $todos[1] - $todos[2][1] && $i <= $todos[1] + $todos[2][1] ) :?>
-				<?php if( $i == $todos[1] ) : ?>
+		<?php for( $i = 1; $i <= $range[ 'maxPage' ]; $i++ ) : ?>
+			<?php if( $i >= $page - $range[ 'range' ] && $i <= $page + $range[ 'range' ] ) :?>
+				<?php if( $i == $page ) : ?>
 					<span class="now_page_number"><?php echo $i; ?></span>
 				<?php else: ?>
 					<a href="?page=<?php echo $i; ?>" class="pagenumber"><?php echo $i;?></a>
 				<?php endif; ?>
 			<?php endif; ?>
 		<?php endfor; ?>
-		<?php if( $todos[1] < $todos[2][0] ) :?>
-			<a href="index.php?page=<?php echo ( $todos[1] + 1 );?>" class="page_feed">&raquo;</a>
+		<?php if( $page < $range[ 'maxPage' ] ) :?>
+			<a href="index.php?page=<?php echo ( $page + 1 );?>" class="page_feed">&raquo;</a>
 		<?php else :?>
 			<span class="first_last_page">&raquo;</span>
 		<?php endif; ?>
