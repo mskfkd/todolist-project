@@ -6,6 +6,9 @@ class Todo
 {
 	const STATUS_COMPLETE = 2;
 	const UPPER_LINIT = 10;
+	const UPPER_PAGE_LINIT = 4;
+	const MIDDLE_PAGE_LINIT = 3;
+	const LOWER_PAGE_LINIT = 2;
 
 	public static function findAll()
 	{
@@ -187,11 +190,11 @@ class Todo
 		$maxPage = ceil( $data / self::UPPER_LINIT );
 
 		if ( $page == 1 || $page == $maxPage ) {
-			$range = 4;
+			$range = self::UPPER_PAGE_LINIT;
 		} elseif( $page == 2 || $page == $maxPage - 1 ) {
-			$range = 3;
+			$range = self::MIDDLE_PAGE_LINIT;
 		} else {
-			$range = 2;
+			$range = self::LOWER_PAGE_LINIT;
 		}
 
 		$result = [
