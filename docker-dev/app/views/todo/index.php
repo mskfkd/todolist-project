@@ -1,9 +1,10 @@
 <?php
-require_once("./../../controllers/BaseController.php");
+require_once("./../../controllers/TodoController.php");
 
-$controller = new BaseController();
+$controller = new TodoController();
 $params = $controller->index();
 $todos = $params[ 'todos' ];
+// error_log(print_r($todos, true));
 $page = $params[ 'page' ];
 $range = $params[ 'range' ];
 
