@@ -75,6 +75,18 @@ ini_set("display_errors", 1);
 		<?php endif; ?>
 	</div>
 	<a href="./../../views/todo/new.php">新規作成</a>
+	<form action="./../../controllers/TodoController.php" method="POST">
+		<label for="title">タイトル</label>
+		<input type="text" name="title">
+		<label for="deadline">締め切り日</label>
+		<input type="text" name="deadline">
+		<select name="selectstatus" id="selectstatus">
+			<option value="comp">完了</option>
+			<option value="incomp">未完了</option>
+		</select>
+		
+		<input type="submit" name="submit"  value="検索">
+	</form>
 	<script>
 
 				$(function () {

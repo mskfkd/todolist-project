@@ -34,7 +34,6 @@ volumes:
             #       external:
             #           name: project-mysql
             #
-
                    #      phpmyadmin:
                    #        image: phpmyadmin/phpmyadmin
                    #        environment:
