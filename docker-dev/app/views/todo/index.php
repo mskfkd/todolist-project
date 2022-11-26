@@ -8,6 +8,15 @@ $todos = $params[ 'todos' ];
 $page = $params[ 'page' ];
 $range = $params[ 'range' ];
 
+if ( isset( $_POST[ 'title' ] )
+	&& isset( $_POST[ 'deadline1' ] )
+	&& isset( $_POST[ 'deadline2' ] )
+	&& isset( $_POST[ 'selectstatus' ] ) ) {
+	$results = $controller->search( $_POST );
+} else {
+
+}
+
 ini_set("display_errors", 1);
 ?>
 <!DOCTYPE html>
@@ -79,7 +88,9 @@ ini_set("display_errors", 1);
 		<label for="title">タイトル</label>
 		<input type="text" name="title">
 		<label for="deadline">締め切り日</label>
-		<input type="text" name="deadline">
+		<input type="date" name="deadline1">
+		~
+		<input type="date" name="deadline2">
 		<select name="selectstatus" id="selectstatus">
 			<option value="comp">完了</option>
 			<option value="incomp">未完了</option>
@@ -87,6 +98,14 @@ ini_set("display_errors", 1);
 		
 		<input type="submit" name="submit"  value="検索">
 	</form>
+			<?php if( isset( $results) ):?>
+			<?php foreach( $results as $result ):?>
+				<tr>
+					<th><?php echo $result[ 'title' ];?></th>
+					<th><?php echo $result[ 'end_at' ];?></th>
+				</tr>
+			<?php endforeach;?>
+			<?php endif;?>
 	<script>
 
 				$(function () {

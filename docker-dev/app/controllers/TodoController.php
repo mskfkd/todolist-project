@@ -159,7 +159,34 @@ class TodoController extends BaseController
 
 	public function search() {
 		
-	}
+		$params = [
+			'title' => $_POST[ 'title' ],
+			'deadline' => $_POST[ 'deadline' ],
+			'selectstatus' => $_POST[ 'selectstatus' ],
+		];
+
+		$todo = new Todo();
+
+		if( isset( $params[ 'title' ] ) ) {
+			
+			$res = $todo->findtitle( $params[ 'title' ] );
+			return $res;
+
+		} elseif ( isset( $params[ 'deadline' ] ) ) {
+
+			$res = $todo->finddeadline( $params[ 'deadline' ] );
+			return $res;
+
+		}elseif( isset( $params[ 'selectstatus' ] ) ) {
+
+			$res = $todo->findstatus( $params[ 'selectstatus' ] );
+			return $res;
+
+		}
+
+
+
+	 }
 
 
 

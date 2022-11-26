@@ -207,4 +207,61 @@ class Todo
 		return $result;
 	}
 
+	public function findtitle( $content ) {
+
+		try {
+			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
+			$sql = "SELECT * FROM todos WHERE title like :title";
+
+			$sth = $db->prepare($sql);
+			$sth->bindValue(':title', '%' . addcslashes( $content, '\_%') . '%');
+			 $result = $sth->execute();
+
+		} catch (PDOException $e) {
+			return false;
+		}
+
+		return $result;
+	}
+
+	public function finddeadline( $content ) {
+
+		try {
+			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
+			$sql = "SELECT * FROM todos WHERE end_at between :end_at1 and :end_at2";
+
+			$sth = $db->prepare($sql);
+			$sth->bindValue(':end_at1', '%' . addcslashes( $content[0], '\_%') . '%');
+			$sth->bindValue(':end_at2', '%' . addcslashes( $content[1], '\_%') . '%');
+			 $result = $sth->execute();
+
+		} catch (PDOException $e) {
+			return false;
+		}
+
+		return $result;
+
+	}
+
+	public function findstatus( $content ) {
+
+		try {
+			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
+			$sql = "SELECT * FROM todos WHERE status = :status";
+
+			$sth = $db->prepare($sql);
+			$sth->bindValue( ':status', $content );
+			$result = $sth->execute();
+
+		} catch (PDOException $e) {
+			return false;
+		}
+
+		return $result;
+
+	}
+
+
+
+
 }
