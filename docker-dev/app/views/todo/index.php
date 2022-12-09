@@ -9,9 +9,9 @@ $page = $params[ 'page' ];
 $range = $params[ 'range' ];
 
 if ( isset( $_POST[ 'title' ] )
-	&& isset( $_POST[ 'deadline1' ] )
-	&& isset( $_POST[ 'deadline2' ] )
-	&& isset( $_POST[ 'selectstatus' ] ) ) {
+	|| isset( $_POST[ 'deadline1' ] )
+	|| isset( $_POST[ 'deadline2' ] )
+	|| isset( $_POST[ 'selectstatus' ] ) ) {
 	$results = $controller->search( $_POST );
 } else {
 

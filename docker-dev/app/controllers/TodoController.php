@@ -2,6 +2,8 @@
 require_once(dirname(__FILE__). "./../models/Todo.php");
 require_once(dirname(__FILE__). "./../validations/TodoValidation.php");
 require_once(dirname(__FILE__). "/BaseController.php");
+require_once(dirname(__FILE__). "./../services/ServiceTodo.php");
+require_once(dirname(__FILE__). "./../views/error/404.php");
 
 
 class TodoController extends BaseController
@@ -9,15 +11,14 @@ class TodoController extends BaseController
 
 	public function index()
 	{
-		$page = parent::getCurrentPage();
-		$range = Todo::pagenum( $page );
-		$todos = Todo::findAll();
+		$load = [];
+		$load = ServiceTodo::paginate();	
     // error_log(print_r($todos,true));
 
 		$result =  [
-			'todos' => $todos,
-			'page' => $page,
-			'range' => $range
+			'todos' => $load[ 'todos' ],
+			'page' => $load[ 'page' ],
+			'range' => $load[ 'range']
 		];
 
 		return $result;
@@ -29,6 +30,14 @@ class TodoController extends BaseController
 		$todo_id = $_GET["todo_id"];
 
 		$todo = Todo::findById($todo_id);
+
+		if ( is_null($todo)
+			|| $todo === '' ) {
+
+			header("Location:./../../views/error/404.php");
+			exit();
+
+		}
 
 		return $todo;
 	}
@@ -157,13 +166,14 @@ class TodoController extends BaseController
 		return;
 	}
 
-	public function search() {
-		
+	public function search( $params ) {
+
 		$params = [
 			'title' => $_POST[ 'title' ],
 			'deadline' => $_POST[ 'deadline' ],
 			'selectstatus' => $_POST[ 'selectstatus' ],
 		];
+		error_log(print_r($params, true));
 
 		$todo = new Todo();
 
