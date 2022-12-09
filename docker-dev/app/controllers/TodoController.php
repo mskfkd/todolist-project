@@ -31,10 +31,11 @@ class TodoController extends BaseController
 
 		$todo = Todo::findById($todo_id);
 
-		if ( is_null($todo)
+		if ( is_null($todo) === true
 			|| $todo === '' ) {
 
-			header("Location:./../../views/error/404.php");
+			// header("HTTP/1.1 404 Not Found");
+			header( $_SERVER[ 'DOCUMENT_ROOT' ] . "/404.php");
 			exit();
 
 		}
