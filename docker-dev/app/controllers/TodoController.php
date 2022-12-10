@@ -35,7 +35,7 @@ class TodoController extends BaseController
 			|| $todo === '' ) {
 
 			// header("HTTP/1.1 404 Not Found");
-			header( $_SERVER[ 'DOCUMENT_ROOT' ] . "/404.php");
+			header( "Location:" . $_SERVER[ 'DOCUMENT_ROOT' ] . "/404.php");
 			exit();
 
 		}
@@ -117,6 +117,15 @@ class TodoController extends BaseController
 			"detail"		=> $_GET["detail"],
 			"endAt"		=> $_GET["end_at"],
 		];
+
+		if ( is_null( $params[ "todoId" ] ) === true
+			|| $params[ "todoId" ] === '' ) {
+
+			// header("HTTP/1.1 404 Not Found");
+			header( "Location:" . $_SERVER[ 'DOCUMENT_ROOT' ] . "/404.php");
+			exit();
+
+		}
 
 		return $params;
 
