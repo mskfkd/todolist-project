@@ -115,11 +115,48 @@ class TodoController extends BaseController
 
 		}
 
-
-
 	 }
 
+	 public function addContent() {
 
+		$params = [
+			"userId" => 0,
+			"title"	 => $_POST["title"],
+			"detail" => $_POST["detail"],
+			"endAt"  => $_POST["end_at"],
+		];
+
+		$validator = new Todovalidation;
+		$validate = $validator->postCheck($params);
+
+		if ($validate === false) {
+			session_start();
+			//バリデーションクラスからエラーメッセージを取得
+			$message = $validator->getErrorMessage();
+			//セッションに保存
+			$_SESSION["message"] = $message;
+			$query = http_build_query($params);
+
+			header("Location:./../../views/todo/new.php" . "?" . $query);
+			exit();
+		}
+
+		$validated_data = $this->getData($params);
+
+		$serviceTodo = new ServiceTodo();
+		$result = $serviceTodo->store($validated_data);
+
+		if ($result === true) {
+
+			header("Location:./../../views/todo/index.php");
+			exit();
+		} else {
+
+			header("Location:./../../views/todo/new.php");
+			echo "新規作成に失敗しました。";
+			exit();
+		}
+	 }
 
 
 }
