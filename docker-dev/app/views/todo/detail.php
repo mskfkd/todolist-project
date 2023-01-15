@@ -5,6 +5,7 @@ require_once( "./../../controllers/TodoController.php" );
 $controller = new TodoController();
 $data = $controller->detail();
 $todo = $data[ 'todo' ];
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">

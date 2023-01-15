@@ -20,7 +20,7 @@ class Todo
 			exit;
 		}
 
-		$sql = "SELECT * FROM todos WHERE user_id = 1 && status = 1 LIMIT ?,10";
+		$sql = "SELECT * FROM todos WHERE user_id = 1 && status_id = 1 LIMIT ?,10";
 
 		$sth = $db->prepare($sql);
 		$sth->bindParam(1,$_REQUEST[ 'page' ], PDO::PARAM_INT);
@@ -41,7 +41,7 @@ class Todo
 			exit;
 		}
 
-		$sql = "SELECT count(*) FROM todos WHERE user_id = 1 && status = 1";
+		$sql = "SELECT count(*) FROM todos WHERE user_id = 1 && status_id = 1";
 
 		$sth = $db->query($sql);
 		$todos = $sth->fetch(PDO::FETCH_COLUMN);
@@ -55,7 +55,7 @@ class Todo
 
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
-			$sql = "SELECT * FROM todos WHERE id = :id && status = 1";
+			$sql = "SELECT * FROM todos WHERE id = :id && status_id = 1";
 
 			$sth = $db->prepare($sql);
 			$sth->bindValue(':id', $todo_id, PDO::PARAM_INT);
@@ -73,10 +73,11 @@ class Todo
 
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
-			$sql = "INSERT INTO todos ( user_id, title, detail, end_at, created_at ) VALUES ( :user_id, :title, :detail, :end_at, NOW() )";
+			$sql = "INSERT INTO todos ( user_id, title, detail, end_at, created_at ) VALUES ( :status_id, :user_id, :title, :detail, :end_at, NOW() )";
 
 
 			$sth = $db->prepare($sql);
+			$sth->bindParam(':status_id', 1, PDO::PARAM_INT);
 			$sth->bindParam(':user_id', $passToTodo["userId"], PDO::PARAM_INT);
 			$sth->bindParam(':title', $passToTodo["title"], PDO::PARAM_STR);
 			$sth->bindParam(':detail', $passToTodo["detail"],  PDO::PARAM_STR);
@@ -158,13 +159,13 @@ class Todo
 
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
-			$sql = "UPDATE todos SET status = :status,  updated_at = NOW() WHERE id = :id";
+			$sql = "UPDATE todos SET status_id = :status_id,  updated_at = NOW() WHERE id = :id";
 
 			$db->beginTransaction();
 
 			$sth = $db->prepare($sql);
 			$sth->bindParam(':id', $validates_data["id"], PDO::PARAM_INT);
-			$sth->bindValue(':status', self::STATUS_COMPLETE);
+			$sth->bindValue(':status_id', self::STATUS_COMPLETE);
 
 			$res = $sth->execute();
 
@@ -247,7 +248,7 @@ class Todo
 
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
-			$sql = "SELECT * FROM todos WHERE status = :status";
+			$sql = "SELECT * FROM todos WHERE status_id = :status_id";
 
 			$sth = $db->prepare($sql);
 			$sth->bindValue( ':status', $content );
