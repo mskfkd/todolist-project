@@ -117,7 +117,7 @@ class TodoController extends BaseController
 
 	 }
 
-	 public function addContent() {
+	 public function store() {
 
 		$params = [
 			"userId" => 0,
@@ -158,7 +158,7 @@ class TodoController extends BaseController
 		}
 	 }
 
-	 public function UpdateContent() {
+	 public function update() {
 		$params = [
 			"todoId" => $_POST["todoId"],
 			"title"	 => $_POST["title"],
