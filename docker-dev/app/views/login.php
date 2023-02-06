@@ -19,7 +19,7 @@ if( $_SERVER[ "REQUEST_SERVER" ] === "POST" ) {
 </head>
 <body>
    <div>
-        <form action="./../../login.php" method="post">
+        <form action="./todo/index.php" method="post">
             <label for="email">email</label>
             <input type="email" name="email">
             <label for="password">パスワード</label>

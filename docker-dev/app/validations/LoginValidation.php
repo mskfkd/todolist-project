@@ -5,7 +5,7 @@ class LoginValidation {
     public function checkPass( $data ) {
 
         $user = new User();
-        $result = $user->isExistById( $data );
+        $result = $user->password( $data );
 
         if( $result !== false ) {
            return true; 
