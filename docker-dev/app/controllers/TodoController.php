@@ -94,7 +94,7 @@ class TodoController extends BaseController
 			'deadline' => $_POST[ 'deadline' ],
 			'selectstatus' => $_POST[ 'selectstatus' ],
 		];
-		error_log(print_r($params, true));
+
 
 		$todo = new Todo();
 

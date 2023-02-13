@@ -216,7 +216,7 @@ class Todo
 
 			$sth = $db->prepare($sql);
 			$sth->bindValue(':title', '%' . addcslashes( $content, '\_%') . '%');
-			 $result = $sth->execute();
+			$result = $sth->execute();
 
 		} catch (PDOException $e) {
 			return false;

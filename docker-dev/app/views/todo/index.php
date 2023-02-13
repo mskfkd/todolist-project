@@ -4,15 +4,17 @@ require_once("./../../controllers/TodoController.php");
 $controller = new TodoController();
 $params = $controller->index();
 $todos = $params[ 'todos' ];
-// error_log(print_r($todos, true));
 $page = $params[ 'page' ];
 $range = $params[ 'range' ];
 
 if ( isset( $_POST[ 'title' ] )
 	|| isset( $_POST[ 'deadline1' ] )
 	|| isset( $_POST[ 'deadline2' ] )
-	|| isset( $_POST[ 'selectstatus' ] ) ) {
+	|| $_POST[ 'selectstatus' ] !== "none"
+	&& isset( $_POST[ 'search' ] ) ) {
+
 	$results = $controller->search( $_POST );
+
 } else {
 
 }
@@ -84,7 +86,7 @@ ini_set("display_errors", 1);
 		<?php endif; ?>
 	</div>
 	<a href="./../../views/todo/new.php">新規作成</a>
-	<form action="./../../controllers/TodoController.php" method="POST">
+	<form action="./index.php" method="POST">
 		<label for="title">タイトル</label>
 		<input type="text" name="title">
 		<label for="deadline">締め切り日</label>
@@ -92,11 +94,12 @@ ini_set("display_errors", 1);
 		~
 		<input type="date" name="deadline2">
 		<select name="selectstatus" id="selectstatus">
+			<option value="none">選択してください</option>
 			<option value="comp">完了</option>
 			<option value="incomp">未完了</option>
 		</select>
 		
-		<input type="submit" name="submit"  value="検索">
+		<input type="submit" name="search"  value="検索">
 	</form>
 			<?php if( isset( $results) ):?>
 			<?php foreach( $results as $result ):?>
