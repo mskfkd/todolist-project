@@ -209,23 +209,26 @@ class Todo
 	}
 
 	public function findtitle( $content ) {
+		$results = [];		
 
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
 			$sql = "SELECT * FROM todos WHERE title like :title";
 
 			$sth = $db->prepare($sql);
-			$sth->bindValue(':title', '%' . addcslashes( $content, '\_%') . '%');
-			$result = $sth->execute();
+			$sth->bindValue(':title', '%' . $content . '%', PDO::PARAM_STR);
+			$sth->execute();
+			$results = $sth->fetch(PDO::FETCH_ASSOC);
 
 		} catch (PDOException $e) {
 			return false;
 		}
 
-		return $result;
+		return $results;
 	}
 
 	public function finddeadline( $content ) {
+		$results = [];		
 
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
@@ -234,17 +237,19 @@ class Todo
 			$sth = $db->prepare($sql);
 			$sth->bindValue(':end_at1', '%' . addcslashes( $content[0], '\_%') . '%');
 			$sth->bindValue(':end_at2', '%' . addcslashes( $content[1], '\_%') . '%');
-			 $result = $sth->execute();
+			$sth->execute();
+			$results = $sth->fetch(PDO::FETCH_ASSOC);
 
 		} catch (PDOException $e) {
 			return false;
 		}
 
-		return $result;
+		return $results;
 
 	}
 
 	public function findstatus( $content ) {
+		$results = [];		
 
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
@@ -252,13 +257,14 @@ class Todo
 
 			$sth = $db->prepare($sql);
 			$sth->bindValue( ':status', $content );
-			$result = $sth->execute();
+			$sth->execute();
+			$results = $sth->fetch(PDO::FETCH_ASSOC);
 
 		} catch (PDOException $e) {
 			return false;
 		}
 
-		return $result;
+		return $results;
 
 	}
 

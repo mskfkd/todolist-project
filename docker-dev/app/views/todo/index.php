@@ -6,6 +6,7 @@ $params = $controller->index();
 $todos = $params[ 'todos' ];
 $page = $params[ 'page' ];
 $range = $params[ 'range' ];
+$results = [];
 
 if ( isset( $_POST[ 'title' ] )
 	|| isset( $_POST[ 'deadline1' ] )
@@ -94,20 +95,18 @@ ini_set("display_errors", 1);
 		~
 		<input type="date" name="deadline2">
 		<select name="selectstatus" id="selectstatus">
-			<option value="none">選択してください</option>
-			<option value="comp">完了</option>
-			<option value="incomp">未完了</option>
+			<option name="none" value="0">選択してください</option>
+			<option name="comp" value="2">完了</option>
+			<option name="incomp" value="1">未完了</option>
 		</select>
 		
 		<input type="submit" name="search"  value="検索">
 	</form>
-			<?php if( isset( $results) ):?>
-			<?php foreach( $results as $result ):?>
+			<?php if( isset( $results ) ):?>
 				<tr>
-					<th><?php echo $result[ 'title' ];?></th>
-					<th><?php echo $result[ 'end_at' ];?></th>
+					<th><?php echo $results[ 'title' ];?></th>
+					<th><?php echo $results[ 'end_at' ];?></th>
 				</tr>
-			<?php endforeach;?>
 			<?php endif;?>
 	<script>
 

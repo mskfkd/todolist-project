@@ -91,7 +91,8 @@ class TodoController extends BaseController
 
 		$params = [
 			'title' => $_POST[ 'title' ],
-			'deadline' => $_POST[ 'deadline' ],
+			'deadline1' => $_POST[ 'deadline1' ],
+			'deadline2' => $_POST[ 'deadline2' ],
 			'selectstatus' => $_POST[ 'selectstatus' ],
 		];
 
@@ -103,9 +104,10 @@ class TodoController extends BaseController
 			$res = $todo->findtitle( $params[ 'title' ] );
 			return $res;
 
-		} elseif ( isset( $params[ 'deadline' ] ) ) {
+		} elseif ( isset( $params[ 'deadline1' ] )
+				|| isset( $params[ 'deadline2' ]) ) {
 
-			$res = $todo->finddeadline( $params[ 'deadline' ] );
+			$res = $todo->finddeadline( $params );
 			return $res;
 
 		}elseif( isset( $params[ 'selectstatus' ] ) ) {
