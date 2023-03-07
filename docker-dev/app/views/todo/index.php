@@ -8,13 +8,13 @@ $page = $params[ 'page' ];
 $range = $params[ 'range' ];
 $results = [];
 
-if ( isset( $_POST[ 'title' ] )
-	|| isset( $_POST[ 'deadline1' ] )
-	|| isset( $_POST[ 'deadline2' ] )
-	|| $_POST[ 'selectstatus' ] !== "none"
-	&& isset( $_POST[ 'search' ] ) ) {
+if ( isset( $_GET[ 'title' ] )
+	|| isset( $_GET[ 'deadline1' ] )
+	|| isset( $_GET[ 'deadline2' ] )
+	|| $_GET[ 'selectstatus' ] !== "none"
+	&& isset( $_GET[ 'search' ] ) ) {
 
-	$results = $controller->search( $_POST );
+	$results = $controller->index( $_GET );
 
 } else {
 
@@ -87,7 +87,7 @@ ini_set("display_errors", 1);
 		<?php endif; ?>
 	</div>
 	<a href="./../../views/todo/new.php">新規作成</a>
-	<form action="./index.php" method="POST">
+	<form action="./index.php" method="GET">
 		<label for="title">タイトル</label>
 		<input type="text" name="title">
 		<label for="deadline">締め切り日</label>
