@@ -59,27 +59,23 @@ class ServiceTodo  {
 	private function buildQuery( $params ) {
 		$query = 'where';
 
-		$params = [
-			'title' => $_GET[ 'title' ],
-			'deadline1' => $_GET[ 'deadline1' ],
-			'deadline2' => $_GET[ 'deadline2' ],
-			'selectstatus' => $_GET[ 'selectstatus' ],
-		];
 
 		if( isset( $params[ 'title' ] ) ) {
 			
-			$query .= "title like" . $params[ 'title' ];
+			$query .= "title =" . $params[ 'title' ];
 
 		} elseif ( isset( $params[ 'deadline1' ] )
 				|| isset( $params[ 'deadline2' ]) ) {
 
-			$query .= "end_at between" . $params[ 'deadline1' ] "and" . $params[ 'deadline2' ];
+			$query .= "deadline1 =" . $params[ 'deadline1' ] . "&deadline2 =" . $params[ 'deadline2' ];
 
 		}elseif( isset( $params[ 'selectstatus' ] ) ) {
 
 			$query .= "status_id = " . $params[ 'selectstatus' ];
 
 		}
+
+
 
 	}
 

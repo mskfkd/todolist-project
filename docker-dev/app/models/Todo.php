@@ -208,15 +208,15 @@ class Todo
 		return $result;
 	}
 
-	public function findtitle( $content ) {
+	public function findtodo( $content ) {
 		$results = [];		
 
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
-			$sql = "SELECT * FROM todos WHERE title like :title";
+			$sql = $content;
 
 			$sth = $db->prepare($sql);
-			$sth->bindValue(':title', '%' . $content . '%', PDO::PARAM_STR);
+			// $sth->bindValue( , PDO::PARAM_STR);
 			$sth->execute();
 			$results = $sth->fetch(PDO::FETCH_ASSOC);
 
@@ -227,46 +227,6 @@ class Todo
 		return $results;
 	}
 
-	public function finddeadline( $content ) {
-		$results = [];		
-
-		try {
-			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
-			$sql = "SELECT * FROM todos WHERE end_at between :end_at1 and :end_at2";
-
-			$sth = $db->prepare($sql);
-			$sth->bindValue(':end_at1', '%' . addcslashes( $content[0], '\_%') . '%');
-			$sth->bindValue(':end_at2', '%' . addcslashes( $content[1], '\_%') . '%');
-			$sth->execute();
-			$results = $sth->fetch(PDO::FETCH_ASSOC);
-
-		} catch (PDOException $e) {
-			return false;
-		}
-
-		return $results;
-
-	}
-
-	public function findstatus( $content ) {
-		$results = [];		
-
-		try {
-			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
-			$sql = "SELECT * FROM todos WHERE status_id = :status_id";
-
-			$sth = $db->prepare($sql);
-			$sth->bindValue( ':status', $content );
-			$sth->execute();
-			$results = $sth->fetch(PDO::FETCH_ASSOC);
-
-		} catch (PDOException $e) {
-			return false;
-		}
-
-		return $results;
-
-	}
 
 
 

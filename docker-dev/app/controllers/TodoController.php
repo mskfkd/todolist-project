@@ -9,10 +9,16 @@ require_once(dirname(__FILE__). "./../views/error/404.php");
 class TodoController extends BaseController
 {
 
-	public function index()
+	public function index( $params )
 	{
+		$params = [
+			'title' => $_GET[ 'title' ],
+			'deadline1' => $_GET[ 'deadline1' ],
+			'deadline2' => $_GET[ 'deadline2' ],
+			'selectstatus' => $_GET[ 'selectstatus' ],
+		];
 		// list( $todos, $page, $range ) = ServiceTodo::paginate();	
-		$result = ServiceTodo::paginate();	
+		$result = ServiceTodo::paginate( $params );	
     // error_log(print_r( $result, true));
 
 		// return compact( 'todos', 'page', 'range' );
