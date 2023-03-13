@@ -208,15 +208,30 @@ class Todo
 		return $result;
 	}
 
-	public function findtodo( $content ) {
+	public function findtodo( $params, $content ) {
 		$results = [];		
 
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
-			$sql = $content;
+			$sql = "SELECT * FROM todos";
 
-			$sth = $db->prepare($sql);
-			// $sth->bindValue( , PDO::PARAM_STR);
+			$sth = $db->prepare($sql . $content);
+			foreach( $params as $param ) {
+				if( !empty($param[ 'title' ]) ) {
+					$sth->bindParam( ':title', $param[ 'title' ], PDO::PARAM_STR);
+				}
+
+				if( !empty($param[ 'deadline1' ]) 
+					&& !empty($param[ 'deadline2' ]) ) {
+					$sth->bindParam( ':deadline1', $param[ 'deadline1' ], PDO::PARAM_STR);
+					$sth->bindParam( ':deadline2', $param[ 'deadline2' ], PDO::PARAM_STR);
+				}
+				
+				if( !empty($param[ 'selectstatus' ]) ) {
+					$sth->bindParam( ':status_id', $param[ 'selectstatus' ], PDO::PARAM_STR);
+				}
+
+			}
 			$sth->execute();
 			$results = $sth->fetch(PDO::FETCH_ASSOC);
 

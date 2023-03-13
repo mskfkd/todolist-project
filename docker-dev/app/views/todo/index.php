@@ -2,23 +2,17 @@
 require_once("./../../controllers/TodoController.php");
 
 $controller = new TodoController();
-$params = $controller->index();
-$todos = $params[ 'todos' ];
-$page = $params[ 'page' ];
-$range = $params[ 'range' ];
+// $params = $controller->index();
 $results = [];
 
-if ( isset( $_GET[ 'title' ] )
-	|| isset( $_GET[ 'deadline1' ] )
-	|| isset( $_GET[ 'deadline2' ] )
-	|| $_GET[ 'selectstatus' ] !== "none"
-	&& isset( $_GET[ 'search' ] ) ) {
+// if ( $_GET ) {
 
 	$results = $controller->index( $_GET );
 
-} else {
-
-}
+// }
+$todos = $params[ 'todos' ];
+$page = $params[ 'page' ];
+$range = $params[ 'range' ];
 
 ini_set("display_errors", 1);
 ?>
