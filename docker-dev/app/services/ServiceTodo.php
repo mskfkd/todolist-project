@@ -70,7 +70,7 @@ class ServiceTodo  {
 		} elseif ( isset( $params[ 'deadline1' ] )
 				|| isset( $params[ 'deadline2' ]) ) {
 
-			$query .= "between deadline1 = :deadline1 AND deadline2 = :deasline2";
+			$query .= "between end_at = :deadline1 AND :deadline2";
 
 		}elseif( isset( $params[ 'selectstatus' ] ) ) {
 
