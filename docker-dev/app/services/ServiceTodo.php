@@ -7,9 +7,11 @@ class ServiceTodo  {
 
   public function paginate( $params )
   {
-    $page = BaseController::getCurrentPage();
-    $range = Todo::pagenum( $page );
-    $todos = Todo::findAll();
+
+	
+	$page = BaseController::getCurrentPage();
+	$range = Todo::pagenum( $page );
+	$todos = Todo::findAll();
 
 	if( $params ){
 		self::buildQuery( $params );

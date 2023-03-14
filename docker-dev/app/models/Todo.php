@@ -218,17 +218,17 @@ class Todo
 			$sth = $db->prepare($sql . $content);
 			foreach( $params as $param ) {
 				if( !empty($param[ 'title' ]) ) {
-					$sth->bindParam( ':title', $param[ 'title' ], PDO::PARAM_STR);
+					$sth->bindValue( ':title', $param[ 'title' ], PDO::PARAM_STR);
 				}
 
 				if( !empty($param[ 'deadline1' ]) 
 					&& !empty($param[ 'deadline2' ]) ) {
-					$sth->bindParam( ':deadline1', $param[ 'deadline1' ], PDO::PARAM_STR);
-					$sth->bindParam( ':deadline2', $param[ 'deadline2' ], PDO::PARAM_STR);
+					$sth->bindValue( ':deadline1', $param[ 'deadline1' ], PDO::PARAM_STR);
+					$sth->bindValue( ':deadline2', $param[ 'deadline2' ], PDO::PARAM_STR);
 				}
 				
 				if( !empty($param[ 'selectstatus' ]) ) {
-					$sth->bindParam( ':status_id', $param[ 'selectstatus' ], PDO::PARAM_STR);
+					$sth->bindValue( ':status_id', $param[ 'selectstatus' ], PDO::PARAM_INT);
 				}
 
 			}

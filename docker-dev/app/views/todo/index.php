@@ -5,11 +5,11 @@ $controller = new TodoController();
 // $params = $controller->index();
 $results = [];
 
-// if ( $_GET ) {
-
-	$results = $controller->index( $_GET );
-
-// }
+if ( $_GET ) {
+	$params = $controller->index( $_GET );
+} else {
+	$params = $controller->index();
+}
 $todos = $params[ 'todos' ];
 $page = $params[ 'page' ];
 $range = $params[ 'range' ];

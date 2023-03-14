@@ -17,8 +17,9 @@ class TodoController extends BaseController
 			'deadline2' => $_GET[ 'deadline2' ],
 			'selectstatus' => $_GET[ 'selectstatus' ],
 		];
-		// list( $todos, $page, $range ) = ServiceTodo::paginate();	
+
 		$result = ServiceTodo::paginate( $params );	
+		// list( $todos, $page, $range ) = ServiceTodo::paginate();	
     // error_log(print_r( $result, true));
 
 		// return compact( 'todos', 'page', 'range' );
