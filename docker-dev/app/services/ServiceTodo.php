@@ -60,7 +60,8 @@ class ServiceTodo  {
 	}
 
 	private function buildQuery( $params ) {
-		$query = 'where';
+
+		$quey = "SELECT * FROM todos WHERE ";
 
 
 		if( isset( $params[ 'title' ] ) ) {
@@ -79,7 +80,7 @@ class ServiceTodo  {
 		}
 
 		$todo = new Todo;
-		$result = $todo->findtodo( $params, $query );
+		$result = $todo->findByQuery( $params, $query );
 
 		if ($result !== false) {
 
