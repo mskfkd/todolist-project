@@ -9,7 +9,7 @@ require_once(dirname(__FILE__). "./../views/error/404.php");
 class TodoController extends BaseController
 {
 
-	public function index( $params )
+	public function index()
 	{
 		$params = [
 			'title' => $_GET[ 'title' ],
@@ -19,10 +19,7 @@ class TodoController extends BaseController
 		];
 
 		$result = ServiceTodo::paginate( $params );	
-		// list( $todos, $page, $range ) = ServiceTodo::paginate();	
-    // error_log(print_r( $result, true));
 
-		// return compact( 'todos', 'page', 'range' );
 		return $result;
 	}
 

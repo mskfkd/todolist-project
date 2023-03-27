@@ -208,12 +208,11 @@ class Todo
 		return $result;
 	}
 
-	public function findtodo( $params, $content ) {
+	public function findByQuery( $params, $content ) {
 		$results = [];		
 
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
-			$sql = "SELECT * FROM todos";
 
 			$sth = $db->prepare($sql . $content);
 			foreach( $params as $param ) {

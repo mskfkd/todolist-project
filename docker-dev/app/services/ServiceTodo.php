@@ -14,13 +14,16 @@ class ServiceTodo  {
 	$todos = Todo::findAll();
 
 	if( $params ){
-		self::buildQuery( $params );
+		$query = self::buildQuery( $params );
+		$todo = new Todo;
+		$result = $todo->findByQuery( $params, $query );
 	}
 
     return [
       'page' => $page,
       'range' => $range,
-      'todos' => $todos
+      'todos' => $todos,
+	  'result' => $result
     ];
 
 
@@ -64,36 +67,14 @@ class ServiceTodo  {
 		$quey = "SELECT * FROM todos WHERE ";
 
 
-		if( isset( $params[ 'title' ] ) ) {
-			
-			$query .= "title = :title";
+		foreach( $params as $key => $data ) {
 
-		} elseif ( isset( $params[ 'deadline1' ] )
-				|| isset( $params[ 'deadline2' ]) ) {
-
-			$query .= "between end_at = :deadline1 AND :deadline2";
-
-		}elseif( isset( $params[ 'selectstatus' ] ) ) {
-
-			$query .= "status_id = :status_id";
+			$sth->bindParam( ":".$key, $data, PDO::PARAM_STR);
 
 		}
-
-		$todo = new Todo;
-		$result = $todo->findByQuery( $params, $query );
-
-		if ($result !== false) {
-
-			return $result;
-
-		} else {
-
-			return false;
-
-		}
-
 
 	}
+	
 
 
 

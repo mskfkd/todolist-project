@@ -2,17 +2,13 @@
 require_once("./../../controllers/TodoController.php");
 
 $controller = new TodoController();
-// $params = $controller->index();
-$results = [];
 
-if ( $_GET ) {
-	$params = $controller->index( $_GET );
-} else {
-	$params = $controller->index();
-}
+$params = $controller->index();
+
 $todos = $params[ 'todos' ];
 $page = $params[ 'page' ];
 $range = $params[ 'range' ];
+$results = $params[ 'result' ];
 
 ini_set("display_errors", 1);
 ?>
