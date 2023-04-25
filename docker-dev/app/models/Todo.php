@@ -208,14 +208,14 @@ class Todo
 		return $result;
 	}
 
-	public function findByQuery( $params, $content ) {
-		$results = [];		
+	static function findByQuery( $bind_params,$query ) {
+		$results = [];
 
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
 
-			$sth = $db->prepare($sql . $content);
-			foreach( $params as $param ) {
+			$sth = $db->prepare($query);
+			foreach( $bind_params as $param ) {
 				if( !empty($param[ 'title' ]) ) {
 					$sth->bindValue( ':title', $param[ 'title' ], PDO::PARAM_STR);
 				}
