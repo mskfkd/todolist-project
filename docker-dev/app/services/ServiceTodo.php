@@ -64,12 +64,13 @@ class ServiceTodo  {
 
 	private function buildQuery( $params ) {
 
-		$query = "SELECT * FROM todos WHERE ";
+		$query = "SELECT * FROM todos WHERE title = :title OR ";
+		$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
+		$sth = $db->prepare($query);
 
-
-		foreach( $params as $key => $data ) {
-			$query .= $sth->bindParam( ":".$key, $data, PDO::PARAM_STR);
-
+		foreach( $params as $key => &$data ) {
+			$query .= $sth->bindParam( "':".$key."'", $data, PDO::PARAM_STR);
+		var_dump($query);
 		}
 
 		return $query;

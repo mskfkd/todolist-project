@@ -215,21 +215,8 @@ class Todo
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
 
 			$sth = $db->prepare($query);
-			foreach( $bind_params as $param ) {
-				if( !empty($param[ 'title' ]) ) {
-					$sth->bindValue( ':title', $param[ 'title' ], PDO::PARAM_STR);
-				}
-
-				if( !empty($param[ 'deadline1' ]) 
-					&& !empty($param[ 'deadline2' ]) ) {
-					$sth->bindValue( ':deadline1', $param[ 'deadline1' ], PDO::PARAM_STR);
-					$sth->bindValue( ':deadline2', $param[ 'deadline2' ], PDO::PARAM_STR);
-				}
-				
-				if( !empty($param[ 'selectstatus' ]) ) {
-					$sth->bindValue( ':status_id', $param[ 'selectstatus' ], PDO::PARAM_INT);
-				}
-
+			foreach( $bind_params as $key => $param ) {
+				$sth->bindValue( $key, $param[ 'value' ], $param[ 'type' ] );
 			}
 			$sth->execute();
 			$results = $sth->fetch(PDO::FETCH_ASSOC);
