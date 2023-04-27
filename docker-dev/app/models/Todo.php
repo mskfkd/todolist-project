@@ -212,10 +212,10 @@ class Todo
 		$results = [];
 
 		try {
-			// $db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
-			// $sth = $db->prepare($query);
+			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
+			$sth = $db->prepare($query);
 			foreach( $bind_params as $key => &$param ) {
-				$sth->bindParam( ":$key", $param[ 'value' ], $param[ 'type' ] );
+				$sth->bindValue( ":$key", $param[ 'value' ], $param[ 'type' ] );
 			}
 			$sth->execute();
 			$results = $sth->fetchAll(PDO::FETCH_ASSOC);
