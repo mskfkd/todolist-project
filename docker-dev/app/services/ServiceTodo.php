@@ -64,16 +64,24 @@ class ServiceTodo  {
 
 	private function buildQuery( $params ) {
 
-		$query = "SELECT * FROM todos WHERE title = :title OR ";
+		$query = "SELECT * FROM todos WHERE ";
+		$queries = [];
+
+		foreach( $params as $key => $value ) {
+			$query .= $key . "= :" . $key . " OR ";
+			$queries[] = [
+				'value' => $value,
+				'type' => PDO::PARAM_STR,
+			];
+		};
+		$query = rtrim( $query, " OR ");
 		$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
 		$sth = $db->prepare($query);
-
-		foreach( $params as $key => &$data ) {
-			$query .= $sth->bindParam( "':".$key."'", $data, PDO::PARAM_STR);
-		var_dump($query);
+		foreach( $queries as $key => $param) {
+			$sth->bindValue( $key + 1, $param[ 'value' ], $param['type']);
 		}
 
-		return $query;
+		return $sth;
 
 	}
 	
