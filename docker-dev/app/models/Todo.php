@@ -211,11 +211,12 @@ class Todo
 	static function findByQuery( $bind_params,$query ) {
 		$results = [];
 
+
 		try {
 			$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
 			$sth = $db->prepare($query);
 			foreach( $bind_params as $key => &$param ) {
-				$sth->bindValue( ":$key", $param[ 'value' ], $param[ 'type' ] );
+				$sth->bindValue( $param[ 'param' ], $param[ 'value' ], $param[ 'type' ] );
 			}
 			$sth->execute();
 			$results = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -223,7 +224,6 @@ class Todo
 		} catch (PDOException $e) {
 			return false;
 		}
-
 		return $results;
 	}
 

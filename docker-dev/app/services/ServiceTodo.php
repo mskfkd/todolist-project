@@ -12,11 +12,14 @@ class ServiceTodo  {
 	$page = BaseController::getCurrentPage();
 	$range = Todo::pagenum( $page );
 	$todos = Todo::findAll();
+	$result = "";
+
+	$query = [];
 
 	if( $params ){
 		$query = self::buildQuery( $params );
 		$todo = new Todo;
-		$result = $todo->findByQuery( $params, $query );
+		$result = $todo->findByQuery( $query[0], $query[1] );
 	}
 
     return [
@@ -72,16 +75,12 @@ class ServiceTodo  {
 			$queries[] = [
 				'value' => $value,
 				'type' => PDO::PARAM_STR,
+				'param' => ':' . $key,
 			];
 		};
 		$query = rtrim( $query, " OR ");
-		$db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
-		$sth = $db->prepare($query);
-		foreach( $queries as $key => $param) {
-			$sth->bindValue( $key + 1, $param[ 'value' ], $param['type']);
-		}
 
-		return $sth;
+		return [$queries, $query];
 
 	}
 	
